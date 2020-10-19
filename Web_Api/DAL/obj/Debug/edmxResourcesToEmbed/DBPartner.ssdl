@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PartnerProOritMichalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CustomersTbl">
+    <Key>
+      <PropertyRef Name="CustCode" />
+    </Key>
+    <Property Name="CustCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustID" Type="nvarchar" MaxLength="15" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="15" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="15" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="PackagesTbl">
+    <Key>
+      <PropertyRef Name="PackageCode" />
+    </Key>
+    <Property Name="PackageCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PackageName" Type="nchar" MaxLength="10" />
+    <Property Name="qtyMinutes" Type="int" />
+  </EntityType>
+  <EntityType Name="PackagesToSubscriptionTbl">
+    <Key>
+      <PropertyRef Name="PackagesToSubscriptionCode" />
+    </Key>
+    <Property Name="PackagesToSubscriptionCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PackageCode" Type="int" />
+    <Property Name="subCode" Type="int" />
+    <Property Name="OutOfMinutes" Type="int" />
+  </EntityType>
+  <EntityType Name="SubsciptionTbl">
+    <Key>
+      <PropertyRef Name="subCode" />
+    </Key>
+    <Property Name="subCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustCode" Type="int" />
+    <Property Name="subNumber" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_PackagesToSubscriptionTbl_PackagesTbl">
+    <End Role="PackagesTbl" Type="Self.PackagesTbl" Multiplicity="0..1" />
+    <End Role="PackagesToSubscriptionTbl" Type="Self.PackagesToSubscriptionTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PackagesTbl">
+        <PropertyRef Name="PackageCode" />
+      </Principal>
+      <Dependent Role="PackagesToSubscriptionTbl">
+        <PropertyRef Name="PackageCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PackagesToSubscriptionTbl_subsciptionTbl">
+    <End Role="SubsciptionTbl" Type="Self.SubsciptionTbl" Multiplicity="0..1" />
+    <End Role="PackagesToSubscriptionTbl" Type="Self.PackagesToSubscriptionTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubsciptionTbl">
+        <PropertyRef Name="subCode" />
+      </Principal>
+      <Dependent Role="PackagesToSubscriptionTbl">
+        <PropertyRef Name="subCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_subsciptionTbl_CustomersTbl">
+    <End Role="CustomersTbl" Type="Self.CustomersTbl" Multiplicity="0..1" />
+    <End Role="SubsciptionTbl" Type="Self.SubsciptionTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomersTbl">
+        <PropertyRef Name="CustCode" />
+      </Principal>
+      <Dependent Role="SubsciptionTbl">
+        <PropertyRef Name="CustCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PartnerProOritMichalModelStoreContainer">
+    <EntitySet Name="CustomersTbl" EntityType="Self.CustomersTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PackagesTbl" EntityType="Self.PackagesTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PackagesToSubscriptionTbl" EntityType="Self.PackagesToSubscriptionTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubsciptionTbl" EntityType="Self.SubsciptionTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_PackagesToSubscriptionTbl_PackagesTbl" Association="Self.FK_PackagesToSubscriptionTbl_PackagesTbl">
+      <End Role="PackagesTbl" EntitySet="PackagesTbl" />
+      <End Role="PackagesToSubscriptionTbl" EntitySet="PackagesToSubscriptionTbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PackagesToSubscriptionTbl_subsciptionTbl" Association="Self.FK_PackagesToSubscriptionTbl_subsciptionTbl">
+      <End Role="SubsciptionTbl" EntitySet="SubsciptionTbl" />
+      <End Role="PackagesToSubscriptionTbl" EntitySet="PackagesToSubscriptionTbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_subsciptionTbl_CustomersTbl" Association="Self.FK_subsciptionTbl_CustomersTbl">
+      <End Role="CustomersTbl" EntitySet="CustomersTbl" />
+      <End Role="SubsciptionTbl" EntitySet="SubsciptionTbl" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

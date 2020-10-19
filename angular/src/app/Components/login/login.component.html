@@ -1,0 +1,10 @@
+<p>login</p>
+ <form (submit)="login()">
+    <!-- <form action="/action_page.php"> -->
+    <input [(ngModel)]="ravkav" name="ravkav" type="text" placeholder="הכנס מספר רב קו" />
+    <input [(ngModel)]="password" name="password" type="password" placeholder="הכנס סיסמא" />
+    <button  type="submit">אישור</button>
+  
+    <p class="message">Not registered? <a routerLink="/Register">Create an account</a></p> 
+</form>
+

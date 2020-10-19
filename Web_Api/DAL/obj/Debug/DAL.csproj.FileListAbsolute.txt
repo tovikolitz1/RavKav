@@ -1,0 +1,33 @@
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\אורית גלעדי\web\angular\Web_Api\DAL\bin\Debug\DAL.dll.config
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\אורית גלעדי\web\angular\Web_Api\DAL\bin\Debug\DAL.dll
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\אורית גלעדי\web\angular\Web_Api\DAL\bin\Debug\DAL.pdb
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\אורית גלעדי\web\angular\Web_Api\DAL\bin\Debug\EntityFramework.dll
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\אורית גלעדי\web\angular\Web_Api\DAL\bin\Debug\EntityFramework.SqlServer.dll
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\אורית גלעדי\web\angular\Web_Api\DAL\bin\Debug\EntityFramework.xml
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\אורית גלעדי\web\angular\Web_Api\DAL\bin\Debug\EntityFramework.SqlServer.xml
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\אורית גלעדי\web\angular\Web_Api\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\אורית גלעדי\web\angular\Web_Api\DAL\obj\Debug\DAL.csproj.CopyComplete
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\אורית גלעדי\web\angular\Web_Api\DAL\obj\Debug\DAL.dll
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\אורית גלעדי\web\angular\Web_Api\DAL\obj\Debug\DAL.pdb
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\אורית גלעדי\web\angular\Web_Api\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\רחלי נוימן\פרויקט סיום\Web_Api\DAL\bin\Debug\DAL.dll.config
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\רחלי נוימן\פרויקט סיום\Web_Api\DAL\bin\Debug\DAL.dll
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\רחלי נוימן\פרויקט סיום\Web_Api\DAL\bin\Debug\DAL.pdb
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\רחלי נוימן\פרויקט סיום\Web_Api\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\רחלי נוימן\פרויקט סיום\Web_Api\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\רחלי נוימן\פרויקט סיום\Web_Api\DAL\obj\Debug\DAL.dll
+Y:\0000הנדסאיות תשעט\שנה ב\0000000000 שנה ב - כיתה ו\רחלי נוימן\פרויקט סיום\Web_Api\DAL\obj\Debug\DAL.pdb
+F:\טובי קוליץ ורחלי פנחסי\MyKav\Web_Api\DAL\bin\Debug\DAL.dll.config
+F:\טובי קוליץ ורחלי פנחסי\MyKav\Web_Api\DAL\bin\Debug\DAL.dll
+F:\טובי קוליץ ורחלי פנחסי\MyKav\Web_Api\DAL\bin\Debug\DAL.pdb
+F:\טובי קוליץ ורחלי פנחסי\MyKav\Web_Api\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+F:\טובי קוליץ ורחלי פנחסי\MyKav\Web_Api\DAL\obj\Debug\DAL.dll
+F:\טובי קוליץ ורחלי פנחסי\MyKav\Web_Api\DAL\obj\Debug\DAL.pdb
+D:\technut\פרויקט גמר\MyKav\Web_Api\DAL\bin\Debug\DAL.dll.config
+D:\technut\פרויקט גמר\MyKav\Web_Api\DAL\bin\Debug\DAL.dll
+D:\technut\פרויקט גמר\MyKav\Web_Api\DAL\bin\Debug\DAL.pdb
+D:\technut\פרויקט גמר\MyKav\Web_Api\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+D:\technut\פרויקט גמר\MyKav\Web_Api\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\technut\פרויקט גמר\MyKav\Web_Api\DAL\obj\Debug\DAL.csproj.CopyComplete
+D:\technut\פרויקט גמר\MyKav\Web_Api\DAL\obj\Debug\DAL.dll
+D:\technut\פרויקט גמר\MyKav\Web_Api\DAL\obj\Debug\DAL.pdb

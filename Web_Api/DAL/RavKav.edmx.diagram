@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="493e8ce75b614aa2b8d128dbee7a1bcf" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="Model.Area1" Width="1.5" PointX="6.25" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.AreaToContract1" Width="1.5" PointX="7.5" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.Contract1" Width="1.5" PointX="8.75" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.Profile1" Width="1.5" PointX="0.5" PointY="2.75" />
+        <EntityTypeShape EntityType="Model.User1" Width="1.5" PointX="3.375" PointY="4.375" />
+        <EntityTypeShape EntityType="Model.Transit1" Width="1.5" PointX="3.875" PointY="0.5" />
+        <AssociationConnector Association="Model.FK__AreaToCon__areaI__6EF57B66" />
+        <AssociationConnector Association="Model.FK__Transit__areaID__6FE99F9F" />
+        <AssociationConnector Association="Model.FK__AreaToCon__contr__6E01572D" />
+        <AssociationConnector Association="Model.FK__User__profileId__72C60C4A" />
+        <AssociationConnector Association="Model.FK__Transit__userID__70DDC3D8" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

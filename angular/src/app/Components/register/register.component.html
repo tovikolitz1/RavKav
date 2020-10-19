@@ -1,0 +1,16 @@
+<form (submit)="register()" >
+<input name="ravkav" [(ngModel)]="user.ravkav" type="text" placeholder="מספר רב קו" />
+<input name="password" [(ngModel)]="user.password" type="password" placeholder="סיסמא" />
+<input name="firstName" [(ngModel)]="user.firstName" type="text" placeholder="שם פרטי" />
+<input name="lastName" [(ngModel)]="user.lastName" type="text" placeholder="שם משפחה" />
+<select placeholder="בחר פרופיל" [(ngModel)]="user.profileId"  name="profileId">
+    <option value="1">כללי</option>
+    <option value="2">אזרח ותיק</option>/option>
+    <option value="3">סטודנט רגיל</option>
+    <option value="4">זכי ביטוח לאומי</option>
+    <option value="6">סטודנט מורחב</option>
+    <option value="7">נכה</option>
+    <option value="8">נוער עד גיל 18</option>
+  </select>
+<button  type="submit">אישור</button>
+</form>

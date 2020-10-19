@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="CardTbls" EntityType="Model.Store.CardTbls" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProfilsTbls" EntityType="Model.Store.ProfilsTbls" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="Model.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransitTbls" EntityType="Model.Store.TransitTbls" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TravelsTbls" EntityType="Model.Store.TravelsTbls" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserTbls" EntityType="Model.Store.UserTbls" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_TransitTbl_CardTbl" Association="Model.Store.FK_TransitTbl_CardTbl">
+      <End Role="CardTbl" EntitySet="CardTbls" />
+      <End Role="TransitTbl" EntitySet="TransitTbls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTbl_ProfilsTbl" Association="Model.Store.FK_UserTbl_ProfilsTbl">
+      <End Role="ProfilsTbl" EntitySet="ProfilsTbls" />
+      <End Role="UserTbl" EntitySet="UserTbls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TravelsTbl_TransitTbl" Association="Model.Store.FK_TravelsTbl_TransitTbl">
+      <End Role="TransitTbl" EntitySet="TransitTbls" />
+      <End Role="TravelsTbl" EntitySet="TravelsTbls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TravelsTbl_UserTbl" Association="Model.Store.FK_TravelsTbl_UserTbl">
+      <End Role="UserTbl" EntitySet="UserTbls" />
+      <End Role="TravelsTbl" EntitySet="TravelsTbls" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CardTbls">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="describe" Type="nchar" Nullable="true" MaxLength="30" />
+    <Property Name="freeMonthly" Type="float" Nullable="true" />
+    <Property Name="freeWeekly" Type="float" Nullable="true" />
+    <Property Name="freeDaily" Type="float" Nullable="true" />
+    <Property Name="single" Type="float" Nullable="false" />
+    <Property Name="test" Type="varchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ProfilsTbls">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nchar" Nullable="true" MaxLength="20" />
+    <Property Name="discountPercentage" Type="nchar" Nullable="true" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" Nullable="true" />
+    <Property Name="definition" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TransitTbls">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="number" Type="int" Nullable="false" />
+    <Property Name="cardId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TravelsTbls">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dateAndTime" Type="datetime" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="TransitId" Type="int" Nullable="false" />
+    <Property Name="Property1" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserTbls">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isManager" Type="bit" Nullable="false" />
+    <Property Name="ravkav" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="password" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="firstName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="lastName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="profileId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_TransitTbl_CardTbl">
+    <End Role="CardTbl" Type="Model.Store.CardTbls" Multiplicity="1" />
+    <End Role="TransitTbl" Type="Model.Store.TransitTbls" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CardTbl">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TransitTbl">
+        <PropertyRef Name="cardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTbl_ProfilsTbl">
+    <End Role="ProfilsTbl" Type="Model.Store.ProfilsTbls" Multiplicity="1" />
+    <End Role="UserTbl" Type="Model.Store.UserTbls" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProfilsTbl">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserTbl">
+        <PropertyRef Name="profileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TravelsTbl_TransitTbl">
+    <End Role="TransitTbl" Type="Model.Store.TransitTbls" Multiplicity="1" />
+    <End Role="TravelsTbl" Type="Model.Store.TravelsTbls" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransitTbl">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TravelsTbl">
+        <PropertyRef Name="TransitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TravelsTbl_UserTbl">
+    <End Role="UserTbl" Type="Model.Store.UserTbls" Multiplicity="1" />
+    <End Role="TravelsTbl" Type="Model.Store.TravelsTbls" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTbl">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TravelsTbl">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

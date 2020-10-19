@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PartnerProOritMichalModelStoreContainer" CdmEntityContainer="PartnerProOritMichalEntities">
+    <EntitySetMapping Name="CustomersTbls">
+      <EntityTypeMapping TypeName="PartnerProOritMichalModel.CustomersTbl">
+        <MappingFragment StoreEntitySet="CustomersTbl">
+          <ScalarProperty Name="CustCode" ColumnName="CustCode" />
+          <ScalarProperty Name="CustID" ColumnName="CustID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PackagesTbls">
+      <EntityTypeMapping TypeName="PartnerProOritMichalModel.PackagesTbl">
+        <MappingFragment StoreEntitySet="PackagesTbl">
+          <ScalarProperty Name="PackageCode" ColumnName="PackageCode" />
+          <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+          <ScalarProperty Name="qtyMinutes" ColumnName="qtyMinutes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PackagesToSubscriptionTbls">
+      <EntityTypeMapping TypeName="PartnerProOritMichalModel.PackagesToSubscriptionTbl">
+        <MappingFragment StoreEntitySet="PackagesToSubscriptionTbl">
+          <ScalarProperty Name="PackagesToSubscriptionCode" ColumnName="PackagesToSubscriptionCode" />
+          <ScalarProperty Name="PackageCode" ColumnName="PackageCode" />
+          <ScalarProperty Name="subCode" ColumnName="subCode" />
+          <ScalarProperty Name="OutOfMinutes" ColumnName="OutOfMinutes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubsciptionTbls">
+      <EntityTypeMapping TypeName="PartnerProOritMichalModel.SubsciptionTbl">
+        <MappingFragment StoreEntitySet="SubsciptionTbl">
+          <ScalarProperty Name="subCode" ColumnName="subCode" />
+          <ScalarProperty Name="CustCode" ColumnName="CustCode" />
+          <ScalarProperty Name="subNumber" ColumnName="subNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="PartnerProOritMichalModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
