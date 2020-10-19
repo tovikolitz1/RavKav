@@ -31,3 +31,10 @@ D:\technut\פרויקט גמר\MyKav\Web_Api\DAL\obj\Debug\DAL.csproj.CoreCompil
 D:\technut\פרויקט גמר\MyKav\Web_Api\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\technut\פרויקט גמר\MyKav\Web_Api\DAL\obj\Debug\DAL.dll
 D:\technut\פרויקט גמר\MyKav\Web_Api\DAL\obj\Debug\DAL.pdb
+D:\technut\final\Web_Api\DAL\bin\Debug\DAL.dll.config
+D:\technut\final\Web_Api\DAL\bin\Debug\DAL.dll
+D:\technut\final\Web_Api\DAL\bin\Debug\DAL.pdb
+D:\technut\final\Web_Api\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\technut\final\Web_Api\DAL\obj\Debug\DAL.csproj.CopyComplete
+D:\technut\final\Web_Api\DAL\obj\Debug\DAL.dll
+D:\technut\final\Web_Api\DAL\obj\Debug\DAL.pdb

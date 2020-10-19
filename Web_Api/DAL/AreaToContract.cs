@@ -17,5 +17,8 @@ namespace DAL
         public int id { get; set; }
         public int contractID { get; set; }
         public int areaID { get; set; }
+    
+        public virtual Area Area { get; set; }
+        public virtual Contract Contract { get; set; }
     }
 }

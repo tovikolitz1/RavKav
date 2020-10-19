@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="RavKavModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Area">
           <Key>
             <PropertyRef Name="id" />
@@ -143,7 +143,7 @@ warning 6002: The table/view 'RavKav.dbo.Transit' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ModelStoreContainer">
+        <EntityContainer Name="RavKavModelStoreContainer">
           <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AreaToContract" EntityType="Self.AreaToContract" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
@@ -186,189 +186,19 @@ warning 6002: The table/view 'RavKav.dbo.Transit' does not have a primary key de
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="CardTbl">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="describe" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="freeMonthly" Type="Double" />
-          <Property Name="freeWeekly" Type="Double" />
-          <Property Name="freeDaily" Type="Double" />
-          <Property Name="single" Type="Double" Nullable="false" />
-          <NavigationProperty Name="TransitTbls" Relationship="Self.FK_TransitTbl_CardTbl" FromRole="CardTbl" ToRole="TransitTbl" />
-          <Property Name="test" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="ProfilsTbl">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="discountPercentage" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="UserTbls" Relationship="Self.FK_UserTbl_ProfilsTbl" FromRole="ProfilsTbl" ToRole="UserTbl" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="TransitTbl">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="number" Type="Int32" Nullable="false" />
-          <Property Name="cardId" Nullable="false" Type="Int32" />
-          <NavigationProperty Name="CardTbl" Relationship="Self.FK_TransitTbl_CardTbl" FromRole="TransitTbl" ToRole="CardTbl" />
-          <NavigationProperty Name="TravelsTbls" Relationship="Self.FK_TravelsTbl_TransitTbl" FromRole="TransitTbl" ToRole="TravelsTbl" />
-        </EntityType>
-        <EntityType Name="TravelsTbl">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="dateAndTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="userId" Type="Int32" Nullable="false" />
-          <Property Name="TransitId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TransitTbl" Relationship="Self.FK_TravelsTbl_TransitTbl" FromRole="TravelsTbl" ToRole="TransitTbl" />
-          <NavigationProperty Name="UserTbl" Relationship="Self.FK_TravelsTbl_UserTbl" FromRole="TravelsTbl" ToRole="UserTbl" />
-          <Property Name="Property1" Type="String" Nullable="false" />
-          <Property Name="Property2" Type="String" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserTbl">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="isManager" Type="Boolean" Nullable="false" />
-          <Property Name="ravkav" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="profileId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ProfilsTbl" Relationship="Self.FK_UserTbl_ProfilsTbl" FromRole="UserTbl" ToRole="ProfilsTbl" />
-          <NavigationProperty Name="TravelsTbls" Relationship="Self.FK_TravelsTbl_UserTbl" FromRole="UserTbl" ToRole="TravelsTbl" />
-        </EntityType>
-        <Association Name="FK_TransitTbl_CardTbl">
-          <End Role="CardTbl" Type="Self.CardTbl" Multiplicity="1" />
-          <End Role="TransitTbl" Type="Self.TransitTbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CardTbl">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="TransitTbl">
-              <PropertyRef Name="cardId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserTbl_ProfilsTbl">
-          <End Role="ProfilsTbl" Type="Self.ProfilsTbl" Multiplicity="1" />
-          <End Role="UserTbl" Type="Self.UserTbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProfilsTbl">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="UserTbl">
-              <PropertyRef Name="profileId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TravelsTbl_TransitTbl">
-          <End Role="TransitTbl" Type="Self.TransitTbl" Multiplicity="1" />
-          <End Role="TravelsTbl" Type="Self.TravelsTbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TransitTbl">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="TravelsTbl">
-              <PropertyRef Name="TransitId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TravelsTbl_UserTbl">
-          <End Role="UserTbl" Type="Self.UserTbl" Multiplicity="1" />
-          <End Role="TravelsTbl" Type="Self.TravelsTbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserTbl">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="TravelsTbl">
-              <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CardTbls" EntityType="Self.CardTbl" />
-          <EntitySet Name="ProfilsTbls" EntityType="Self.ProfilsTbl" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="TransitTbls" EntityType="Self.TransitTbl" />
-          <EntitySet Name="TravelsTbls" EntityType="Self.TravelsTbl" />
-          <EntitySet Name="UserTbls" EntityType="Self.UserTbl" />
-          <AssociationSet Name="FK_TransitTbl_CardTbl" Association="Self.FK_TransitTbl_CardTbl">
-            <End Role="CardTbl" EntitySet="CardTbls" />
-            <End Role="TransitTbl" EntitySet="TransitTbls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserTbl_ProfilsTbl" Association="Self.FK_UserTbl_ProfilsTbl">
-            <End Role="ProfilsTbl" EntitySet="ProfilsTbls" />
-            <End Role="UserTbl" EntitySet="UserTbls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TravelsTbl_TransitTbl" Association="Self.FK_TravelsTbl_TransitTbl">
-            <End Role="TransitTbl" EntitySet="TransitTbls" />
-            <End Role="TravelsTbl" EntitySet="TravelsTbls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TravelsTbl_UserTbl" Association="Self.FK_TravelsTbl_UserTbl">
-            <End Role="UserTbl" EntitySet="UserTbls" />
-            <End Role="TravelsTbl" EntitySet="TravelsTbls" />
-          </AssociationSet>
-          <EntitySet Name="Areas" EntityType="Model.Area" />
-          <EntitySet Name="AreaToContracts" EntityType="Model.AreaToContract" />
-          <EntitySet Name="Contracts" EntityType="Model.Contract" />
-          <EntitySet Name="Profiles" EntityType="Model.Profile" />
-          <EntitySet Name="Users" EntityType="Model.User" />
-          <EntitySet Name="Transits" EntityType="Model.Transit" />
-          <EntitySet Name="Area1" EntityType="Model.Area1" />
-          <EntitySet Name="AreaToContract1" EntityType="Model.AreaToContract1" />
-          <EntitySet Name="Contract1" EntityType="Model.Contract1" />
-          <EntitySet Name="Profile1" EntityType="Model.Profile1" />
-          <EntitySet Name="User1" EntityType="Model.User1" />
-          <EntitySet Name="Transit1" EntityType="Model.Transit1" />
-          <AssociationSet Name="FK__AreaToCon__areaI__6EF57B66" Association="Model.FK__AreaToCon__areaI__6EF57B66">
-            <End Role="Area1" EntitySet="Area1" />
-            <End Role="AreaToContract1" EntitySet="AreaToContract1" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Transit__areaID__6FE99F9F" Association="Model.FK__Transit__areaID__6FE99F9F">
-            <End Role="Area1" EntitySet="Area1" />
-            <End Role="Transit1" EntitySet="Transit1" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AreaToCon__contr__6E01572D" Association="Model.FK__AreaToCon__contr__6E01572D">
-            <End Role="Contract1" EntitySet="Contract1" />
-            <End Role="AreaToContract1" EntitySet="AreaToContract1" />
-          </AssociationSet>
-          <AssociationSet Name="FK__User__profileId__72C60C4A" Association="Model.FK__User__profileId__72C60C4A">
-            <End Role="Profile1" EntitySet="Profile1" />
-            <End Role="User1" EntitySet="User1" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Transit__userID__70DDC3D8" Association="Model.FK__Transit__userID__70DDC3D8">
-            <End Role="User1" EntitySet="User1" />
-            <End Role="Transit1" EntitySet="Transit1" />
-          </AssociationSet>
-          </EntityContainer>
+      <Schema Namespace="RavKavModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Area">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AreaToContracts" Relationship="Self.FK__AreaToCon__areaI__6EF57B66" FromRole="Area" ToRole="AreaToContract" />
+          <NavigationProperty Name="Transits" Relationship="Self.FK__Transit__areaID__6FE99F9F" FromRole="Area" ToRole="Transit" />
         </EntityType>
         <EntityType Name="AreaToContract">
           <Key>
@@ -377,6 +207,8 @@ warning 6002: The table/view 'RavKav.dbo.Transit' does not have a primary key de
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="contractID" Type="Int32" Nullable="false" />
           <Property Name="areaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Area" Relationship="Self.FK__AreaToCon__areaI__6EF57B66" FromRole="AreaToContract" ToRole="Area" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK__AreaToCon__contr__6E01572D" FromRole="AreaToContract" ToRole="Contract" />
         </EntityType>
         <EntityType Name="Contract">
           <Key>
@@ -385,6 +217,7 @@ warning 6002: The table/view 'RavKav.dbo.Transit' does not have a primary key de
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="freeDay" Type="Double" Nullable="false" />
           <Property Name="freeMounth" Type="Double" Nullable="false" />
+          <NavigationProperty Name="AreaToContracts" Relationship="Self.FK__AreaToCon__contr__6E01572D" FromRole="Contract" ToRole="AreaToContract" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -392,20 +225,24 @@ warning 6002: The table/view 'RavKav.dbo.Transit' does not have a primary key de
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="discount" Type="Int32" Nullable="false" />
-          <Property Name="describe" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="describe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__User__profileId__72C60C4A" FromRole="Profile" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="fName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="lName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="isManager" Type="Boolean" Nullable="false" />
-          <Property Name="pass" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="ravkavNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pass" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ravkavNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="profileId" Type="Int32" />
+          <NavigationProperty Name="Profile" Relationship="Self.FK__User__profileId__72C60C4A" FromRole="User" ToRole="Profile" />
+          <NavigationProperty Name="Transits" Relationship="Self.FK__Transit__userID__70DDC3D8" FromRole="User" ToRole="Transit" />
+          <NavigationProperty Name="Transits1" Relationship="Self.FK__Transit__userID__71D1E811" FromRole="User" ToRole="Transit" />
         </EntityType>
         <EntityType Name="Transit">
           <Key>
@@ -419,219 +256,193 @@ warning 6002: The table/view 'RavKav.dbo.Transit' does not have a primary key de
             <PropertyRef Name="date" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="bas" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="bas" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="price" Type="Double" Nullable="false" />
           <Property Name="areaID" Type="Int32" Nullable="false" />
           <Property Name="InternalOrIntermediate" Type="Boolean" Nullable="false" />
           <Property Name="transitTrip" Type="Boolean" Nullable="false" />
           <Property Name="userID" Type="Int32" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
-        </EntityType>
-        <EntityType Name="Area1">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AreaToContracts" Relationship="Model.FK__AreaToCon__areaI__6EF57B66" FromRole="Area1" ToRole="AreaToContract1" />
-          <NavigationProperty Name="Transits" Relationship="Model.FK__Transit__areaID__6FE99F9F" FromRole="Area1" ToRole="Transit1" />
-        </EntityType>
-        <EntityType Name="AreaToContract1">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="contractID" Type="Int32" Nullable="false" />
-          <Property Name="areaID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Area" Relationship="Model.FK__AreaToCon__areaI__6EF57B66" FromRole="AreaToContract1" ToRole="Area1" />
-          <NavigationProperty Name="Contract" Relationship="Model.FK__AreaToCon__contr__6E01572D" FromRole="AreaToContract1" ToRole="Contract1" />
-        </EntityType>
-        <EntityType Name="Contract1">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="freeDay" Type="Double" Nullable="false" />
-          <Property Name="freeMounth" Type="Double" Nullable="false" />
-          <NavigationProperty Name="AreaToContracts" Relationship="Model.FK__AreaToCon__contr__6E01572D" FromRole="Contract1" ToRole="AreaToContract1" />
-        </EntityType>
-        <EntityType Name="Profile1">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="discount" Type="Int32" Nullable="false" />
-          <Property Name="describe" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Users" Relationship="Model.FK__User__profileId__72C60C4A" FromRole="Profile1" ToRole="User1" />
-        </EntityType>
-        <EntityType Name="User1">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="fName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="lName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="isManager" Type="Boolean" Nullable="false" />
-          <Property Name="pass" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="ravkavNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="profileId" Type="Int32" />
-          <NavigationProperty Name="Profile" Relationship="Model.FK__User__profileId__72C60C4A" FromRole="User1" ToRole="Profile1" />
-          <NavigationProperty Name="Transits" Relationship="Model.FK__Transit__userID__70DDC3D8" FromRole="User1" ToRole="Transit1" />
-        </EntityType>
-        <EntityType Name="Transit1">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="bas" />
-            <PropertyRef Name="price" />
-            <PropertyRef Name="areaID" />
-            <PropertyRef Name="InternalOrIntermediate" />
-            <PropertyRef Name="transitTrip" />
-            <PropertyRef Name="userID" />
-            <PropertyRef Name="date" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="bas" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="price" Type="Double" Nullable="false" />
-          <Property Name="areaID" Type="Int32" Nullable="false" />
-          <Property Name="InternalOrIntermediate" Type="Boolean" Nullable="false" />
-          <Property Name="transitTrip" Type="Boolean" Nullable="false" />
-          <Property Name="userID" Type="Int32" Nullable="false" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Area" Relationship="Model.FK__Transit__areaID__6FE99F9F" FromRole="Transit1" ToRole="Area1" />
-          <NavigationProperty Name="User" Relationship="Model.FK__Transit__userID__70DDC3D8" FromRole="Transit1" ToRole="User1" />
+          <NavigationProperty Name="Area" Relationship="Self.FK__Transit__areaID__6FE99F9F" FromRole="Transit" ToRole="Area" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Transit__userID__70DDC3D8" FromRole="Transit" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK__Transit__userID__71D1E811" FromRole="Transit" ToRole="User" />
         </EntityType>
         <Association Name="FK__AreaToCon__areaI__6EF57B66">
-          <End Type="Model.Area1" Role="Area1" Multiplicity="1" />
-          <End Type="Model.AreaToContract1" Role="AreaToContract1" Multiplicity="*" />
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="AreaToContract" Type="Self.AreaToContract" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Area1">
+            <Principal Role="Area">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="AreaToContract1">
+            <Dependent Role="AreaToContract">
               <PropertyRef Name="areaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Transit__areaID__6FE99F9F">
-          <End Type="Model.Area1" Role="Area1" Multiplicity="1" />
-          <End Type="Model.Transit1" Role="Transit1" Multiplicity="*" />
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Transit" Type="Self.Transit" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Area1">
+            <Principal Role="Area">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Transit1">
+            <Dependent Role="Transit">
               <PropertyRef Name="areaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__AreaToCon__contr__6E01572D">
-          <End Type="Model.Contract1" Role="Contract1" Multiplicity="1" />
-          <End Type="Model.AreaToContract1" Role="AreaToContract1" Multiplicity="*" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="AreaToContract" Type="Self.AreaToContract" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Contract1">
+            <Principal Role="Contract">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="AreaToContract1">
+            <Dependent Role="AreaToContract">
               <PropertyRef Name="contractID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__User__profileId__72C60C4A">
-          <End Type="Model.Profile1" Role="Profile1" Multiplicity="0..1" />
-          <End Type="Model.User1" Role="User1" Multiplicity="*" />
+          <End Role="Profile" Type="Self.Profile" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Profile1">
+            <Principal Role="Profile">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="User1">
+            <Dependent Role="User">
               <PropertyRef Name="profileId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Transit__userID__70DDC3D8">
-          <End Type="Model.User1" Role="User1" Multiplicity="1" />
-          <End Type="Model.Transit1" Role="Transit1" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Transit" Type="Self.Transit" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User1">
+            <Principal Role="User">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Transit1">
+            <Dependent Role="Transit">
               <PropertyRef Name="userID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <Association Name="FK__Transit__userID__71D1E811">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Transit" Type="Self.Transit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transit">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RavKavEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Areas" EntityType="Self.Area" />
+          <EntitySet Name="AreaToContracts" EntityType="Self.AreaToContract" />
+          <EntitySet Name="Contracts" EntityType="Self.Contract" />
+          <EntitySet Name="Profiles" EntityType="Self.Profile" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Transits" EntityType="Self.Transit" />
+          <AssociationSet Name="FK__AreaToCon__areaI__6EF57B66" Association="Self.FK__AreaToCon__areaI__6EF57B66">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="AreaToContract" EntitySet="AreaToContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transit__areaID__6FE99F9F" Association="Self.FK__Transit__areaID__6FE99F9F">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="Transit" EntitySet="Transits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AreaToCon__contr__6E01572D" Association="Self.FK__AreaToCon__contr__6E01572D">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="AreaToContract" EntitySet="AreaToContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__profileId__72C60C4A" Association="Self.FK__User__profileId__72C60C4A">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transit__userID__70DDC3D8" Association="Self.FK__Transit__userID__70DDC3D8">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Transit" EntitySet="Transits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transit__userID__71D1E811" Association="Self.FK__Transit__userID__71D1E811">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Transit" EntitySet="Transits" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="Area1">
-            <EntityTypeMapping TypeName="Model.Area1">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RavKavModelStoreContainer" CdmEntityContainer="RavKavEntities">
+          <EntitySetMapping Name="Areas">
+            <EntityTypeMapping TypeName="RavKavModel.Area">
               <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AreaToContract1">
-            <EntityTypeMapping TypeName="Model.AreaToContract1">
+          <EntitySetMapping Name="AreaToContracts">
+            <EntityTypeMapping TypeName="RavKavModel.AreaToContract">
               <MappingFragment StoreEntitySet="AreaToContract">
-                <ScalarProperty Name="areaID" ColumnName="areaID" />
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="contractID" ColumnName="contractID" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Contract1">
-            <EntityTypeMapping TypeName="Model.Contract1">
-              <MappingFragment StoreEntitySet="Contract">
-                <ScalarProperty Name="freeMounth" ColumnName="freeMounth" />
-                <ScalarProperty Name="freeDay" ColumnName="freeDay" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Profile1">
-            <EntityTypeMapping TypeName="Model.Profile1">
-              <MappingFragment StoreEntitySet="Profile">
-                <ScalarProperty Name="describe" ColumnName="describe" />
-                <ScalarProperty Name="discount" ColumnName="discount" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="User1">
-            <EntityTypeMapping TypeName="Model.User1">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="profileId" ColumnName="profileId" />
-                <ScalarProperty Name="ravkavNum" ColumnName="ravkavNum" />
-                <ScalarProperty Name="pass" ColumnName="pass" />
-                <ScalarProperty Name="isManager" ColumnName="isManager" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="lName" ColumnName="lName" />
-                <ScalarProperty Name="fName" ColumnName="fName" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Transit1">
-            <EntityTypeMapping TypeName="Model.Transit1">
-              <MappingFragment StoreEntitySet="Transit">
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="userID" ColumnName="userID" />
-                <ScalarProperty Name="transitTrip" ColumnName="transitTrip" />
-                <ScalarProperty Name="InternalOrIntermediate" ColumnName="InternalOrIntermediate" />
                 <ScalarProperty Name="areaID" ColumnName="areaID" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="bas" ColumnName="bas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="RavKavModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="freeDay" ColumnName="freeDay" />
+                <ScalarProperty Name="freeMounth" ColumnName="freeMounth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="RavKavModel.Profile">
+              <MappingFragment StoreEntitySet="Profile">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="describe" ColumnName="describe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="RavKavModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="lName" ColumnName="lName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="isManager" ColumnName="isManager" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="ravkavNum" ColumnName="ravkavNum" />
+                <ScalarProperty Name="profileId" ColumnName="profileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transits">
+            <EntityTypeMapping TypeName="RavKavModel.Transit">
+              <MappingFragment StoreEntitySet="Transit">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="bas" ColumnName="bas" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="areaID" ColumnName="areaID" />
+                <ScalarProperty Name="InternalOrIntermediate" ColumnName="InternalOrIntermediate" />
+                <ScalarProperty Name="transitTrip" ColumnName="transitTrip" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="date" ColumnName="date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
         </EntityContainerMapping>
-</Mapping></edmx:Mappings>
+      </Mapping>
+    </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -645,7 +456,7 @@ warning 6002: The table/view 'RavKav.dbo.Transit' does not have a primary key de
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

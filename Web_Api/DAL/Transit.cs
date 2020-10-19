@@ -22,5 +22,9 @@ namespace DAL
         public bool transitTrip { get; set; }
         public int userID { get; set; }
         public System.DateTime date { get; set; }
+    
+        public virtual Area Area { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

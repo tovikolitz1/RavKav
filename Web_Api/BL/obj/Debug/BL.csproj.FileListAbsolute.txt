@@ -68,3 +68,7 @@ D:\technut\פרויקט גמר\MyKav\Web_Api\BL\obj\Debug\BL.csproj.CoreCompileI
 D:\technut\פרויקט גמר\MyKav\Web_Api\BL\obj\Debug\BL.csproj.CopyComplete
 D:\technut\פרויקט גמר\MyKav\Web_Api\BL\obj\Debug\BL.dll
 D:\technut\פרויקט גמר\MyKav\Web_Api\BL\obj\Debug\BL.pdb
+D:\technut\final\Web_Api\BL\obj\Debug\BL.csprojAssemblyReference.cache
+D:\technut\final\Web_Api\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
+D:\technut\final\Web_Api\BL\obj\Debug\BL.dll
+D:\technut\final\Web_Api\BL\obj\Debug\BL.pdb

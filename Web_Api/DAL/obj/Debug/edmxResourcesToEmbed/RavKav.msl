@@ -1,69 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
-    <EntitySetMapping Name="CardTbls">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CardTbl)">
-        <MappingFragment StoreEntitySet="CardTbls">
+  <EntityContainerMapping StorageEntityContainer="RavKavModelStoreContainer" CdmEntityContainer="RavKavEntities">
+    <EntitySetMapping Name="Areas">
+      <EntityTypeMapping TypeName="RavKavModel.Area">
+        <MappingFragment StoreEntitySet="Area">
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AreaToContracts">
+      <EntityTypeMapping TypeName="RavKavModel.AreaToContract">
+        <MappingFragment StoreEntitySet="AreaToContract">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="contractID" ColumnName="contractID" />
+          <ScalarProperty Name="areaID" ColumnName="areaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contracts">
+      <EntityTypeMapping TypeName="RavKavModel.Contract">
+        <MappingFragment StoreEntitySet="Contract">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="freeDay" ColumnName="freeDay" />
+          <ScalarProperty Name="freeMounth" ColumnName="freeMounth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profiles">
+      <EntityTypeMapping TypeName="RavKavModel.Profile">
+        <MappingFragment StoreEntitySet="Profile">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
           <ScalarProperty Name="describe" ColumnName="describe" />
-          <ScalarProperty Name="freeMonthly" ColumnName="freeMonthly" />
-          <ScalarProperty Name="freeWeekly" ColumnName="freeWeekly" />
-          <ScalarProperty Name="freeDaily" ColumnName="freeDaily" />
-          <ScalarProperty Name="single" ColumnName="single" />
-          <ScalarProperty Name="test" ColumnName="test" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProfilsTbls">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ProfilsTbl)">
-        <MappingFragment StoreEntitySet="ProfilsTbls">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="RavKavModel.User">
+        <MappingFragment StoreEntitySet="User">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="discountPercentage" ColumnName="discountPercentage" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.sysdiagram)">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TransitTbls">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TransitTbl)">
-        <MappingFragment StoreEntitySet="TransitTbls">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="number" ColumnName="number" />
-          <ScalarProperty Name="cardId" ColumnName="cardId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TravelsTbls">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TravelsTbl)">
-        <MappingFragment StoreEntitySet="TravelsTbls">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="dateAndTime" ColumnName="dateAndTime" />
-          <ScalarProperty Name="userId" ColumnName="userId" />
-          <ScalarProperty Name="TransitId" ColumnName="TransitId" />
-          <ScalarProperty Name="Property1" ColumnName="Property1" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserTbls">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.UserTbl)">
-        <MappingFragment StoreEntitySet="UserTbls">
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="fName" ColumnName="fName" />
+          <ScalarProperty Name="lName" ColumnName="lName" />
+          <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="isManager" ColumnName="isManager" />
-          <ScalarProperty Name="ravkav" ColumnName="ravkav" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="firstName" ColumnName="firstName" />
-          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="ravkavNum" ColumnName="ravkavNum" />
           <ScalarProperty Name="profileId" ColumnName="profileId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transits">
+      <EntityTypeMapping TypeName="RavKavModel.Transit">
+        <MappingFragment StoreEntitySet="Transit">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="bas" ColumnName="bas" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="areaID" ColumnName="areaID" />
+          <ScalarProperty Name="InternalOrIntermediate" ColumnName="InternalOrIntermediate" />
+          <ScalarProperty Name="transitTrip" ColumnName="transitTrip" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="date" ColumnName="date" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

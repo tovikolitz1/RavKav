@@ -13,10 +13,10 @@ namespace DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class RavKavEntities : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public RavKavEntities()
+            : base("name=RavKavEntities")
         {
         }
     
@@ -25,23 +25,11 @@ namespace DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CardTbl> CardTbls { get; set; }
-        public virtual DbSet<ProfilsTbl> ProfilsTbls { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<TransitTbl> TransitTbls { get; set; }
-        public virtual DbSet<TravelsTbl> TravelsTbls { get; set; }
-        public virtual DbSet<UserTbl> UserTbls { get; set; }
         public virtual DbSet<Area> Areas { get; set; }
         public virtual DbSet<AreaToContract> AreaToContracts { get; set; }
         public virtual DbSet<Contract> Contracts { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Transit> Transits { get; set; }
-        public virtual DbSet<Area1> Area1 { get; set; }
-        public virtual DbSet<AreaToContract1> AreaToContract1 { get; set; }
-        public virtual DbSet<Contract1> Contract1 { get; set; }
-        public virtual DbSet<Profile1> Profile1 { get; set; }
-        public virtual DbSet<User1> User1 { get; set; }
-        public virtual DbSet<Transit1> Transit1 { get; set; }
     }
 }

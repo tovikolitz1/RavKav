@@ -10,28 +10,28 @@ namespace BL.Convertion
 {
     public class UserConversion
     {
-        public static UserDTO convertToUserDto(UserTbl userTbl)
+        public static UserDTO convertToUserDto(User userTbl)
         {
             UserDTO newUser = new UserDTO();
-            newUser.firstName = userTbl.firstName;
-            newUser.lastName = userTbl.lastName;
-            newUser.password = userTbl.password;
+            newUser.fName = userTbl.fName;
+            newUser.lName = userTbl.lName;
+            newUser.pass = userTbl.pass;
             newUser.profileId = userTbl.profileId;
-            newUser.ravkav = userTbl.ravkav;
+            newUser.ravkavNum = userTbl.ravkavNum;
             newUser.id = userTbl.id;
             newUser.isManager = userTbl.isManager;
             return newUser;
         }
-        public static UserTbl ConvertToUserTbl(UserDTO userDto)
+        public static User ConvertToUserTbl(UserDTO userTbl)
         {
-            UserTbl newUser = new UserTbl();
-            newUser.firstName = userDto.firstName;
-            newUser.lastName = userDto.lastName;
-            newUser.password = userDto.password;
-            newUser.profileId = userDto.profileId;
-            newUser.ravkav = userDto.ravkav;
-            newUser.id = userDto.id;
-            newUser.isManager = userDto.isManager;
+            User newUser = new User();
+            newUser.fName = userTbl.fName;
+            newUser.lName = userTbl.lName;
+            newUser.pass = userTbl.pass;
+            newUser.profileId = userTbl.profileId;
+            newUser.ravkavNum = userTbl.ravkavNum;
+            newUser.id = userTbl.id;
+            newUser.isManager = userTbl.isManager;
             return newUser;
         }
 

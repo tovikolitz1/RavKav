@@ -14,8 +14,17 @@ namespace DAL
     
     public partial class Profile
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Profile()
+        {
+            this.Users = new HashSet<User>();
+        }
+    
         public int id { get; set; }
         public int discount { get; set; }
         public string describe { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

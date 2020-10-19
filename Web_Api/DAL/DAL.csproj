@@ -52,35 +52,16 @@
     <Compile Include="Area.cs">
       <DependentUpon>RavKav.tt</DependentUpon>
     </Compile>
-    <Compile Include="Area1.cs">
-      <DependentUpon>RavKav.tt</DependentUpon>
-    </Compile>
     <Compile Include="AreaToContract.cs">
       <DependentUpon>RavKav.tt</DependentUpon>
     </Compile>
-    <Compile Include="AreaToContract1.cs">
-      <DependentUpon>RavKav.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CardTbl.cs">
-      <DependentUpon>RavKav.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Contract.cs">
-      <DependentUpon>RavKav.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Contract1.cs">
       <DependentUpon>RavKav.tt</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Profile.cs">
-      <DependentUpon>RavKav.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Profile1.cs">
-      <DependentUpon>RavKav.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProfilsTbl.cs">
       <DependentUpon>RavKav.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,28 +80,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RavKav.edmx</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>RavKav.tt</DependentUpon>
-    </Compile>
     <Compile Include="Transit.cs">
       <DependentUpon>RavKav.tt</DependentUpon>
     </Compile>
-    <Compile Include="Transit1.cs">
-      <DependentUpon>RavKav.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TransitTbl.cs">
-      <DependentUpon>RavKav.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TravelsTbl.cs">
-      <DependentUpon>RavKav.tt</DependentUpon>
-    </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>RavKav.tt</DependentUpon>
-    </Compile>
-    <Compile Include="User1.cs">
-      <DependentUpon>RavKav.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserTbl.cs">
       <DependentUpon>RavKav.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -148,7 +111,6 @@
       <DependentUpon>RavKav.edmx</DependentUpon>
       <LastGenOutput>RavKav.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="RavKav.edmx.sql" />
     <Content Include="RavKav.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RavKav.edmx</DependentUpon>

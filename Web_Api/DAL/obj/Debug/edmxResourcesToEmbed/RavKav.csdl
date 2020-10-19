@@ -1,143 +1,183 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="CardTbl">
+<Schema Namespace="RavKavModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Area">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="describe" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="freeMonthly" Type="Double" />
-    <Property Name="freeWeekly" Type="Double" />
-    <Property Name="freeDaily" Type="Double" />
-    <Property Name="single" Type="Double" Nullable="false" />
-    <NavigationProperty Name="TransitTbls" Relationship="Self.FK_TransitTbl_CardTbl" FromRole="CardTbl" ToRole="TransitTbl" />
-    <Property Name="test" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AreaToContracts" Relationship="Self.FK__AreaToCon__areaI__6EF57B66" FromRole="Area" ToRole="AreaToContract" />
+    <NavigationProperty Name="Transits" Relationship="Self.FK__Transit__areaID__6FE99F9F" FromRole="Area" ToRole="Transit" />
   </EntityType>
-  <EntityType Name="ProfilsTbl">
+  <EntityType Name="AreaToContract">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-    <Property Name="discountPercentage" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-    <NavigationProperty Name="UserTbls" Relationship="Self.FK_UserTbl_ProfilsTbl" FromRole="ProfilsTbl" ToRole="UserTbl" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="contractID" Type="Int32" Nullable="false" />
+    <Property Name="areaID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Area" Relationship="Self.FK__AreaToCon__areaI__6EF57B66" FromRole="AreaToContract" ToRole="Area" />
+    <NavigationProperty Name="Contract" Relationship="Self.FK__AreaToCon__contr__6E01572D" FromRole="AreaToContract" ToRole="Contract" />
   </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
-  <EntityType Name="TransitTbl">
+  <EntityType Name="Contract">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="number" Type="Int32" Nullable="false" />
-    <Property Name="cardId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="CardTbl" Relationship="Self.FK_TransitTbl_CardTbl" FromRole="TransitTbl" ToRole="CardTbl" />
-    <NavigationProperty Name="TravelsTbls" Relationship="Self.FK_TravelsTbl_TransitTbl" FromRole="TransitTbl" ToRole="TravelsTbl" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="freeDay" Type="Double" Nullable="false" />
+    <Property Name="freeMounth" Type="Double" Nullable="false" />
+    <NavigationProperty Name="AreaToContracts" Relationship="Self.FK__AreaToCon__contr__6E01572D" FromRole="Contract" ToRole="AreaToContract" />
   </EntityType>
-  <EntityType Name="TravelsTbl">
+  <EntityType Name="Profile">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="dateAndTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="userId" Type="Int32" Nullable="false" />
-    <Property Name="TransitId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="TransitTbl" Relationship="Self.FK_TravelsTbl_TransitTbl" FromRole="TravelsTbl" ToRole="TransitTbl" />
-    <NavigationProperty Name="UserTbl" Relationship="Self.FK_TravelsTbl_UserTbl" FromRole="TravelsTbl" ToRole="UserTbl" />
-    <Property Name="Property1" Type="String" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="discount" Type="Int32" Nullable="false" />
+    <Property Name="describe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__User__profileId__72C60C4A" FromRole="Profile" ToRole="User" />
   </EntityType>
-  <EntityType Name="UserTbl">
+  <EntityType Name="User">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="isManager" Type="Boolean" Nullable="false" />
-    <Property Name="ravkav" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="profileId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ProfilsTbl" Relationship="Self.FK_UserTbl_ProfilsTbl" FromRole="UserTbl" ToRole="ProfilsTbl" />
-    <NavigationProperty Name="TravelsTbls" Relationship="Self.FK_TravelsTbl_UserTbl" FromRole="UserTbl" ToRole="TravelsTbl" />
+    <Property Name="pass" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ravkavNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="profileId" Type="Int32" />
+    <NavigationProperty Name="Profile" Relationship="Self.FK__User__profileId__72C60C4A" FromRole="User" ToRole="Profile" />
+    <NavigationProperty Name="Transits" Relationship="Self.FK__Transit__userID__70DDC3D8" FromRole="User" ToRole="Transit" />
+    <NavigationProperty Name="Transits1" Relationship="Self.FK__Transit__userID__71D1E811" FromRole="User" ToRole="Transit" />
   </EntityType>
-  <Association Name="FK_TransitTbl_CardTbl">
-    <End Role="CardTbl" Type="Self.CardTbl" Multiplicity="1" />
-    <End Role="TransitTbl" Type="Self.TransitTbl" Multiplicity="*" />
+  <EntityType Name="Transit">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="bas" />
+      <PropertyRef Name="price" />
+      <PropertyRef Name="areaID" />
+      <PropertyRef Name="InternalOrIntermediate" />
+      <PropertyRef Name="transitTrip" />
+      <PropertyRef Name="userID" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="bas" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="price" Type="Double" Nullable="false" />
+    <Property Name="areaID" Type="Int32" Nullable="false" />
+    <Property Name="InternalOrIntermediate" Type="Boolean" Nullable="false" />
+    <Property Name="transitTrip" Type="Boolean" Nullable="false" />
+    <Property Name="userID" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Area" Relationship="Self.FK__Transit__areaID__6FE99F9F" FromRole="Transit" ToRole="Area" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Transit__userID__70DDC3D8" FromRole="Transit" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="Self.FK__Transit__userID__71D1E811" FromRole="Transit" ToRole="User" />
+  </EntityType>
+  <Association Name="FK__AreaToCon__areaI__6EF57B66">
+    <End Role="Area" Type="Self.Area" Multiplicity="1" />
+    <End Role="AreaToContract" Type="Self.AreaToContract" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CardTbl">
+      <Principal Role="Area">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="TransitTbl">
-        <PropertyRef Name="cardId" />
+      <Dependent Role="AreaToContract">
+        <PropertyRef Name="areaID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UserTbl_ProfilsTbl">
-    <End Role="ProfilsTbl" Type="Self.ProfilsTbl" Multiplicity="1" />
-    <End Role="UserTbl" Type="Self.UserTbl" Multiplicity="*" />
+  <Association Name="FK__Transit__areaID__6FE99F9F">
+    <End Role="Area" Type="Self.Area" Multiplicity="1" />
+    <End Role="Transit" Type="Self.Transit" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ProfilsTbl">
+      <Principal Role="Area">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="UserTbl">
+      <Dependent Role="Transit">
+        <PropertyRef Name="areaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AreaToCon__contr__6E01572D">
+    <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+    <End Role="AreaToContract" Type="Self.AreaToContract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contract">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="AreaToContract">
+        <PropertyRef Name="contractID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User__profileId__72C60C4A">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="User">
         <PropertyRef Name="profileId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TravelsTbl_TransitTbl">
-    <End Role="TransitTbl" Type="Self.TransitTbl" Multiplicity="1" />
-    <End Role="TravelsTbl" Type="Self.TravelsTbl" Multiplicity="*" />
+  <Association Name="FK__Transit__userID__70DDC3D8">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Transit" Type="Self.Transit" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TransitTbl">
+      <Principal Role="User">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="TravelsTbl">
-        <PropertyRef Name="TransitId" />
+      <Dependent Role="Transit">
+        <PropertyRef Name="userID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TravelsTbl_UserTbl">
-    <End Role="UserTbl" Type="Self.UserTbl" Multiplicity="1" />
-    <End Role="TravelsTbl" Type="Self.TravelsTbl" Multiplicity="*" />
+  <Association Name="FK__Transit__userID__71D1E811">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Transit" Type="Self.Transit" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="UserTbl">
+      <Principal Role="User">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="TravelsTbl">
-        <PropertyRef Name="userId" />
+      <Dependent Role="Transit">
+        <PropertyRef Name="userID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="CardTbls" EntityType="Self.CardTbl" />
-    <EntitySet Name="ProfilsTbls" EntityType="Self.ProfilsTbl" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-    <EntitySet Name="TransitTbls" EntityType="Self.TransitTbl" />
-    <EntitySet Name="TravelsTbls" EntityType="Self.TravelsTbl" />
-    <EntitySet Name="UserTbls" EntityType="Self.UserTbl" />
-    <AssociationSet Name="FK_TransitTbl_CardTbl" Association="Self.FK_TransitTbl_CardTbl">
-      <End Role="CardTbl" EntitySet="CardTbls" />
-      <End Role="TransitTbl" EntitySet="TransitTbls" />
+  <EntityContainer Name="RavKavEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Areas" EntityType="Self.Area" />
+    <EntitySet Name="AreaToContracts" EntityType="Self.AreaToContract" />
+    <EntitySet Name="Contracts" EntityType="Self.Contract" />
+    <EntitySet Name="Profiles" EntityType="Self.Profile" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Transits" EntityType="Self.Transit" />
+    <AssociationSet Name="FK__AreaToCon__areaI__6EF57B66" Association="Self.FK__AreaToCon__areaI__6EF57B66">
+      <End Role="Area" EntitySet="Areas" />
+      <End Role="AreaToContract" EntitySet="AreaToContracts" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserTbl_ProfilsTbl" Association="Self.FK_UserTbl_ProfilsTbl">
-      <End Role="ProfilsTbl" EntitySet="ProfilsTbls" />
-      <End Role="UserTbl" EntitySet="UserTbls" />
+    <AssociationSet Name="FK__Transit__areaID__6FE99F9F" Association="Self.FK__Transit__areaID__6FE99F9F">
+      <End Role="Area" EntitySet="Areas" />
+      <End Role="Transit" EntitySet="Transits" />
     </AssociationSet>
-    <AssociationSet Name="FK_TravelsTbl_TransitTbl" Association="Self.FK_TravelsTbl_TransitTbl">
-      <End Role="TransitTbl" EntitySet="TransitTbls" />
-      <End Role="TravelsTbl" EntitySet="TravelsTbls" />
+    <AssociationSet Name="FK__AreaToCon__contr__6E01572D" Association="Self.FK__AreaToCon__contr__6E01572D">
+      <End Role="Contract" EntitySet="Contracts" />
+      <End Role="AreaToContract" EntitySet="AreaToContracts" />
     </AssociationSet>
-    <AssociationSet Name="FK_TravelsTbl_UserTbl" Association="Self.FK_TravelsTbl_UserTbl">
-      <End Role="UserTbl" EntitySet="UserTbls" />
-      <End Role="TravelsTbl" EntitySet="TravelsTbls" />
+    <AssociationSet Name="FK__User__profileId__72C60C4A" Association="Self.FK__User__profileId__72C60C4A">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transit__userID__70DDC3D8" Association="Self.FK__Transit__userID__70DDC3D8">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Transit" EntitySet="Transits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transit__userID__71D1E811" Association="Self.FK__Transit__userID__71D1E811">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Transit" EntitySet="Transits" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

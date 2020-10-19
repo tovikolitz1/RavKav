@@ -14,8 +14,17 @@ namespace DAL
     
     public partial class Contract
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Contract()
+        {
+            this.AreaToContracts = new HashSet<AreaToContract>();
+        }
+    
         public int id { get; set; }
         public double freeDay { get; set; }
         public double freeMounth { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AreaToContract> AreaToContracts { get; set; }
     }
 }

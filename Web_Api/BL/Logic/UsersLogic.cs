@@ -11,19 +11,18 @@ namespace BL
 {
     public static class UsersLogic
     {
-        static RavKav db = new RavKav();
+        static RavKavEntities db = new RavKavEntities();
 
         public static bool AddUser(UserDTO user)
         {
-            UserTbl u = Extend.CreateUserTbl(user);
+            User u = Extend.CreateUserTbl(user);
             try
             {
-                using (RavKav r = new RavKav())
-                {
-                    r.UserTbls.Add(u);
-                    r.SaveChanges();
+               
+                    db.Users.Add(u);
+                    db.SaveChanges();
                     return true;
-                }
+                
             }
             catch (Exception e)
             {
@@ -37,7 +36,7 @@ namespace BL
         }
         public static UserDTO IfExsistRavKav(string ravKav, string pass)
         {
-            UserTbl userTbl = db.UserTbls.ToList().FirstOrDefault(x => x.ravkav == ravKav && x.password == pass);
+            User userTbl = db.Users.ToList().FirstOrDefault(x => x.ravkavNum == ravKav && x.pass == pass);
             if (userTbl == null)
                 return null;
             return Convertion.UserConversion.convertToUserDto(userTbl);

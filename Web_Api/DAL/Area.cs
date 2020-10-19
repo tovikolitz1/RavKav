@@ -14,7 +14,19 @@ namespace DAL
     
     public partial class Area
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Area()
+        {
+            this.AreaToContracts = new HashSet<AreaToContract>();
+            this.Transits = new HashSet<Transit>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AreaToContract> AreaToContracts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transit> Transits { get; set; }
     }
 }
