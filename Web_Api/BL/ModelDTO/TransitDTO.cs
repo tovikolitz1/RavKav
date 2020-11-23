@@ -10,10 +10,12 @@ namespace BL.ModelDTO
     class TransitDTO
     {
         public int id { get; set; }
-        public int number { get; set; }
-        public int cardId { get; set; }
-        public virtual CardTbl CardTbl { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TravelsTbl> TravelsTbls { get; set; }
+        public string buss { get; set; }
+        public double price { get; set; }
+        public int areaID { get; set; }
+        public bool internalOrIntermediate { get; set; }
+        public bool transitTrip { get; set; }
+        public int userID { get; set; }
+        public DateTime date { get; set; }
     }
 }

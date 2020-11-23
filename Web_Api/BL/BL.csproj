@@ -47,17 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Conversion\TravelConversion.cs" />
-    <Compile Include="Conversion\UserConversion.cs" />
+    <Compile Include="Convertions.cs" />
     <Compile Include="Logic\TravelLogic.cs" />
     <Compile Include="Logic\UsersLogic.cs" />
-    <Compile Include="Extentions\Extend.cs" />
+    <Compile Include="ModelDTO\AreasDTO.cs" />
+    <Compile Include="ModelDTO\AreaToContractsDTO.cs" />
+    <Compile Include="ModelDTO\contractsDTO.cs" />
     <Compile Include="ModelDTO\ProfilsDTO.cs" />
     <Compile Include="ModelDTO\TransitDTO.cs" />
-    <Compile Include="ModelDTO\TravelsDTO.cs" />
     <Compile Include="ModelDTO\UserDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ModelDTO\CardDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

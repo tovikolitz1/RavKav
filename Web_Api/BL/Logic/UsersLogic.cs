@@ -1,4 +1,4 @@
-﻿using BL.Extentions;
+﻿
 using BL.ModelDTO;
 using DAL;
 using System;
@@ -7,44 +7,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BL
 {
     public static class UsersLogic
     {
-        static RavKavEntities db = new RavKavEntities();
+        static RavKav db = new RavKav();
 
         public static bool AddUser(UserDTO user)
         {
-            User u = Extend.CreateUserTbl(user);
+            User u = Convertions.Convertion(user);
             try
             {
-               
                     db.Users.Add(u);
                     db.SaveChanges();
                     return true;
-                
             }
             catch (Exception e)
             {
                 return false;
             }
         }
-
+        public static bool UpdateUser(UserDTO user)
+        {
+            User u = Convertions.Convertion(user);
+            try
+            {
+                db.Users.Attach(u);
+                db.Entry<User>(u).State=System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
         public static int CalculateThePayment(string id)
         {
             return 1;
         }
         public static UserDTO IfExsistRavKav(string ravKav, string pass)
         {
-            User userTbl = db.Users.ToList().FirstOrDefault(x => x.ravkavNum == ravKav && x.pass == pass);
-            if (userTbl == null)
+            User user = db.Users.ToList().FirstOrDefault(x => x.ravkavNum == ravKav && x.pass == pass);
+            if (user == null)
                 return null;
-            return Convertion.UserConversion.convertToUserDto(userTbl);
-            //return db.UserTbls.ToList().Where(a => a.ravkav.Equals(ravKav) && a.password.Equals(pass)).Select(item => new UserDTO { id = item.id, isManager = item.isManager, ravkav = item.ravkav, password = item.password, firstName = item.firstName, lastName = item.lastName, profileId = item.profileId}).FirstOrDefault();
+            return Convertions.Convertion(user);
         }                                                                                                                            
         public static string GetNameById(int id)                                                                                     
         {                                                                                                                            
-             return db.UserTbls.Where(x=> x.id==id).Select(x=> x.firstName+" "+x.lastName).ToString();                               
+             return db.Users.Where(x=> x.id==id).Select(x=> x.fName+" "+x.lName).ToString();                               
         }                                                                                                                            
     }
 }
