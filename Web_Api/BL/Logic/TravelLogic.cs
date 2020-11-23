@@ -9,11 +9,11 @@ namespace BL.Logic
     class TravelLogic
     {
 
+        Console.WriteLine();
 
 
 
-
-
+            
 
     }
 }
