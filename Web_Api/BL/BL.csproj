@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Convertions.cs" />
+    <Compile Include="Logic\ContractToUserLogic.cs" />
     <Compile Include="Logic\TravelLogic.cs" />
     <Compile Include="Logic\UsersLogic.cs" />
     <Compile Include="ModelDTO\AreasDTO.cs" />
