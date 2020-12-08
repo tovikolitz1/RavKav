@@ -19,10 +19,11 @@ namespace BL
         }
         public static Area Convertion(AreasDTO area)
         {
-            Area newarea = new Area();
-            newarea.id = area.id;
-            newarea.name = area.name;
-            return newarea;
+            return new Area() {
+            id = area.id,
+            name = area.name
+            };
+            
         }
         public static AreaToContractsDTO Convertion(AreaToContract areaToContractsTbl)
         {
