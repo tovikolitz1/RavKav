@@ -38,3 +38,11 @@ D:\technut\final\Web_Api\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 D:\technut\final\Web_Api\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\technut\final\Web_Api\DAL\obj\Debug\DAL.dll
 D:\technut\final\Web_Api\DAL\obj\Debug\DAL.pdb
+F:\RAVKAV\RavKav\Web_Api\DAL\bin\Debug\DAL.dll.config
+F:\RAVKAV\RavKav\Web_Api\DAL\bin\Debug\DAL.dll
+F:\RAVKAV\RavKav\Web_Api\DAL\bin\Debug\DAL.pdb
+F:\RAVKAV\RavKav\Web_Api\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+F:\RAVKAV\RavKav\Web_Api\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+F:\RAVKAV\RavKav\Web_Api\DAL\obj\Debug\DAL.csproj.CopyComplete
+F:\RAVKAV\RavKav\Web_Api\DAL\obj\Debug\DAL.dll
+F:\RAVKAV\RavKav\Web_Api\DAL\obj\Debug\DAL.pdb
