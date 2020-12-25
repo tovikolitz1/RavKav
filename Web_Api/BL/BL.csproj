@@ -55,7 +55,7 @@
     <Compile Include="ModelDTO\AreaToContractsDTO.cs" />
     <Compile Include="ModelDTO\contractsDTO.cs" />
     <Compile Include="ModelDTO\ProfilsDTO.cs" />
-    <Compile Include="ModelDTO\TransitDTO.cs" />
+    <Compile Include="ModelDTO\TravelsDTO.cs" />
     <Compile Include="ModelDTO\UserDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

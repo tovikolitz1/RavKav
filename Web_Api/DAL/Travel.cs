@@ -12,13 +12,19 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class AreaToContract
+    public partial class Travel
     {
         public int id { get; set; }
-        public int contractID { get; set; }
+        public string bas { get; set; }
+        public double price { get; set; }
         public int areaID { get; set; }
+        public bool InternalOrIntermediate { get; set; }
+        public bool travelTrip { get; set; }
+        public int userID { get; set; }
+        public System.DateTime date { get; set; }
     
         public virtual Area Area { get; set; }
-        public virtual Contract Contract { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

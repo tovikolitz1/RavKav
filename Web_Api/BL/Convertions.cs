@@ -74,33 +74,33 @@ namespace BL
             newprofile.describe = profile.describe;
             return newprofile;
         }
-        public static TransitDTO Convertion(Transit transitTbl)
+        public static TravelsDTO Convertion(Travel travelTbl)
         {
-            TransitDTO newTransit = new TransitDTO();
+            TravelsDTO newTravel = new TravelsDTO();
 
-            newTransit.id = transitTbl.id;
-            newTransit.buss = transitTbl.bas;
-            newTransit.price = transitTbl.price;
-            newTransit.areaID = transitTbl.areaID;
-            newTransit.internalOrIntermediate = transitTbl.InternalOrIntermediate;
-            newTransit.transitTrip = transitTbl.transitTrip;
-            newTransit.userID = transitTbl.userID;
-            newTransit.date = transitTbl.date;
-            return newTransit;
+            newTravel.id = travelTbl.id;
+            newTravel.buss = travelTbl.bas;
+            newTravel.price = travelTbl.price;
+            newTravel.areaID = travelTbl.areaID;
+            newTravel.internalOrIntermediate = travelTbl.InternalOrIntermediate;
+            newTravel.trvelTrip = travelTbl.travelTrip;
+            newTravel.userID = travelTbl.userID;
+            newTravel.date = travelTbl.date;
+            return newTravel;
         }
-        public static Transit Convertion(TransitDTO transit)
+        public static Travel Convertion(TravelsDTO travel)
         {
-            Transit newTransit = new Transit();
+            Travel newTravel = new Travel();
 
-            newTransit.id = transit.id;
-            newTransit.bas = transit.buss;
-            newTransit.price = transit.price;
-            newTransit.areaID = transit.areaID;
-            newTransit.InternalOrIntermediate = transit.internalOrIntermediate;
-            newTransit.transitTrip = transit.transitTrip;
-            newTransit.userID = transit.userID;
-            newTransit.date = transit.date;
-            return newTransit;
+            newTravel.id = travel.id;
+            newTravel.bas = travel.buss;
+            newTravel.price = travel.price;
+            newTravel.areaID = travel.areaID;
+            newTravel.InternalOrIntermediate = travel.internalOrIntermediate;
+            newTravel.travelTrip = travel.trvelTrip;
+            newTravel.userID = travel.userID;
+            newTravel.date = travel.date;
+            return newTravel;
         }
         public static UserDTO Convertion(User userTbl)
         {

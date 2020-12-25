@@ -80,7 +80,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RavKav.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Transit.cs">
+    <Compile Include="Travel.cs">
       <DependentUpon>RavKav.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">

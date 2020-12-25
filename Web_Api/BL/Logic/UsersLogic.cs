@@ -19,6 +19,7 @@ namespace BL
             User u = Convertions.Convertion(user);
             try
             {
+                
                     db.Users.Add(u);
                     db.SaveChanges();
                     return true;
