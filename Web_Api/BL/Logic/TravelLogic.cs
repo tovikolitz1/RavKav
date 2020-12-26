@@ -8,28 +8,75 @@ using System.Threading.Tasks;
 
 namespace BL.Logic
 {
+    public static class MyExtensions
+    {
+
+        public static T GetNext<T>(this List<T> list, T item)
+        {
+            int index = list.IndexOf(item);
+            return list[index + 1];
+
+        }
+        public static T GetPrevious<T>(this List<T> list, T item)
+        {
+            int index = list.IndexOf(item);
+            return list[index - 1];
+        }
+    }
     class TravelLogic
     {
         static RavKav db = new RavKav();
-        // שליפת כל הנסיעות של משתמש
         public static List<TravelsDTO> GetTravelsById(int id)
         {
-            //לבדוק איך אפשר להחזיר רשימה מסוג נסיעות
+            //שליפת כל הנסיעות בצורה ממוינת לפי מחיר ואזור
             List<Travel> travelsById = new List<Travel>();
-            travelsById = db.Travels.Where(x => x.id == id).ToList();
-            List<TravelsDTO> travelsByIdDTO = Convertions.Convertion(travelsById);   
+            travelsById = db.Travels.Where(x => x.id == id).OrderBy(x => x.price).ThenByDescending(x => x.areaID).ToList();
+            List<Contract> contracts = new List<Contract>();
+            contracts = db.Contracts.ToList();
+            List<AreaToContract> areaToContracts = new List<AreaToContract>();
+            areaToContracts = db.AreaToContracts.ToList();
+            List<TravelsDTO> travelsByIdDTO = new List<TravelsDTO>();
+            IDictionary<int, bool> areas = new Dictionary<int, bool>();
+            foreach (var item in travelsById)
+            {//יצירת דיקשנרי של כל האזורים הקיימים למשתמש זה
+                travelsByIdDTO.Add(Convertions.Convertion(item));
+                if (!areas.ContainsKey(item.areaID))
+                {
+                    areas.Add(item.areaID, false);
+                }
+            }
+            //מעבר על רשימת הנסיעות ומציאת חוזה לשתי נסיעות זהות
+            foreach (var item in travelsByIdDTO)
+            {
+                int index = travelsByIdDTO.IndexOf(item);
+                //בדיקה האם קיימות שתי נסיעות מאותו אזור
+                if (travelsByIdDTO[index + 1].areaID == item.areaID)
+                {
+                    Contract min=new Contract();
+                    Contract currentContract = new Contract();
+                    foreach (var areaToContract in areaToContracts)
+                    {
+                        if (areaToContract.areaID == item.areaID)
+                        {//מציאת חוזה מתאים לאזור
+                            foreach (var contract in contracts)
+                            {
+                                if (areaToContract.contractID == contract.id)
+                                {
+                                    currentContract = contract;
+                                    break;
+                                }
+                            }
+                            if (min.freeDay > currentContract.freeDay)
+                                min = currentContract;
+                        }
+                    }
+                }
+
+            }
             return travelsByIdDTO;
         }
-        ////מציאת שתי נסיעות הכי יקרות
-        //public static List<string> GetExpenciveTravel(int id)
-        //{
-        //    //לא גמור
-        //    //איך להוציא רק שתי נסיעות 
-        //    List<string> expenciveTravel = new List<string>();
-        //    expenciveTravel = db.Transits.Where(x => x.id == id).Select(x => x.id + x.bas + x.price + x.areaID + x.InternalOrIntermediate + x.transitTrip + x.userID + x.date).ToList();
-        //    return expenciveTravel;
-        //}
+
     }
-       
-       
+
+
 }
