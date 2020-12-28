@@ -50,17 +50,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Transits">
-      <EntityTypeMapping TypeName="RavKavModel.Transit">
-        <MappingFragment StoreEntitySet="Transit">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="bas" ColumnName="bas" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="areaID" ColumnName="areaID" />
-          <ScalarProperty Name="InternalOrIntermediate" ColumnName="InternalOrIntermediate" />
-          <ScalarProperty Name="transitTrip" ColumnName="transitTrip" />
-          <ScalarProperty Name="userID" ColumnName="userID" />
+    <EntitySetMapping Name="Travels">
+      <EntityTypeMapping TypeName="RavKavModel.Travel">
+        <MappingFragment StoreEntitySet="Travel">
           <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="travelTrip" ColumnName="travelTrip" />
+          <ScalarProperty Name="InternalOrIntermediate" ColumnName="InternalOrIntermediate" />
+          <ScalarProperty Name="areaID" ColumnName="areaID" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="bas" ColumnName="bas" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

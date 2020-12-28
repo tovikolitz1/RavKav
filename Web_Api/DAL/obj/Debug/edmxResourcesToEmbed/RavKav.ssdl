@@ -32,15 +32,15 @@
     <Property Name="describe" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'RavKav.dbo.Transit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="Transit">
+warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Travel">
     <Key>
       <PropertyRef Name="id" />
       <PropertyRef Name="bas" />
       <PropertyRef Name="price" />
       <PropertyRef Name="areaID" />
       <PropertyRef Name="InternalOrIntermediate" />
-      <PropertyRef Name="transitTrip" />
+      <PropertyRef Name="travelTrip" />
       <PropertyRef Name="userID" />
       <PropertyRef Name="date" />
     </Key>
@@ -49,7 +49,7 @@ warning 6002: The table/view 'RavKav.dbo.Transit' does not have a primary key de
     <Property Name="price" Type="float" Nullable="false" />
     <Property Name="areaID" Type="int" Nullable="false" />
     <Property Name="InternalOrIntermediate" Type="bit" Nullable="false" />
-    <Property Name="transitTrip" Type="bit" Nullable="false" />
+    <Property Name="travelTrip" Type="bit" Nullable="false" />
     <Property Name="userID" Type="int" Nullable="false" />
     <Property Name="date" Type="date" Nullable="false" />
   </EntityType>
@@ -92,36 +92,36 @@ warning 6002: The table/view 'RavKav.dbo.Transit' does not have a primary key de
   </Association>
   <Association Name="FK__Transit__areaID__6FE99F9F">
     <End Role="Area" Type="Self.Area" Multiplicity="1" />
-    <End Role="Transit" Type="Self.Transit" Multiplicity="*" />
+    <End Role="Travel" Type="Self.Travel" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Area">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="Transit">
+      <Dependent Role="Travel">
         <PropertyRef Name="areaID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Transit__userID__70DDC3D8">
     <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="Transit" Type="Self.Transit" Multiplicity="*" />
+    <End Role="Travel" Type="Self.Travel" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="Transit">
+      <Dependent Role="Travel">
         <PropertyRef Name="userID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Transit__userID__71D1E811">
     <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="Transit" Type="Self.Transit" Multiplicity="*" />
+    <End Role="Travel" Type="Self.Travel" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="Transit">
+      <Dependent Role="Travel">
         <PropertyRef Name="userID" />
       </Dependent>
     </ReferentialConstraint>
@@ -144,17 +144,17 @@ warning 6002: The table/view 'RavKav.dbo.Transit' does not have a primary key de
     <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Transit" EntityType="Self.Transit" store:Type="Tables" store:Schema="dbo">
+    <EntitySet Name="Travel" EntityType="Self.Travel" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [Transit].[id] AS [id], 
-    [Transit].[bas] AS [bas], 
-    [Transit].[price] AS [price], 
-    [Transit].[areaID] AS [areaID], 
-    [Transit].[InternalOrIntermediate] AS [InternalOrIntermediate], 
-    [Transit].[transitTrip] AS [transitTrip], 
-    [Transit].[userID] AS [userID], 
-    [Transit].[date] AS [date]
-    FROM [dbo].[Transit] AS [Transit]</DefiningQuery>
+    [Travel].[id] AS [id], 
+    [Travel].[bas] AS [bas], 
+    [Travel].[price] AS [price], 
+    [Travel].[areaID] AS [areaID], 
+    [Travel].[InternalOrIntermediate] AS [InternalOrIntermediate], 
+    [Travel].[travelTrip] AS [travelTrip], 
+    [Travel].[userID] AS [userID], 
+    [Travel].[date] AS [date]
+    FROM [dbo].[Travel] AS [Travel]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK__AreaToCon__areaI__6EF57B66" Association="Self.FK__AreaToCon__areaI__6EF57B66">
       <End Role="Area" EntitySet="Area" />
@@ -166,15 +166,15 @@ warning 6002: The table/view 'RavKav.dbo.Transit' does not have a primary key de
     </AssociationSet>
     <AssociationSet Name="FK__Transit__areaID__6FE99F9F" Association="Self.FK__Transit__areaID__6FE99F9F">
       <End Role="Area" EntitySet="Area" />
-      <End Role="Transit" EntitySet="Transit" />
+      <End Role="Travel" EntitySet="Travel" />
     </AssociationSet>
     <AssociationSet Name="FK__Transit__userID__70DDC3D8" Association="Self.FK__Transit__userID__70DDC3D8">
       <End Role="User" EntitySet="User" />
-      <End Role="Transit" EntitySet="Transit" />
+      <End Role="Travel" EntitySet="Travel" />
     </AssociationSet>
     <AssociationSet Name="FK__Transit__userID__71D1E811" Association="Self.FK__Transit__userID__71D1E811">
       <End Role="User" EntitySet="User" />
-      <End Role="Transit" EntitySet="Transit" />
+      <End Role="Travel" EntitySet="Travel" />
     </AssociationSet>
     <AssociationSet Name="FK__User__profileId__72C60C4A" Association="Self.FK__User__profileId__72C60C4A">
       <End Role="Profile" EntitySet="Profile" />
