@@ -8,6 +8,7 @@
     <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="AreaToContracts" Relationship="Self.FK__AreaToCon__areaI__6EF57B66" FromRole="Area" ToRole="AreaToContract" />
     <NavigationProperty Name="Transits" Relationship="Self.FK__Transit__areaID__6FE99F9F" FromRole="Area" ToRole="Transit" />
+    <NavigationProperty Name="Travels" Relationship="RavKavModel.FK__Transit__areaID__6FE99F9F1" FromRole="Area" ToRole="Travel" />
   </EntityType>
   <EntityType Name="AreaToContract">
     <Key>
@@ -51,7 +52,8 @@
     <Property Name="profileId" Type="Int32" />
     <NavigationProperty Name="Profile" Relationship="Self.FK__User__profileId__72C60C4A" FromRole="User" ToRole="Profile" />
     <NavigationProperty Name="Transits" Relationship="Self.FK__Transit__userID__70DDC3D8" FromRole="User" ToRole="Transit" />
-    <NavigationProperty Name="Transits1" Relationship="Self.FK__Transit__userID__71D1E811" FromRole="User" ToRole="Transit" />
+    <NavigationProperty Name="Travels" Relationship="RavKavModel.FK__Transit__userID__70DDC3D81" FromRole="User" ToRole="Travel" />
+    <NavigationProperty Name="Travels1" Relationship="RavKavModel.FK__Transit__userID__71D1E811" FromRole="User" ToRole="Travel" />
   </EntityType>
   <EntityType Name="Transit">
     <Key>
@@ -74,7 +76,6 @@
     <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="Area" Relationship="Self.FK__Transit__areaID__6FE99F9F" FromRole="Transit" ToRole="Area" />
     <NavigationProperty Name="User" Relationship="Self.FK__Transit__userID__70DDC3D8" FromRole="Transit" ToRole="User" />
-    <NavigationProperty Name="User1" Relationship="Self.FK__Transit__userID__71D1E811" FromRole="Transit" ToRole="User" />
   </EntityType>
   <Association Name="FK__AreaToCon__areaI__6EF57B66">
     <End Role="Area" Type="Self.Area" Multiplicity="1" />
@@ -136,19 +137,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Transit__userID__71D1E811">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="Transit" Type="Self.Transit" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Transit">
-        <PropertyRef Name="userID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityContainer Name="RavKavEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="RavKav" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Areas" EntityType="Self.Area" />
     <EntitySet Name="AreaToContracts" EntityType="Self.AreaToContract" />
     <EntitySet Name="Contracts" EntityType="Self.Contract" />
@@ -175,9 +164,77 @@
       <End Role="User" EntitySet="Users" />
       <End Role="Transit" EntitySet="Transits" />
     </AssociationSet>
-    <AssociationSet Name="FK__Transit__userID__71D1E811" Association="Self.FK__Transit__userID__71D1E811">
+    <EntitySet Name="Travels" EntityType="RavKavModel.Travel" />
+    <AssociationSet Name="FK__Transit__areaID__6FE99F9F1" Association="RavKavModel.FK__Transit__areaID__6FE99F9F1">
+      <End Role="Area" EntitySet="Areas" />
+      <End Role="Travel" EntitySet="Travels" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transit__userID__70DDC3D81" Association="RavKavModel.FK__Transit__userID__70DDC3D81">
       <End Role="User" EntitySet="Users" />
-      <End Role="Transit" EntitySet="Transits" />
+      <End Role="Travel" EntitySet="Travels" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transit__userID__71D1E811" Association="RavKavModel.FK__Transit__userID__71D1E811">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Travel" EntitySet="Travels" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Travel">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="bas" />
+      <PropertyRef Name="price" />
+      <PropertyRef Name="areaID" />
+      <PropertyRef Name="InternalOrIntermediate" />
+      <PropertyRef Name="travelTrip" />
+      <PropertyRef Name="userID" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="bas" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Double" Nullable="false" />
+    <Property Name="areaID" Type="Int32" Nullable="false" />
+    <Property Name="InternalOrIntermediate" Type="Boolean" Nullable="false" />
+    <Property Name="travelTrip" Type="Boolean" Nullable="false" />
+    <Property Name="userID" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Area" Relationship="RavKavModel.FK__Transit__areaID__6FE99F9F1" FromRole="Travel" ToRole="Area" />
+    <NavigationProperty Name="User" Relationship="RavKavModel.FK__Transit__userID__70DDC3D81" FromRole="Travel" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="RavKavModel.FK__Transit__userID__71D1E811" FromRole="Travel" ToRole="User" />
+  </EntityType>
+  <Association Name="FK__Transit__areaID__6FE99F9F1">
+    <End Type="RavKavModel.Area" Role="Area" Multiplicity="1" />
+    <End Type="RavKavModel.Travel" Role="Travel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Travel">
+        <PropertyRef Name="areaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transit__userID__70DDC3D81">
+    <End Type="RavKavModel.User" Role="User" Multiplicity="1" />
+    <End Type="RavKavModel.Travel" Role="Travel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Travel">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transit__userID__71D1E811">
+    <End Type="RavKavModel.User" Role="User" Multiplicity="1" />
+    <End Type="RavKavModel.Travel" Role="Travel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Travel">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
