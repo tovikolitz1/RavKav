@@ -113,7 +113,23 @@ namespace BL.Logic
                     else
                         contractUsed.Add(currentContract.id, currentContract);
                 }
+            }
+            foreach (var item in travelsByIdDTO)
+            {
+                //נסיעה שעוד לא מומשה בשום חוזה בדיקה האם ייצא יותר זול להרחיב חוזה בשבילה
+                //כאן הסתבכתי מפורט באקסל
+                if (!item.used)
+                {
+                    foreach (var con in contractUsed)
+                    {
 
+                        foreach (var areaToCon in areaToContractsDTO)
+                        {
+
+                        }
+
+                    }
+                }
             }
             return travelsByIdDTO;
         }
