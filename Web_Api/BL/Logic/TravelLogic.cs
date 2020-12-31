@@ -26,6 +26,7 @@ namespace BL.Logic
     class TravelLogic
     {
         static RavKav db = new RavKav();
+        //להוסיף מיון לפי תאריך או לקבל בפונקציה גם תאריך
         public static List<TravelsDTO> GetTravelsById(int id)
         {
             //שליפת כל הנסיעות בצורה ממוינת לפי מחיר ואזור
@@ -41,7 +42,9 @@ namespace BL.Logic
             IDictionary<int, bool> areas = new Dictionary<int, bool>();
             IDictionary<int, contractsDTO> contractUsed = new Dictionary<int, contractsDTO>();
             List<AreasDTO> areaToCurrentContract = new List<AreasDTO>();
+            List<AreasDTO> areaToContractForSingleTravel = new List<AreasDTO>();
             int cntTravelInCntract = 0;
+            int cntSingleTravels = 0;
             //המרת רשימות ל DTO
             foreach (var item in contracts)
             {
@@ -110,10 +113,31 @@ namespace BL.Logic
                         item.used = false;
                         travelsByIdDTO[index + 1].used = false;
                     }
+                    //שמירת החוזה הנבחר כחוזה שהשמתשו בו
                     else
                         contractUsed.Add(currentContract.id, currentContract);
                 }
 
+            }
+            //מעבר על כל הנסיעות הבודדות שנותרו
+            foreach (var item in travelsByIdDTO)
+            {
+               
+                
+                //נסיעה שעוד לא מומשה בשום חוזה בדיקה האם ייצא יותר זול להרחיב חוזה בשבילה
+                //כאן הסתבכתי מפורט באקסל
+                if (!item.used)
+                {
+                    foreach (var con in contractUsed)
+                    {
+                     
+                             foreach (var areaToCon in areaToContractsDTO)
+                        {
+
+                        }
+                      
+                    }
+                }
             }
             return travelsByIdDTO;
         }
