@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { WebApiService } from 'src/app/services/web-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-show-travels',
   templateUrl: './show-travels.component.html',
