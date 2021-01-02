@@ -8,127 +8,129 @@ using System.Threading.Tasks;
 
 namespace BL.Logic
 {
-    public static class MyExtensions
-    {
-
-        public static T GetNext<T>(this List<T> list, T item)
-        {
-            int index = list.IndexOf(item);
-            return list[index + 1];
-
-        }
-        public static T GetPrevious<T>(this List<T> list, T item)
-        {
-            int index = list.IndexOf(item);
-            return list[index - 1];
-        }
-    }
     class TravelLogic
     {
         static RavKav db = new RavKav();
-        public static List<TravelsDTO> GetTravelsById(int id)
+        public static Node<TravelsDTO> GetTravelsById(int id)
         {
+            #region declare
             //שליפת כל הנסיעות בצורה ממוינת לפי מחיר ואזור
             List<Travel> travelsById = new List<Travel>();
             travelsById = db.Travels.Where(x => x.id == id).OrderBy(x => x.price).ThenByDescending(x => x.areaID).ToList();
+            Node<TravelsDTO> travelsByIdDTO = new Node<TravelsDTO>();
+            Node<TravelsDTO> travelsByIdDTOpos = travelsByIdDTO;
+            Node<TravelsDTO> travelsByIdDTOpos1 = travelsByIdDTO;
             List<Contract> contracts = new List<Contract>();
             contracts = db.Contracts.ToList();
-            List<contractsDTO> contractsDTO = new List<contractsDTO>();
+            Node<contractsDTO> contractsDTO = new Node<contractsDTO>();
+            Node<contractsDTO> contractsDTOpos = contractsDTO;
             List<AreaToContract> areaToContracts = new List<AreaToContract>();
             areaToContracts = db.AreaToContracts.ToList();
-            List<AreaToContractsDTO> areaToContractsDTO = new List<AreaToContractsDTO>();
-            List<TravelsDTO> travelsByIdDTO = new List<TravelsDTO>();
-            IDictionary<int, bool> areas = new Dictionary<int, bool>();
+            Node<AreasDTO> areaToCurrentContractsDTO = new Node<AreasDTO>();
+            Node<AreasDTO> areaToCurrentContractsDTOpos = areaToCurrentContractsDTO;
+            //IDictionary<int, bool> areas = new Dictionary<int, bool>();
+            //לשנות את הוליו להיות מסוג המחלקת עזר
             IDictionary<int, contractsDTO> contractUsed = new Dictionary<int, contractsDTO>();
-            List<AreasDTO> areaToCurrentContract = new List<AreasDTO>();
+            Node<AreasDTO> travelToCurrentContractDTO = new Node<AreasDTO>();
+            Node<AreasDTO> travelToCurrentContractDTOpos = travelToCurrentContractDTO;
             int cntTravelInCntract = 0;
+            #endregion
             //המרת רשימות ל DTO
             foreach (var item in contracts)
             {
-                contractsDTO.Add(Convertions.Convertion(item));
+                contractsDTOpos.Value(Convertions.Convertion(item));
+                contractsDTOpos = contractsDTOpos.Next();
             }
 
-            foreach (var item in areaToContracts)
-            {
-                areaToContractsDTO.Add(Convertions.Convertion(item));
-            }
+            //foreach (var item in areaToContracts)
+            //{
+            //    areaToCurrentContractsDTOpos.Value(Convertions.Convertion(item));
+            //    areaToCurrentContractsDTOpos = areaToCurrentContractsDTOpos.Next();
+            //}
 
-            foreach (var item in travelsById)
-            {//יצירת דיקשנרי של כל האזורים הקיימים למשתמש זה
-                travelsByIdDTO.Add(Convertions.Convertion(item));
-                if (!areas.ContainsKey(item.areaID))
-                {
-                    areas.Add(item.areaID, false);
-                }
-            }
+            //foreach (var item in travelsById)
+            //{//יצירת דיקשנרי של כל האזורים הקיימים למשתמש זה
+            //    travelsByIdDTOpos.Value(Convertions.Convertion(item));
+            //    travelsByIdDTOpos = travelsByIdDTOpos.Next();
+            //    if (!areas.ContainsKey(item.areaID))
+            //    {
+            //        areas.Add(item.areaID, false);
+            //    }
+            //}
+            travelsByIdDTOpos = travelsByIdDTO;
+
             //מעבר על רשימת הנסיעות ומציאת חוזה לשתי נסיעות זהות
-            foreach (var item in travelsByIdDTO)
+            while (travelsByIdDTOpos != null && travelsByIdDTOpos.Next() != null)
             {
-                int index = travelsByIdDTO.IndexOf(item);
+
                 //בדיקה האם קיימות שתי נסיעות מאותו אזור
-                if (travelsByIdDTO[index + 1].areaID == item.areaID && !item.used)
+                if (travelsByIdDTOpos.Value().areaID == travelsByIdDTOpos.Next().Value().areaID && !travelsByIdDTOpos.Value().used)
                 {
                     contractsDTO min = new contractsDTO();
                     contractsDTO currentContract = new contractsDTO();
                     foreach (var areaToContract in areaToContracts)
                     {
-                        if (areaToContract.areaID == item.areaID)
+                        if (areaToContract.areaID == travelsByIdDTOpos.Value().areaID)
                         {//מציאת חוזה מתאים לאזור
-                            foreach (var contract in contractsDTO)
+                            while (contractsDTOpos != null)
                             {
-                                if (areaToContract.contractID == contract.id)
+                                if (areaToContract.contractID == contractsDTOpos.Value().id)
                                 {
-                                    currentContract = contract;
+                                    currentContract = contractsDTOpos.Value();
                                     break;
                                 }
+                                contractsDTOpos = contractsDTOpos.Next();
                             }
+                            contractsDTOpos = contractsDTO;
                             if (min.freeDay > currentContract.freeDay)
                                 min = currentContract;
                         }
                     }
+                    areaToCurrentContractsDTOpos = areaToCurrentContractsDTO;
                     //יצירת רשימת אזורים שנכללים בחוזה
-                    foreach (var con in areaToContractsDTO)
+                    foreach (var item in areaToContracts)
                     {
-                        if (con.contractID == currentContract.id)
-                            areaToCurrentContract.Add(new AreasDTO(con.id));
-                    }
-                    //הוספת נסיעות שמתאימות לחוזה הנבחר
-                    foreach (var travel in travelsByIdDTO)
-                    {
-                        foreach (var area in areaToCurrentContract)
+                        if (item.contractID == currentContract.id)
                         {
-                            if (travel.areaID == area.id && !travel.used)
+                            areaToCurrentContractsDTOpos.Value(new AreasDTO(item.id));
+                            areaToCurrentContractsDTOpos = areaToCurrentContractsDTOpos.Next();
+                        }
+                    }
+                    areaToCurrentContractsDTOpos = areaToCurrentContractsDTO;
+                    //הוספת נסיעות שמתאימות לחוזה הנבחר
+                    while (travelsByIdDTOpos1 != null)
+                    {
+                        while (areaToCurrentContractsDTOpos != null)
+                        {
+                            if (travelsByIdDTOpos1.Value().areaID == areaToCurrentContractsDTOpos.Value().id && !travelsByIdDTOpos1.Value().used)
                             {
-                                travel.used = true;
+                                travelsByIdDTOpos1.Value().used = true;
                                 cntTravelInCntract++;
                             }
+                            areaToCurrentContractsDTOpos = areaToCurrentContractsDTOpos.Next();
                         }
-
+                        travelsByIdDTOpos1 = travelsByIdDTOpos1.Next();
+                        areaToCurrentContractsDTOpos = areaToCurrentContractsDTO;
                     }
+                    travelsByIdDTOpos1 = travelsByIdDTO;
+                    //בדיקה האם קיימות שלוש נסיעות
                     if (cntTravelInCntract < 3)
                     {
-                        item.used = false;
-                        travelsByIdDTO[index + 1].used = false;
+                        travelsByIdDTOpos.Value().used = false;
+                        travelsByIdDTO.Next().Value().used = false;
                     }
                     else
-                        contractUsed.Add(currentContract.id, currentContract);
+                        contractUsed.Add(currentContract.id, currentContract);//דיקשנרי
                 }
+                travelsByIdDTOpos = travelsByIdDTOpos.Next();
             }
-            foreach (var item in travelsByIdDTO)
+            travelsByIdDTOpos = travelsByIdDTO;
+            //מעבר על נסיעות שעדיין לא מומשו
+            while (travelsByIdDTOpos != null)
             {
-                //נסיעה שעוד לא מומשה בשום חוזה בדיקה האם ייצא יותר זול להרחיב חוזה בשבילה
-                //כאן הסתבכתי מפורט באקסל
-                if (!item.used)
+                if (!travelsByIdDTOpos.Value().used)
                 {
-                    foreach (var con in contractUsed)
-                    {
 
-                        foreach (var areaToCon in areaToContractsDTO)
-                        {
-
-                        }
-
-                    }
                 }
             }
             return travelsByIdDTO;
