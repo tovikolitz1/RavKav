@@ -28,12 +28,13 @@ namespace BL.Logic
             areaToContracts = db.AreaToContracts.ToList();
             Node<AreasDTO> areaToCurrentContractsDTO = new Node<AreasDTO>();
             Node<AreasDTO> areaToCurrentContractsDTOpos = areaToCurrentContractsDTO;
-            //IDictionary<int, bool> areas = new Dictionary<int, bool>();
-            //לשנות את הוליו להיות מסוג המחלקת עזר
-            IDictionary<int, contractsDTO> contractUsed = new Dictionary<int, contractsDTO>();
+            Node<ContractExtensionHelp> contractUsed = new Node<ContractExtensionHelp>();
+            Node<ContractExtensionHelp> contractUsedpos = contractUsed;
+            Node<ContractExtensionHelp> contractUsedpos1;
             Node<AreasDTO> travelToCurrentContractDTO = new Node<AreasDTO>();
             Node<AreasDTO> travelToCurrentContractDTOpos = travelToCurrentContractDTO;
             int cntTravelInCntract = 0;
+            IDictionary<int, string> areas = new Dictionary<int, string>(); ; //דיקשנרי של אזורים שבגללם בחרנו חודה מסוים
             #endregion
             //המרת רשימות ל DTO
             foreach (var item in contracts)
@@ -41,7 +42,8 @@ namespace BL.Logic
                 contractsDTOpos.Value(Convertions.Convertion(item));
                 contractsDTOpos = contractsDTOpos.Next();
             }
-
+            travelsByIdDTOpos = travelsByIdDTO;
+            #region remarks
             //foreach (var item in areaToContracts)
             //{
             //    areaToCurrentContractsDTOpos.Value(Convertions.Convertion(item));
@@ -57,8 +59,7 @@ namespace BL.Logic
             //        areas.Add(item.areaID, false);
             //    }
             //}
-            travelsByIdDTOpos = travelsByIdDTO;
-
+            #endregion
             //מעבר על רשימת הנסיעות ומציאת חוזה לשתי נסיעות זהות
             while (travelsByIdDTOpos != null && travelsByIdDTOpos.Next() != null)
             {
@@ -77,6 +78,7 @@ namespace BL.Logic
                                 if (areaToContract.contractID == contractsDTOpos.Value().id)
                                 {
                                     currentContract = contractsDTOpos.Value();
+                                    areas.Add(areaToContract.contractID, "");
                                     break;
                                 }
                                 contractsDTOpos = contractsDTOpos.Next();
@@ -87,6 +89,7 @@ namespace BL.Logic
                         }
                     }
                     areaToCurrentContractsDTOpos = areaToCurrentContractsDTO;
+
                     //יצירת רשימת אזורים שנכללים בחוזה
                     foreach (var item in areaToContracts)
                     {
@@ -100,12 +103,15 @@ namespace BL.Logic
                     //הוספת נסיעות שמתאימות לחוזה הנבחר
                     while (travelsByIdDTOpos1 != null)
                     {
+
                         while (areaToCurrentContractsDTOpos != null)
                         {
                             if (travelsByIdDTOpos1.Value().areaID == areaToCurrentContractsDTOpos.Value().id && !travelsByIdDTOpos1.Value().used)
                             {
                                 travelsByIdDTOpos1.Value().used = true;
                                 cntTravelInCntract++;
+                                if (!areas.ContainsKey(travelsByIdDTOpos1.Value().areaID))
+                                    areas.Add(travelsByIdDTOpos1.Value().areaID, "");
                             }
                             areaToCurrentContractsDTOpos = areaToCurrentContractsDTOpos.Next();
                         }
@@ -120,18 +126,31 @@ namespace BL.Logic
                         travelsByIdDTO.Next().Value().used = false;
                     }
                     else
-                        contractUsed.Add(currentContract.id, currentContract);//דיקשנרי
+                    {
+                        contractUsedpos.Value(new ContractExtensionHelp(areas, currentContract.id, currentContract.freeDay));//דיקשנרי
+                        contractUsedpos = contractUsedpos.Next();
+                    }
+                    areas.Clear();
                 }
                 travelsByIdDTOpos = travelsByIdDTOpos.Next();
             }
+           
             travelsByIdDTOpos = travelsByIdDTO;
-            //מעבר על נסיעות שעדיין לא מומשו
+            //הוספת נסיעות בודדות לדיקשרי 
             while (travelsByIdDTOpos != null)
             {
                 if (!travelsByIdDTOpos.Value().used)
                 {
-
+                    contractUsedpos.Value(new ContractExtensionHelp(travelsByIdDTOpos.Value().areaID, travelsByIdDTOpos.Value().id,travelsByIdDTOpos.Value().price));
+                    contractUsedpos = contractUsedpos.Next();
                 }
+            }
+            contractUsedpos = contractUsed;
+            //חישוב הרחבת חוזים ונסיעות
+            foreach (var item in areaToContracts)
+            {
+                while (contractUsedpos != null)
+                { }
             }
             return travelsByIdDTO;
         }

@@ -10,21 +10,24 @@ namespace BL
     {
         int id { get; set; }
         bool isContract { get; set; }
-        Node<int> areas { get; set; }
+        IDictionary<int, string> areas { get; set; }
         int idContractOrTravel { get; set; }
+        double price { get; set; }
         //פעולה בונה לחוזה
-        public ContractExtensionHelp(Node<int> areas,int idContractOrTravel)
+        public ContractExtensionHelp(IDictionary<int, string> areas, int idContractOrTravel, double price)
         {
             isContract = true;
             this.areas = areas;
             this.idContractOrTravel = idContractOrTravel;
+            this.price = price;
         }
         //פעולה בונה לנסיעה
-        public ContractExtensionHelp(int areaID , int idContractOrTravel)
+        public ContractExtensionHelp(int areaID, int idContractOrTravel, double price)
         {
             isContract = false;
-            areas = new Node<int>(areaID);
+            areas.Add(areaID, "");
             this.idContractOrTravel = idContractOrTravel;
+            this.price = price;
         }
     }
 }
