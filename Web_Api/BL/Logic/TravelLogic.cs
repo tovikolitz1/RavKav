@@ -63,9 +63,14 @@ namespace BL.Logic
         {
             for (int i = 0; i < contractUsed.Count() - 1; i++)
             {
-                contracts.Where(x => x.AreaToContracts.Where(y =>    )
-                //להשוות לרשימת האזורים לחוזה הראשון והשני
-                //במידה ומכיל את הכל והמנימלי במחיר לבחור אותו ולסמן עוד חוזים או נסיעות שיכלות להכלל בתוכו
+                List<Area> areaI1 = contractUsed.ElementAt(i).Value;
+                List<Area> areaI2 = contractUsed.ElementAt(i + 1).Value;
+                var extntionContract= contracts.Select(x => x.AreaToContracts.Join
+                (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
+                (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 })
+                .OrderBy(f => f.AreaToCon2.AreaToCon1.Contract.freeDay).FirstOrDefault().AreaToCon2.AreaToCon1.contractID);
+            
+                //  ולסמן עוד חוזים או נסיעות שיכלות להכלל בתוכו
 
             }
         }
