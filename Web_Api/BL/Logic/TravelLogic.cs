@@ -11,43 +11,54 @@ namespace BL.Logic
     class TravelLogic
     {
         static RavKav db = new RavKav();
-
+        static List<Travel> travelsById = new List<Travel>();
+        //dictionary of contracts' with their own areas
+        static IDictionary<int, List<Area>> contractUsed = new Dictionary<int, List<Area>>();
+        static List<Contract> contracts = new List<Contract>();
         public static void GetTravelsByIdAndMonth(int id, DateTime time)
         {
             //שליפה של כל החודש לפי שנה למשתמש מסוים
-            List<Travel> travelsById = db.Travels.Where(x => x.userID == id && x.date.Year == time.Year && x.date.Month == time.Month).OrderBy(x => x.price).ThenByDescending(x => x.areaID).ToList();
+            travelsById = db.Travels.Where(x => x.userID == id && x.date.Year == time.Year && x.date.Month == time.Month)
+                .OrderBy(x => x.price).ThenByDescending(x => x.areaID).ToList();
             //שליפה של כל החוזים שמתאימים לנסיעות של המשתמש
-            List<Contract> contracts = db.Contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f => (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month)))).ToList();
+            contracts = db.Contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f => (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month)))).ToList();
             for (int i = 0; i < 28; i++)
             {
-                findContractBase(contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f => (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month && f.date.Day == i)))).ToList(), travelsById.Where(x => x.date.Day == i).ToList());
+                contractBase(contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f => (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month && f.date.Day == i)))).ToList(), travelsById.Where(x => x.date.Day == i).ToList());
             }
 
         }
         //להוסיף לדיקנשרי של החוזים שבחרנו בהם את הנסיעות שלא נכנסו באף חוזה 
-        public static void findContractBase(List<Contract> contracts, List<Travel> travelsById)
+
+
+        //find base contract
+        //the rule of base contract is:
+        //contract who as Travel back and forth
+        //With at least one more internal trip
+        public static void contractBase(List<Contract> contracts, List<Travel> travelsById)
         {
             IDictionary<Travel, int> travelUsed = new Dictionary<Travel, int>();
-            IDictionary<int, List<Area>> contractUsed = new Dictionary<int, List<Area>>();//דיקשנרי של חוזים שכל אחד מכיל רשימת אזורים שבגללם בחרנו את החוזה
             int cnt = 0;
-            //מעבר על רשימת הנסיעות למשתמש
+            List<Travel> travelsToCurrentContract;
+            //Go over the travel list for the user
             for (int i = 0; i < travelsById.Count; i++)
             {
-                //בדיקה האם שתי הנסיעות מאותו אזור
+                //Go over the travel list for the user
                 if (travelsById[i].areaID == travelsById[i + 1].areaID)
-                {//מציאת החוזה המתאים והזול
-                    var currentContractID = travelsById[i].Area.AreaToContracts.OrderBy(x => x.Contract.freeDay).FirstOrDefault().id;
-                    //שליפת כל הנסיעות המתאימות לחוזה
-                    var travelsToCurrentContract = travelsById.Where(x => x.Area.AreaToContracts.Any(m => m.contractID == currentContractID));
+                {
+                     //Finding the the travels in a right and cheapest contract
+                    travelsToCurrentContract = GetTravelOfCheapestContract(travelsById[i]);
+
                     foreach (var item in travelsToCurrentContract)
-                    {//בדיקה האם חלק מהנסיעות כבר מומשו בחוזים אחרים
+                    {
+                        //Check if some of the trips have already been realized in other contracts
                         if (!travelUsed.ContainsKey(item))
                             cnt++;
                     }
-                    //בדיקה שיש יותר משלוש נסיעות שלא מומשו באף חוזה ותואמות את החוזה הנבחר
-                    if (cnt > 2)
+                    //Check that there are more than three trips that have not been realized in any contract
+                    if (cnt >= 3)
                     {
-                        //הוספת הנסיעות לדיקשנרי של נסיעות שכבר נמצאות בחוזים
+                        //Add the travels to the travels list that for them a contract has been found
                         foreach (var item in travelsToCurrentContract)
                         {
                             if (!travelUsed.ContainsKey(item))
@@ -59,21 +70,60 @@ namespace BL.Logic
 
         }
 
-        public static void contractExtention(List<Contract> contracts, List<Travel> travelsById, Dictionary<int, List<Area>> contractUsed)
+
+        public static List<Travel> GetTravelOfCheapestContract(Travel currentTravel)
         {
+            //Finding the right and cheapest contract
+            var currentContractID = currentTravel.Area.AreaToContracts.OrderBy
+                                    (x => x.Contract.freeDay).FirstOrDefault().id;
+
+            //Pulling out all travel appropriate to the contract
+            var travelsToCurrentContract = travelsById.Where(x => x.Area.AreaToContracts.Any
+                                            (m => m.contractID == currentContractID)).ToList();
+
+            return  travelsToCurrentContract;
+        }
+
+
+        public static void contractExtention(List<Contract> contracts, List<Travel> travelsById)
+        {
+            
             for (int i = 0; i < contractUsed.Count() - 1; i++)
             {
+                int extntionContract;
                 List<Area> areaI1 = contractUsed.ElementAt(i).Value;
                 List<Area> areaI2 = contractUsed.ElementAt(i + 1).Value;
-                var extntionContract= contracts.Select(x => x.AreaToContracts.Join
-                (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
-                (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 })
-                .OrderBy(f => f.AreaToCon2.AreaToCon1.Contract.freeDay).FirstOrDefault().AreaToCon2.AreaToCon1.contractID);
-            
-                //  ולסמן עוד חוזים או נסיעות שיכלות להכלל בתוכו
 
+                extntionContract = contracts.Select(x => x.AreaToContracts.Join
+                 (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
+                 (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 })
+                 .OrderBy(f => f.AreaToCon2.AreaToCon1.Contract.freeDay).FirstOrDefault().AreaToCon2.AreaToCon1.contractID).FirstOrDefault();
             }
+            addTravelsToTheExtentionContract(extntionContract);
         }
-    }
+
+
+        public static int findcontractExtentionOfToSmallContracts(int index)
+        {
+           int extntionContract = 0;
+           List<Area> areaI1 = contractUsed.ElementAt(index).Value;
+           List<Area> areaI2 = contractUsed.ElementAt(index + 1).Value;
+
+           extntionContract = contracts.Select(x => x.AreaToContracts.Join
+           (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
+           (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 })
+           .OrderBy(f => f.AreaToCon2.AreaToCon1.Contract.freeDay).FirstOrDefault().AreaToCon2.AreaToCon1.contractID).FirstOrDefault();
+
+           return extntionContract;
+        }
+        
+
+        public static void addTravelsToTheExtentionContract(int extntionContract)
+        {
+            if( extntionContract != 0)
+            { }
+        }
+
+    }//  ולסמן עוד חוזים או נסיעות שיכלות להכלל בתוכו
 
 }

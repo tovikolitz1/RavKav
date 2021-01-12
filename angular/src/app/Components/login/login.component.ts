@@ -17,13 +17,16 @@ export class LoginComponent implements OnInit {
   }
   login() {
 
-    this.webapi.IfExsistRavKav(this.ravkav, this.password).subscribe(y => {
-      if (y == 0)
-        alert("undifine!!!!!!");
+    this.webapi.IfExsistRavKav(this.ravkav, this.password).subscribe(ID => {
+      if (ID != 0)
+      {
+        window.localStorage.setItem('ID',ID);
+
+        this.router.navigate(['account',localStorage.getItem('ID')]);
+      }
         else
         {
-          alert("fine!!!!!!");
-          this.router.navigate(['account',y]);
+         alert("undifine!!!!!!");
         }
         
     });

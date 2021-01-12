@@ -10,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace BL
 {
+   
     public static class UsersLogic
-    {
+    { 
         static RavKav db = new RavKav();
 
         public static bool AddUser(UserDTO user)
@@ -51,12 +52,16 @@ namespace BL
         public static UserDTO IfExsistRavKav(string ravKav, string pass)
         {
             User user = db.Users.ToList().FirstOrDefault(x => x.ravkavNum == ravKav && x.pass == pass);
-            if (user == null)
-                return null;
-            return Convertions.Convertion(user);
+            if (user != null)
+            {
+                return Convertions.Convertion(user);
+            }
+            
+            return null;
         }                                                                                                                            
         public static string GetNameById(int id)                                                                                     
-        {                                                                                                                            
+        {                 
+            var x=                                                                                                            
              return db.Users.Where(x=> x.id==id).Select(x=> x.fName+" "+x.lName).ToString();                               
         }                                                                                                                            
     }
