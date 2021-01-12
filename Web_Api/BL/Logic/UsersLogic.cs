@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace BL
+namespace BL.Logic
 {
    
     public static class UsersLogic
@@ -56,8 +56,7 @@ namespace BL
             return null;
         }                                                                                                                            
         public static string GetNameById(int id)                                                                                     
-        {                 
-            var x=                                                                                                            
+        {                                                                                                 
              return db.Users.Where(x=> x.id==id).Select(x=> x.fName+" "+x.lName).ToString();                               
         }                                                                                                                            
     }

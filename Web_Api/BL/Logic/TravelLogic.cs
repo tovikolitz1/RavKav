@@ -8,13 +8,18 @@ using System.Threading.Tasks;
 
 namespace BL.Logic
 {
-    class TravelLogic
+    public static class TravelLogic
     {
         static RavKav db = new RavKav();
         static List<Travel> travelsById = new List<Travel>();
         //dictionary of contracts' with their own areas
         static IDictionary<int, List<Area>> contractUsed = new Dictionary<int, List<Area>>();
         static List<Contract> contracts = new List<Contract>();
+        //     public static 
+        public static int calaulateThePayment(int id, DateTime time)
+        {
+            return 0;
+        }
         public static void GetTravelsByIdAndMonth(int id, DateTime time)
         {
             //שליפה של כל החודש לפי שנה למשתמש מסוים
@@ -22,7 +27,7 @@ namespace BL.Logic
                 .OrderBy(x => x.price).ThenByDescending(x => x.areaID).ToList();
             //שליפה של כל החוזים שמתאימים לנסיעות של המשתמש
             contracts = db.Contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f => (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month)))).ToList();
-            for (int i = 0; i < 28; i++)
+            for (int i = 0; i < DateTime.DaysInMonth(time.Year,time.Month); i++)
             {
                 contractBase(contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f => (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month && f.date.Day == i)))).ToList(), travelsById.Where(x => x.date.Day == i).ToList());
             }

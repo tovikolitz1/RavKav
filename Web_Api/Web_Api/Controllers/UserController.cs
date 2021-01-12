@@ -1,4 +1,4 @@
-﻿using BL;
+﻿using BL.Logic;
 using BL.ModelDTO;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -12,7 +12,7 @@ namespace Web_Api.Controllers
         [HttpGet]
         public IHttpActionResult IfExsistRavKav(string ravKav, string pass)
         {
-            return Ok(UsersLogic.IfExsistRavKav(ravKav,pass));
+            return Ok(UsersLogic.IfExsistRavKav(ravKav, pass));
         }
         [HttpGet]
         public IHttpActionResult GetNameById(int id)
