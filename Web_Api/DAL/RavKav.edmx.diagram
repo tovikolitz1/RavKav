@@ -5,17 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2d81bc999fcc4e0f9051c8785871c110" Name="Diagram1">
-        <EntityTypeShape EntityType="RavKavModel.Area" Width="1.5" PointX="11.625" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RavKavModel.AreaToContract" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RavKavModel.Contract" Width="1.5" PointX="4.875" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RavKavModel.Profile" Width="1.5" PointX="11.875" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RavKavModel.User" Width="1.5" PointX="14.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RavKavModel.Area" Width="1.5" PointX="11.625" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RavKavModel.AreaToContract" Width="1.5" PointX="8.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RavKavModel.Contract" Width="1.5" PointX="6.375" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RavKavModel.Profile" Width="1.5" PointX="7" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RavKavModel.User" Width="1.5" PointX="9.25" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="RavKavModel.FK__AreaToCon__areaI__6EF57B66" ManuallyRouted="false" />
         <AssociationConnector Association="RavKavModel.FK__AreaToCon__contr__6E01572D" ManuallyRouted="false" />
         <AssociationConnector Association="RavKavModel.FK__User__profileId__72C60C4A" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="RavKavModel.Travel" Width="1.5" PointX="16.5" PointY="1" />
+        <EntityTypeShape EntityType="RavKavModel.Travel" Width="1.5" PointX="11.875" PointY="1.125" />
         <AssociationConnector Association="RavKavModel.FK__Transit__areaID__6FE99F9F1" />
-        <AssociationConnector Association="RavKavModel.FK__Transit__userID__70DDC3D81" />
         <AssociationConnector Association="RavKavModel.FK__Transit__userID__71D1E811" />
       </Diagram>
     </edmx:Diagrams>
