@@ -44,10 +44,6 @@ namespace BL
                 return false;
             }
         }
-        public static int CalculateThePayment(string id)
-        {
-            return 1;
-        }
         public static UserDTO IfExsistRavKav(string ravKav, string pass)
         {
             User user = db.Users.ToList().FirstOrDefault(x => x.ravkavNum == ravKav && x.pass == pass);

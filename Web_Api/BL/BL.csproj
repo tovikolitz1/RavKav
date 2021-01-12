@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContractExtensionHelp.cs" />
     <Compile Include="Convertions.cs" />
     <Compile Include="Logic\TravelLogic.cs" />
     <Compile Include="Logic\UsersLogic.cs" />
@@ -57,7 +56,6 @@
     <Compile Include="ModelDTO\ProfilsDTO.cs" />
     <Compile Include="ModelDTO\TravelsDTO.cs" />
     <Compile Include="ModelDTO\UserDTO.cs" />
-    <Compile Include="Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

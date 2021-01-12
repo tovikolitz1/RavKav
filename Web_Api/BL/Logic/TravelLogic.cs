@@ -18,7 +18,7 @@ namespace BL.Logic
             List<Travel> travelsById = db.Travels.Where(x => x.userID == id && x.date.Year == time.Year && x.date.Month == time.Month).OrderBy(x => x.price).ThenByDescending(x => x.areaID).ToList();
             //שליפה של כל החוזים שמתאימים לנסיעות של המשתמש
             List<Contract> contracts = db.Contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f => (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month)))).ToList();
-            for (int i = 0; i < 28; i++)
+            for (int i = 0; i < DateTime.DaysInMonth(time.Year,time.Month); i++)
             {
                 findContractBase(contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f => (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month && f.date.Day == i)))).ToList(), travelsById.Where(x => x.date.Day == i).ToList());
             }

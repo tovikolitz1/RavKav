@@ -15,11 +15,6 @@ namespace Web_Api.Controllers
             return Ok(UsersLogic.IfExsistRavKav(ravKav,pass));
         }
         [HttpGet]
-        public IHttpActionResult CalculateThePayment(string id)
-        {
-            return Ok(UsersLogic.CalculateThePayment(id));
-        }
-        [HttpGet]
         public IHttpActionResult GetNameById(int id)
         {
             return Ok(UsersLogic.GetNameById(id));
@@ -35,7 +30,7 @@ namespace Web_Api.Controllers
             var user = new UserDTO()
             {
                 profileId = id,
-                password = password
+                pass = password
             };
             return Ok(UsersLogic.AddUser(user));
         }
