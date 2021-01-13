@@ -12,8 +12,10 @@ namespace BL.Logic
     {
         static RavKav db = new RavKav();
         static List<Travel> travelsById = new List<Travel>();
-        //dictionary of contracts' with their own areas
+
+        //Dictionary of contracts, with their own areas
         static IDictionary<int, List<Area>> contractUsed = new Dictionary<int, List<Area>>();
+
         static List<Contract> contracts = new List<Contract>();
         //     public static 
         public static int calaulateThePayment(int id, DateTime time)
@@ -23,8 +25,13 @@ namespace BL.Logic
         public static void GetTravelsByIdAndMonth(int id, DateTime time)
         {
             //שליפה של כל החודש לפי שנה למשתמש מסוים
-            travelsById = db.Travels.Where(x => x.userID == id && x.date.Year == time.Year && x.date.Month == time.Month)
-                .OrderBy(x => x.price).ThenByDescending(x => x.areaID).ToList();
+
+            //The travels for a particular user 
+            travelsById = db.Travels.Where(x => x.userID == id && 
+                                            x.date.Year == time.Year &&
+                                            x.date.Month == time.Month)
+                         .OrderBy(x => x.price).ThenByDescending(x => x.areaID).ToList();
+
             //שליפה של כל החוזים שמתאימים לנסיעות של המשתמש
             contracts = db.Contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f => (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month)))).ToList();
             for (int i = 0; i < DateTime.DaysInMonth(time.Year,time.Month); i++)
@@ -42,7 +49,9 @@ namespace BL.Logic
         //With at least one more internal trip
         public static void contractBase(List<Contract> contracts, List<Travel> travelsById)
         {
+            //Dictionary of used travels
             IDictionary<Travel, int> travelUsed = new Dictionary<Travel, int>();
+
             int cnt = 0;
             List<Travel> travelsToCurrentContract;
             //Go over the travel list for the user
@@ -79,12 +88,10 @@ namespace BL.Logic
         public static List<Travel> GetTravelOfCheapestContract(Travel currentTravel)
         {
             //Finding the right and cheapest contract
-            var currentContractID = currentTravel.Area.AreaToContracts.OrderBy
-                                    (x => x.Contract.freeDay).FirstOrDefault().id;
+            var currentContractID = currentTravel.Area.AreaToContracts.OrderBy(x => x.Contract.freeDay).FirstOrDefault().id;
 
             //Pulling out all travel appropriate to the contract
-            var travelsToCurrentContract = travelsById.Where(x => x.Area.AreaToContracts.Any
-                                            (m => m.contractID == currentContractID)).ToList();
+            var travelsToCurrentContract = travelsById.Where(x => x.Area.AreaToContracts.Any(m => m.contractID == currentContractID)).ToList();
 
             return  travelsToCurrentContract;
         }
@@ -99,10 +106,13 @@ namespace BL.Logic
                 List<Area> areaI1 = contractUsed.ElementAt(i).Value;
                 List<Area> areaI2 = contractUsed.ElementAt(i + 1).Value;
 
+
+                //join with 3 tables
                 extntionContract = contracts.Select(x => x.AreaToContracts.Join
                  (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
                  (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 })
                  .OrderBy(f => f.AreaToCon2.AreaToCon1.Contract.freeDay).FirstOrDefault().AreaToCon2.AreaToCon1.contractID).FirstOrDefault();
+
             }
             addTravelsToTheExtentionContract(extntionContract);
         }
@@ -114,10 +124,7 @@ namespace BL.Logic
            List<Area> areaI1 = contractUsed.ElementAt(index).Value;
            List<Area> areaI2 = contractUsed.ElementAt(index + 1).Value;
 
-           extntionContract = contracts.Select(x => x.AreaToContracts.Join
-           (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
-           (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 })
-           .OrderBy(f => f.AreaToCon2.AreaToCon1.Contract.freeDay).FirstOrDefault().AreaToCon2.AreaToCon1.contractID).FirstOrDefault();
+           extntionContract = contracts.Select(x => x.AreaToContracts.Join(areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join(areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 }).OrderBy(f => f.AreaToCon2.AreaToCon1.Contract.freeDay).FirstOrDefault().AreaToCon2.AreaToCon1.contractID).FirstOrDefault();
 
            return extntionContract;
         }
