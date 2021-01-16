@@ -53,3 +53,6 @@ D:\מסמכים\GitHub\RavKav\Web_Api\DAL\obj\Debug\DAL.pdb
 D:\מסמכים\GitHub\RavKav\Web_Api\DAL\bin\Debug\DAL.dll.config
 D:\מסמכים\GitHub\RavKav\Web_Api\DAL\bin\Debug\DAL.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\DAL\bin\Debug\DAL.pdb
+C:\Users\rachel.p\Documents\GitHub\RavKav\Web_Api\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\rachel.p\Documents\GitHub\RavKav\Web_Api\DAL\obj\Debug\DAL.dll
+C:\Users\rachel.p\Documents\GitHub\RavKav\Web_Api\DAL\obj\Debug\DAL.pdb

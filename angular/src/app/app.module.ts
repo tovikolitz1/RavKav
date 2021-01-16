@@ -2,12 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import {FormsModule} from '@angular/Forms';
+
 import { RegisterComponent } from './Components/register/register.component';
 import { LoginComponent } from './Components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountComponent } from './Components/account/account.component';
 import { ShowTravelsComponent } from './Components/show-travels/show-travels.component';
+import { FormsModule, FormGroup ,FormControl, Validators}   from '@angular/forms';
+//import swal from 'sweetalert';
 const routes:Routes=
 [
 {path:'',component:LoginComponent},

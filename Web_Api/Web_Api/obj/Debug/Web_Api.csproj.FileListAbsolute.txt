@@ -568,3 +568,6 @@ D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.csprojResolveAss
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.csproj.CoreCompileInputs.cache
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.pdb
+C:\Users\rachel.p\Documents\GitHub\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.csprojResolveAssemblyReference.cache
+C:\Users\rachel.p\Documents\GitHub\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.dll
+C:\Users\rachel.p\Documents\GitHub\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.pdb
