@@ -12,14 +12,16 @@ namespace BL.Logic
     {
         static RavKav db = new RavKav();
         static List<Travel> travelsById = new List<Travel>();
-
+        static int currentContractID;
         //Dictionary of contracts, with their own areas
-        static IDictionary<int, List<Area>> contractUsed = new Dictionary<int, List<Area>>();
+        static IDictionary<contractExtentionHelp, List<Area>> contractUsed = new Dictionary<contractExtentionHelp, List<Area>>();
 
         static List<Contract> contracts = new List<Contract>();
         //     public static 
         public static int calaulateThePayment(int id, DateTime time)
         {
+            GetTravelsByIdAndMonth(id, time);
+
             return 0;
         }
         public static void GetTravelsByIdAndMonth(int id, DateTime time)
@@ -27,21 +29,22 @@ namespace BL.Logic
             //שליפה של כל החודש לפי שנה למשתמש מסוים
 
             //The travels for a particular user 
-            travelsById = db.Travels.Where(x => x.userID == id && 
+            travelsById = db.Travels.Where(x => x.userID == id &&
                                             x.date.Year == time.Year &&
                                             x.date.Month == time.Month)
                          .OrderBy(x => x.price).ThenByDescending(x => x.areaID).ToList();
 
             //שליפה של כל החוזים שמתאימים לנסיעות של המשתמש
-            contracts = db.Contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f => (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month)))).ToList();
-            for (int i = 0; i < DateTime.DaysInMonth(time.Year,time.Month); i++)
+            contracts = db.Contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f =>
+            (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month)))).ToList();
+            for (int i = 0; i < DateTime.DaysInMonth(time.Year, time.Month); i++)
             {
-                contractBase(contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f => (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month && f.date.Day == i)))).ToList(), travelsById.Where(x => x.date.Day == i).ToList());
+                contractBase(contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any
+                (f => (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month && f.date.Day == i)))).ToList()
+                , travelsById.Where(x => x.date.Day == i).ToList());
             }
 
         }
-        //להוסיף לדיקנשרי של החוזים שבחרנו בהם את הנסיעות שלא נכנסו באף חוזה 
-
 
         //find base contract
         //the rule of base contract is:
@@ -60,7 +63,7 @@ namespace BL.Logic
                 //Go over the travel list for the user
                 if (travelsById[i].areaID == travelsById[i + 1].areaID)
                 {
-                     //Finding the the travels in a right and cheapest contract
+                    //Finding the the travels in a right and cheapest contract
                     travelsToCurrentContract = GetTravelOfCheapestContract(travelsById[i]);
 
                     foreach (var item in travelsToCurrentContract)
@@ -72,6 +75,10 @@ namespace BL.Logic
                     //Check that there are more than three trips that have not been realized in any contract
                     if (cnt >= 3)
                     {
+                        //add the current contract to dictionary contractUsed
+                        contractUsed.Add(new contractExtentionHelp(currentContractID,
+                               contracts.Where(x => x.id == currentContractID).FirstOrDefault().freeDay, true),
+                               db.Areas.Where(x => x.AreaToContracts.Any(m => m.contractID == currentContractID)).ToList());
                         //Add the travels to the travels list that for them a contract has been found
                         foreach (var item in travelsToCurrentContract)
                         {
@@ -81,6 +88,14 @@ namespace BL.Logic
                     }
                 }
             }
+            //add signal travels to contract used dictionary
+            foreach (var travel in travelsById)
+            {
+                if (!travelUsed.ContainsKey(travel))
+
+                    contractUsed.Add(new contractExtentionHelp(travel.id, travel.price, false), new List<Area>(travel.areaID));
+            }
+
 
         }
 
@@ -88,54 +103,91 @@ namespace BL.Logic
         public static List<Travel> GetTravelOfCheapestContract(Travel currentTravel)
         {
             //Finding the right and cheapest contract
-            var currentContractID = currentTravel.Area.AreaToContracts.OrderBy(x => x.Contract.freeDay).FirstOrDefault().id;
+            currentContractID = currentTravel.Area.AreaToContracts.OrderBy(x => x.Contract.freeDay).FirstOrDefault().id;
 
             //Pulling out all travel appropriate to the contract
             var travelsToCurrentContract = travelsById.Where(x => x.Area.AreaToContracts.Any(m => m.contractID == currentContractID)).ToList();
 
-            return  travelsToCurrentContract;
+            return travelsToCurrentContract;
         }
 
 
         public static void contractExtention(List<Contract> contracts, List<Travel> travelsById)
         {
-            
+            Contract extntionContract;
             for (int i = 0; i < contractUsed.Count() - 1; i++)
             {
-                int extntionContract;
-                List<Area> areaI1 = contractUsed.ElementAt(i).Value;
-                List<Area> areaI2 = contractUsed.ElementAt(i + 1).Value;
-
-
-                //join with 3 tables
-                extntionContract = contracts.Select(x => x.AreaToContracts.Join
-                 (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
-                 (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 })
-                 .OrderBy(f => f.AreaToCon2.AreaToCon1.Contract.freeDay).FirstOrDefault().AreaToCon2.AreaToCon1.contractID).FirstOrDefault();
-
+                for (int j = i+1; j < contractUsed.Count(); j++)
+                {
+                    extntionContract = findContractExtentionOfTwoSmallContracts(i,j);
+                    if (extntionContract != null)
+                    {
+                        if (addTravelsToTheExtentionContract(extntionContract))
+                        {
+                            i = -1;
+                            j = contractUsed.Count();
+                        }
+                        
+                    }
+                }
             }
-            addTravelsToTheExtentionContract(extntionContract);
+
         }
 
 
-        public static int findcontractExtentionOfToSmallContracts(int index)
+        public static Contract findContractExtentionOfTwoSmallContracts(int indexI,int indexJ)
         {
-           int extntionContract = 0;
-           List<Area> areaI1 = contractUsed.ElementAt(index).Value;
-           List<Area> areaI2 = contractUsed.ElementAt(index + 1).Value;
+            List<Area> areaI1 = contractUsed.ElementAt(indexI).Value;
+            List<Area> areaI2 = contractUsed.ElementAt(indexJ).Value;
 
-           extntionContract = contracts.Select(x => x.AreaToContracts.Join(areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join(areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 }).OrderBy(f => f.AreaToCon2.AreaToCon1.Contract.freeDay).FirstOrDefault().AreaToCon2.AreaToCon1.contractID).FirstOrDefault();
+            //join with 3 tables
+            var extntionContract = contracts.Select(x => x.AreaToContracts.Join
+             (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
+             (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 })
+             .OrderBy(f => f.AreaToCon2.AreaToCon1.Contract.freeDay).FirstOrDefault().AreaToCon2.AreaToCon1.Contract).FirstOrDefault();
 
-           return extntionContract;
+            return extntionContract;
         }
-        
 
-        public static void addTravelsToTheExtentionContract(int extntionContract)
+
+        public static bool addTravelsToTheExtentionContract(Contract extntionContract)
         {
-            if( extntionContract != 0)
-            { }
+            bool response = false;
+            List<Area> areaToCurrentContractTemp = new List<Area>();
+            double sumOfTravelPrice = 0;
+            foreach (var item in contractUsed)
+            {
+                if (contracts.Select(x => x.AreaToContracts.Join
+                    (item.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
+                    .Where(y => y.AreaToCon.contractID == extntionContract.id)
+                    ).Any())
+                {
+                    sumOfTravelPrice += item.Key.price;
+                }
+            }
+            if (extntionContract.freeDay <= sumOfTravelPrice)
+            {
+                foreach (var item in contractUsed)
+                {
+                    if (contracts.Select(x => x.AreaToContracts.Join
+                    (item.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
+                    .Where(y => y.AreaToCon.contractID == extntionContract.id)
+                    ).Any())
+                    {
+                        foreach (var area in item.Value)
+                        {
+                            areaToCurrentContractTemp.Add(area);
+                        }
+                        contractUsed.Remove(item);
+                    }
+                }
+                contractUsed.Add(new contractExtentionHelp(extntionContract.id, extntionContract.freeDay, true), areaToCurrentContractTemp);
+                response = true;
+            }
+            
+            return response;
         }
 
-    }//  ולסמן עוד חוזים או נסיעות שיכלות להכלל בתוכו
+    }
 
 }
