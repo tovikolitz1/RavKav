@@ -1,2 +1,106 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<<<<<<< Updated upstream
 <ClassDiagram /> 
+=======
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BL.Logic.TravelLogic">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAQAAAAAAAAAAAAAAAAAAAAAAAQAAAABAA=</HashCode>
+      <FileName>Logic\TravelLogic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.ModelDTO.AreasDTO">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ModelDTO\AreasDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.ModelDTO.AreaToContractsDTO">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ModelDTO\AreaToContractsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.ModelDTO.contractsDTO">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ModelDTO\contractsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.ModelDTO.ProfilsDTO">
+    <Position X="2" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgA=</HashCode>
+      <FileName>ModelDTO\ProfilsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.ModelDTO.TravelsDTO">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABEAAAAAAAAAAACAAAAAEAAAAgAAAAAQAAQQAAAgA=</HashCode>
+      <FileName>ModelDTO\TravelsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.ModelDTO.UserDTO">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAkIAAQAAQAAAAABAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ModelDTO\UserDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Convertions">
+    <Position X="3.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Convertions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Node&lt;T&gt;">
+    <Position X="5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAGAAAAAAAAAAAQAGAAAABgAAIAAAA=</HashCode>
+      <FileName>Node.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.UsersLogic">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABQAAAAAAAAACAAAQAAAAAgAAAAIAAAAAA=</HashCode>
+      <FileName>Logic\UsersLogic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.User">
+    <Position X="1" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DAL.Travel">
+    <Position X="2.5" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DAL.Profile">
+    <Position X="4" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DAL.Contract">
+    <Position X="5.5" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DAL.AreaToContract">
+    <Position X="7" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DAL.Area">
+    <Position X="4" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DAL.RavKav">
+    <Position X="5.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
+>>>>>>> Stashed changes

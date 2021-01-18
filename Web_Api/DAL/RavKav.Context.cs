@@ -28,7 +28,27 @@ public partial class RavKav : DbContext
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
+<<<<<<< Updated upstream
         throw new UnintentionalCodeFirstException();
+=======
+        public RavKav()
+            : base("name=RavKav")
+        {
+        }
+    
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+    
+        public virtual DbSet<Area> Areas { get; set; }
+        public virtual DbSet<AreaToContract> AreaToContracts { get; set; }
+        public virtual DbSet<Contract> Contracts { get; set; }
+        public virtual DbSet<Profile> Profiles { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Transit> Transits { get; set; }
+        public virtual DbSet<Travel> Travels { get; set; }
+>>>>>>> Stashed changes
     }
 
 
