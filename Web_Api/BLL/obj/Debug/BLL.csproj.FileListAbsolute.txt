@@ -1,0 +1,15 @@
+F:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
+F:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\BLL.dll.config
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\BLL.dll
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\BLL.pdb
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.dll
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.dll
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.dll
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.pdb
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.dll.config
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.xml
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.xml
+F:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CopyComplete
+F:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.dll
+F:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.pdb

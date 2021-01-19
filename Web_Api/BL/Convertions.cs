@@ -12,10 +12,12 @@ namespace BL
     {
         public static AreasDTO Convertion(Area areaTbl)
         {
-            AreasDTO newarea = new AreasDTO(areaTbl.id);
-            newarea.id = areaTbl.id;
-            newarea.name = areaTbl.name;
-            return newarea;
+            return  new AreasDTO(areaTbl.id) {
+                id = areaTbl.id,
+                name = areaTbl.name
+            };
+           
+           
         }
         public static Area Convertion(AreasDTO area)
         {

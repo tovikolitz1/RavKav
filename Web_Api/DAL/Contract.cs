@@ -11,7 +11,7 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Contract
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,11 +19,13 @@ namespace DAL
         {
             this.AreaToContracts = new HashSet<AreaToContract>();
         }
-
+    
         public int id { get; set; }
         public double freeDay { get; set; }
         public double freeMounth { get; set; }
-
+        public int code { get; set; }
+        public string Description { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AreaToContract> AreaToContracts { get; set; }
     }

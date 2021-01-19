@@ -14,10 +14,6 @@ namespace DAL
     
     public partial class AreaToContract
     {
-        public AreaToContract()
-        {
-                
-        }
         public int id { get; set; }
         public int contractID { get; set; }
         public int areaID { get; set; }

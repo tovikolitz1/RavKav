@@ -21,7 +21,7 @@ namespace DAL
         }
     
         public int id { get; set; }
-        public int discount { get; set; }
+        public Nullable<int> discount { get; set; }
         public string describe { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -2,15 +2,12 @@
 using BL.ModelDTO;
 using DAL;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace BL.Logic
 {
-   
+
     public static class UsersLogic
     { 
         static RavKav db = new RavKav();
@@ -25,7 +22,7 @@ namespace BL.Logic
                     db.SaveChanges();
                     return true;
             }
-            catch (Exception e)
+            catch 
             {
                 return false;
             }

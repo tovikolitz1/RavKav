@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="RavKavModelStoreContainer" CdmEntityContainer="RavKavEntities">
+  <EntityContainerMapping StorageEntityContainer="RavKavModelStoreContainer" CdmEntityContainer="RavKav">
     <EntitySetMapping Name="Areas">
       <EntityTypeMapping TypeName="RavKavModel.Area">
         <MappingFragment StoreEntitySet="Area">
+          <ScalarProperty Name="code" ColumnName="code" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>
@@ -21,6 +22,8 @@
     <EntitySetMapping Name="Contracts">
       <EntityTypeMapping TypeName="RavKavModel.Contract">
         <MappingFragment StoreEntitySet="Contract">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="code" ColumnName="code" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="freeDay" ColumnName="freeDay" />
           <ScalarProperty Name="freeMounth" ColumnName="freeMounth" />
@@ -53,10 +56,10 @@
     <EntitySetMapping Name="Travels">
       <EntityTypeMapping TypeName="RavKavModel.Travel">
         <MappingFragment StoreEntitySet="Travel">
+          <ScalarProperty Name="time" ColumnName="time" />
           <ScalarProperty Name="date" ColumnName="date" />
           <ScalarProperty Name="userID" ColumnName="userID" />
           <ScalarProperty Name="travelTrip" ColumnName="travelTrip" />
-          <ScalarProperty Name="InternalOrIntermediate" ColumnName="InternalOrIntermediate" />
           <ScalarProperty Name="areaID" ColumnName="areaID" />
           <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="bas" ColumnName="bas" />

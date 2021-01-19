@@ -1,10 +1,7 @@
-﻿using BL.ModelDTO;
-using DAL;
+﻿using DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL.Logic
 {
@@ -18,29 +15,29 @@ namespace BL.Logic
 
         static List<Contract> contracts = new List<Contract>();
         //     public static 
-        public static int calaulateThePayment(int id, DateTime time)
+        public static int CalaulateThePayment(int id, DateTime date)
         {
-            GetTravelsByIdAndMonth(id, time);
+            GetTravelsByIdAndMonth(id, date);
 
             return 0;
         }
-        public static void GetTravelsByIdAndMonth(int id, DateTime time)
+        public static void GetTravelsByIdAndMonth(int id, DateTime date)
         {
             //שליפה של כל החודש לפי שנה למשתמש מסוים
 
             //The travels for a particular user 
             travelsById = db.Travels.Where(x => x.userID == id &&
-                                            x.date.Year == time.Year &&
-                                            x.date.Month == time.Month)
+                                            x.date.Year == date.Year &&
+                                            x.date.Month == date.Month)
                          .OrderBy(x => x.price).ThenByDescending(x => x.areaID).ToList();
 
             //שליפה של כל החוזים שמתאימים לנסיעות של המשתמש
             contracts = db.Contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f =>
-            (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month)))).ToList();
-            for (int i = 0; i < DateTime.DaysInMonth(time.Year, time.Month); i++)
+            (f.userID == id && f.date.Year == date.Year && f.date.Month == date.Month)))).ToList();
+            for (int i = 0; i < DateTime.DaysInMonth(date.Year, date.Month); i++)
             {
                 contractBase(contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any
-                (f => (f.userID == id && f.date.Year == time.Year && f.date.Month == time.Month && f.date.Day == i)))).ToList()
+                (f => (f.userID == id && f.date.Year == date.Year && f.date.Month == date.Month && f.date.Day == i)))).ToList()
                 , travelsById.Where(x => x.date.Day == i).ToList());
             }
 
@@ -50,7 +47,7 @@ namespace BL.Logic
         //the rule of base contract is:
         //contract who as Travel back and forth
         //With at least one more internal trip
-        public static void contractBase(List<Contract> contracts, List<Travel> travelsById)
+        public static void ContractBase(List<Contract> contracts, List<Travel> travelsById)
         {
             //Dictionary of used travels
             IDictionary<Travel, int> travelUsed = new Dictionary<Travel, int>();
@@ -112,7 +109,7 @@ namespace BL.Logic
         }
 
 
-        public static void contractExtention(List<Contract> contracts, List<Travel> travelsById)
+        public static void ContractExtention(List<Contract> contracts, List<Travel> travelsById)
         {
             Contract extntionContract;
             for (int i = 0; i < contractUsed.Count() - 1; i++)
@@ -135,7 +132,7 @@ namespace BL.Logic
         }
 
 
-        public static Contract findContractExtentionOfTwoSmallContracts(int indexI,int indexJ)
+        public static Contract FindContractExtentionOfTwoSmallContracts(int indexI,int indexJ)
         {
             List<Area> areaI1 = contractUsed.ElementAt(indexI).Value;
             List<Area> areaI2 = contractUsed.ElementAt(indexJ).Value;
@@ -150,7 +147,7 @@ namespace BL.Logic
         }
 
 
-        public static bool addTravelsToTheExtentionContract(Contract extntionContract)
+        public static bool AddTravelsToTheExtentionContract(Contract extntionContract)
         {
             bool response = false;
             List<Area> areaToCurrentContractTemp = new List<Area>();

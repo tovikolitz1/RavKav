@@ -18,17 +18,15 @@ namespace DAL
         public Area()
         {
             this.AreaToContracts = new HashSet<AreaToContract>();
-            this.Transits = new HashSet<Transit>();
             this.Travels = new HashSet<Travel>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
+        public string code { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AreaToContract> AreaToContracts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transit> Transits { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Travel> Travels { get; set; }
     }

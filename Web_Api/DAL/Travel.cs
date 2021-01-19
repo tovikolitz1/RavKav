@@ -14,27 +14,16 @@ namespace DAL
     
     public partial class Travel
     {
-        public Travel(string bas, double price, int areaID, bool InternalOrIntermediate, int userID, System.DateTime date)
-        {
-            this.bas = bas;
-            this.price = price;
-            this.areaID = areaID;
-            this.InternalOrIntermediate = InternalOrIntermediate;
-            this.userID = userID;
-            this.date = date;
-        }
-        public Travel() { }
         public int id { get; set; }
         public string bas { get; set; }
         public double price { get; set; }
         public int areaID { get; set; }
-        public bool InternalOrIntermediate { get; set; }
         public bool travelTrip { get; set; }
         public int userID { get; set; }
         public System.DateTime date { get; set; }
+        public Nullable<System.TimeSpan> time { get; set; }
     
         public virtual Area Area { get; set; }
-        public virtual User User { get; set; }
         public virtual User User1 { get; set; }
     }
 }
