@@ -23,6 +23,7 @@ namespace DAL
             this.userID = userID;
             this.date = date;
         }
+        public Travel() { }
         public int id { get; set; }
         public string bas { get; set; }
         public double price { get; set; }

@@ -12,7 +12,7 @@ namespace BL
     {
         public static AreasDTO Convertion(Area areaTbl)
         {
-            AreasDTO newarea = new AreasDTO();
+            AreasDTO newarea = new AreasDTO(areaTbl.id);
             newarea.id = areaTbl.id;
             newarea.name = areaTbl.name;
             return newarea;
@@ -91,7 +91,6 @@ namespace BL
         public static Travel Convertion(TravelsDTO travel)
         {
             Travel newTravel = new Travel();
-
             newTravel.id = travel.id;
             newTravel.bas = travel.buss;
             newTravel.price = travel.price;
