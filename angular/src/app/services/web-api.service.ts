@@ -13,9 +13,9 @@ export class WebApiService {
   AddUser(user:User){
     return this.httpClient.post<boolean>("http://localhost:60000/api/User/AddUser",user);
   }
-  CalculateThePayment(id:number)
+  CalculateThePayment(id:number,dtDate:Date)
   {
-    return this.httpClient.get<number>("http://localhost:60000/api/User/CalculateThePayment?id=" + id);
+    return this.httpClient.get<number>("http://localhost:60000/api/User/CalculateThePayment?id=" + id+"?date="+dtDate);
   };
   GetNameById(id:number) {
     return this.httpClient.get<string>("http://localhost:60000/api/User/GetNameById?id=" + id);
