@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 
 
-namespace BL.Logic
+namespace BLL.Logic
 {
 
     public static class UsersLogic

@@ -51,8 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="contractExtentionHelp.cs" />
+    <Compile Include="CalculateResulte.cs" />
+    <Compile Include="ContractInformation.cs" />
     <Compile Include="Convertions.cs" />
     <Compile Include="Logic\TravelLogic.cs" />
     <Compile Include="Logic\UsersLogic.cs" />

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BL.ModelDTO
+namespace BLL.ModelDTO
 {
     class TravelsDTO
     {
@@ -12,7 +12,5 @@ namespace BL.ModelDTO
         public bool trvelTrip { get; set; }
         public int userID { get; set; }
         public DateTime date { get; set; }
-        //שדה שלא קיים בDB
-        public bool used { get; set; }
     }
 }
