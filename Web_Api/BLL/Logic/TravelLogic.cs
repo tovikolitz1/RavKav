@@ -43,10 +43,10 @@ namespace BLL.Logic
             foreach (var travel in travelsById)
             {
                 if (!travelUsed.ContainsKey(travel))
-                   t.Add(travel);
+                    t.Add(travel);
             }
 
-            CalculateResulte c = new CalculateResulte(contracts.Where(x => x.id == 0).FirstOrDefault(), t,false);
+            CalculateResulte c = new CalculateResulte(contracts.Where(x => x.id == 0).FirstOrDefault(), t, false);
             calculateResultes.Add(c);
             return calculateResultes;
         }
@@ -121,38 +121,28 @@ namespace BLL.Logic
 
         }
 
-        public static void ContractExtention()
+        public static void ContractExtention(int conid, double difference)
         {
-            Contract extntionContract;
-            for (int i = 0; i < contractUsed.Count() - 1; i++)
+            bool b=func();
+            while (b)
             {
 
-                for (int j = i + 1; j < contractUsed.Count(); j++)
-                {
-                    //send two contract to check if there is extantion contract for them
-                    extntionContract = FindContractExtentionOfTwoSmallContracts(i, j);
-                    if (extntionContract != null)
-                    {
-                        if (AddTravelsToTheExtentionContract(extntionContract))
-                        {
-                            i = -1;
-                            j = contractUsed.Count();
-                        }
+                b = func();
 
-                    }
-                }
             }
-            string day =travelsByDate.Count()==0 ? null: travelsByDate[0].date.Day.ToString();
+
+            string day = travelsByDate.Count() == 0 ? null : travelsByDate[0].date.Day.ToString();
             foreach (var contract in contractUsed)
-            {if (contract.Key.isContract == false)
+            {
+                if (contract.Key.isContract == false)
                     continue;
                 List<Travel> t = new List<Travel>();
                 if (type == "freeMounth")
                 {
-                   
+
                     foreach (var travel in travelUsed)
                     {
-                        if (travel.Value == contract.Key.id )
+                        if (travel.Value == contract.Key.id)
                             t.Add(travel.Key);
                     }
                 }
@@ -160,18 +150,14 @@ namespace BLL.Logic
                 {
                     foreach (var travel in travelUsed)
                     {
-                        if (travel.Value == contract.Key.id &&travel.Key.date.Day.ToString()==day)
+                        if (travel.Value == contract.Key.id && travel.Key.date.Day.ToString() == day)
                             t.Add(travel.Key);
                     }
                 }
-                
-                CalculateResulte c = new CalculateResulte(contracts.Where(x => x.id == contract.Key.id).FirstOrDefault(), t,(type=="freeDay"?true:false));
+                CalculateResulte c = new CalculateResulte(contracts.Where(x => x.id == contract.Key.id).FirstOrDefault(), t, (type == "freeDay" ? true : false));
                 calculateResultes.Add(c);
             }
-
         }
-
-
         public static Contract FindContractExtentionOfTwoSmallContracts(int indexI, int indexJ)
         {
             List<Area> areaI1 = contractUsed.ElementAt(indexI).Value;
@@ -186,43 +172,41 @@ namespace BLL.Logic
 
             return extntionContract;
         }
-
-
         public static bool AddTravelsToTheExtentionContract(Contract extntionContract)
         {
+            int conid = 0;
+            double price = 0;
             bool response = false;
             List<Area> areaToCurrentContractTemp = new List<Area>();
             double sumOfTravelPrice = 0;
-            foreach (var item in contractUsed)
-            {
-                //sum price of all contracts that include in the extention contract
-                if (contracts.Select(x => x.AreaToContracts.Join
-                    (item.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
-                    .Where(y => y.AreaToCon.contractID == extntionContract.id)
-                    ).Any())
-                {//
-                    sumOfTravelPrice += item.Key.price;
-                }
-            }
+
+            // IDictionary<int, double> extentionTemp = new Dictionary<int, double>();
             //check if the extention contract is cheapest
-            if ((type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) <= sumOfTravelPrice)
+
+            if ((type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) <= sumOfTravelPrice && sumOfTravelPrice - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) > price)
             {
-                foreach (var item in contractUsed)
-                {
-                    if (contracts.Select(x => x.AreaToContracts.Join
-                    (item.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
-                    .Where(y => y.AreaToCon.contractID == extntionContract.id)
-                    ).Any())
-                    {
-                        //add the areas of all contracts that include in the extention contract
-                        foreach (var area in item.Value)
-                        {
-                            areaToCurrentContractTemp.Add(area);
-                        }
-                        //remove all contracts that include in the extention contract
-                        contractUsed.Remove(item);
-                    }
-                }
+                conid = extntionContract.id;
+                price = (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth);
+                // extentionTemp.Add(extntionContract.id, sumOfTravelPrice - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth));
+                #region
+                /*   foreach (var item in contractUsed)
+                   {
+                       if (contracts.Select(x => x.AreaToContracts.Join
+                       (item.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
+                       .Where(y => y.AreaToCon.contractID == extntionContract.id)
+                       ).Any())
+                       {
+                           //add the areas of all contracts that include in the extention contract
+                           foreach (var area in item.Value)
+                           {
+                               areaToCurrentContractTemp.Add(area);
+                           }
+                           //remove all contracts that include in the extention contract
+                           contractUsed.Remove(item);
+                       }
+               
+            }*/
+                #endregion
                 //add extention contract to contractUsed
                 contractUsed.Add(new ContractInformation(extntionContract.id, (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth)
                     , true), areaToCurrentContractTemp);
@@ -231,7 +215,46 @@ namespace BLL.Logic
             //return true if ther is extention contract
             return response;
         }
+        public static bool func()
+        {
+            int conid=0;
+            double difference=0;
+            Contract extntionContract;
+            double sumOfTravelPrice = 0;
+            for (int i = 0; i < contractUsed.Count() - 1; i++)
+            {
 
+                for (int j = i + 1; j < contractUsed.Count(); j++)
+                {
+                    //send two contract to check if there is extantion contract for them
+                    extntionContract = FindContractExtentionOfTwoSmallContracts(i, j);
+                    if (extntionContract != null)
+                    {
+                        foreach (var item in contractUsed)
+                        {
+                            //sum price of all contracts that include in the extention contract
+                            if (contracts.Select(x => x.AreaToContracts.Join
+                                (item.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
+                                .Where(y => y.AreaToCon.contractID == extntionContract.id)).Any())
+                            {
+                                sumOfTravelPrice += item.Key.price;
+                            }
+                        }
+                        ///check if the extention contract is cheapest
+                        if ((type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) <= sumOfTravelPrice && sumOfTravelPrice - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) > difference)
+                        {
+                            conid = extntionContract.id;
+                            difference = (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth);
+                        }
+                    }
+                }
+                
+            }
+            if (conid == 0 && difference == 0)
+                return false;
+            else
+                return true;
+        }
     }
 
 }
