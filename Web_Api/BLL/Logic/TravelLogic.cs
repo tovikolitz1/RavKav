@@ -172,49 +172,49 @@ namespace BLL.Logic
 
             return extntionContract;
         }
-        public static bool AddTravelsToTheExtentionContract(Contract extntionContract)
-        {
-            int conid = 0;
-            double price = 0;
-            bool response = false;
-            List<Area> areaToCurrentContractTemp = new List<Area>();
-            double sumOfTravelPrice = 0;
+      //public static bool AddTravelsToTheExtentionContract(Contract extntionContract)
+      //  {
+      //      int conid = 0;
+      //      double price = 0;
+      //      bool response = false;
+      //      List<Area> areaToCurrentContractTemp = new List<Area>();
+      //      double sumOfTravelPrice = 0;
 
-            // IDictionary<int, double> extentionTemp = new Dictionary<int, double>();
-            //check if the extention contract is cheapest
+      //      // IDictionary<int, double> extentionTemp = new Dictionary<int, double>();
+      //      //check if the extention contract is cheapest
 
-            if ((type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) <= sumOfTravelPrice && sumOfTravelPrice - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) > price)
-            {
-                conid = extntionContract.id;
-                price = (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth);
-                // extentionTemp.Add(extntionContract.id, sumOfTravelPrice - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth));
-                #region
-                /*   foreach (var item in contractUsed)
-                   {
-                       if (contracts.Select(x => x.AreaToContracts.Join
-                       (item.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
-                       .Where(y => y.AreaToCon.contractID == extntionContract.id)
-                       ).Any())
-                       {
-                           //add the areas of all contracts that include in the extention contract
-                           foreach (var area in item.Value)
-                           {
-                               areaToCurrentContractTemp.Add(area);
-                           }
-                           //remove all contracts that include in the extention contract
-                           contractUsed.Remove(item);
-                       }
+      //      if ((type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) <= sumOfTravelPrice && sumOfTravelPrice - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) > price)
+      //      {
+      //          conid = extntionContract.id;
+      //          price = (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth);
+      //          // extentionTemp.Add(extntionContract.id, sumOfTravelPrice - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth));
+      //          #region
+      //          /*   foreach (var item in contractUsed)
+      //             {
+      //                 if (contracts.Select(x => x.AreaToContracts.Join
+      //                 (item.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
+      //                 .Where(y => y.AreaToCon.contractID == extntionContract.id)
+      //                 ).Any())
+      //                 {
+      //                     //add the areas of all contracts that include in the extention contract
+      //                     foreach (var area in item.Value)
+      //                     {
+      //                         areaToCurrentContractTemp.Add(area);
+      //                     }
+      //                     //remove all contracts that include in the extention contract
+      //                     contractUsed.Remove(item);
+      //                 }
                
-            }*/
-                #endregion
-                //add extention contract to contractUsed
-                contractUsed.Add(new ContractInformation(extntionContract.id, (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth)
-                    , true), areaToCurrentContractTemp);
-                response = true;
-            }
-            //return true if ther is extention contract
-            return response;
-        }
+      //      }*/
+      //          #endregion
+      //          //add extention contract to contractUsed
+      //          contractUsed.Add(new ContractInformation(extntionContract.id, (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth)
+      //              , true), areaToCurrentContractTemp);
+      //          response = true;
+      //      }
+      //      //return true if ther is extention contract
+      //      return response;
+      //  }
         public static bool func()
         {
             int conid=0;
@@ -248,7 +248,6 @@ namespace BLL.Logic
                         }
                     }
                 }
-                
             }
             if (conid == 0 && difference == 0)
                 return false;
