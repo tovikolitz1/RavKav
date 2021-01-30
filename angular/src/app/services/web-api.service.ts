@@ -15,7 +15,7 @@ export class WebApiService {
   }
   CalculateThePayment(id:number,dtDate:Date)
   {
-    return this.httpClient.get<number>("http://localhost:60000/api/User/CalculateThePayment?id=" + id+"?date="+dtDate);
+    return this.httpClient.get<number>("http://localhost:60000/api/Travel/CalaulateThePayment?id=" + id+"?date="+dtDate);
   };
   GetNameById(id:number) {
     return this.httpClient.get<string>("http://localhost:60000/api/User/GetNameById?id=" + id);

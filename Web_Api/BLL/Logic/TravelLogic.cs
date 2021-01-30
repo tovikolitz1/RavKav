@@ -9,6 +9,7 @@ namespace BLL.Logic
 {
     public static class TravelLogic
     {
+        #region declar
         static RavKavEntities db = new RavKavEntities();
         static List<Travel> travelsById = new List<Travel>();
         static List<Travel> travelsByDate = new List<Travel>();
@@ -22,6 +23,10 @@ namespace BLL.Logic
         //   static List<Contract> contractsByDate = new List<Contract>();
         //contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f => (f.userID == id && f.date.Year == date.Year && f.date.Month == date.Month && f.date.Day == i)))).ToList()
         static List<CalculateResulte> calculateResultes = new List<CalculateResulte>();
+        static int conid = 0;
+        static double difference = 0;
+        static Contract extntionContract = new Contract();
+        #endregion
         public static List<CalculateResulte> CalaulateThePayment(int id, DateTime date)
         {
 
@@ -40,6 +45,7 @@ namespace BLL.Logic
                 ContractBase();
                 ContractExtention();
             }
+
             List<Travel> t = new List<Travel>();
             foreach (var travel in travelsById)
             {
@@ -123,16 +129,38 @@ namespace BLL.Logic
 
         public static void ContractExtention()
         {
-            bool b=func();
-
+            bool b = func();
             while (b)
             {
-
+                ContractInformation con = new ContractInformation(conid, (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth), true);
+                foreach (var c in contractUsed)
+                {
+                    if (contracts.Select(x => x.AreaToContracts.Join(c.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea }).Where(y => y.AreaToCon.contractID == conid)).Any())
+                    {//create list of areas thet include in the extation contract
+                        foreach (var area in c.Value)
+                        {
+                            areaToCurrentContractTemp.Add(area);
+                        }
+                        //adding a single travel that included in the extantion contract to travelUsed
+                        if (c.Key.isContract == false)
+                            travelUsed.Add(travelsById.Where(x => x.id == c.Key.idContractOrTravel).FirstOrDefault(), conid);
+                        //remove contracts and single travels that in the the extantion contract
+                        contractUsed.Remove(c);
+                    }
+                }
+                foreach (var t in travelUsed)
+                { //changing the contract code for travels that were included in the contract that extaned
+                    Contract g = contracts.Where(m => m.id == t.Value).FirstOrDefault();
+                    ContractInformation a = new ContractInformation(t.Value, (type == "freeDay" ? g.freeDay : g.freeMounth), true);
+                    if (!contractUsed.ContainsKey(a))
+                        travelUsed[t.Key] = conid;
+                }
+                //add extation contract to contractUsed
+                contractUsed.Add(con, areaToCurrentContractTemp);
                 b = func();
-
             }
-
-            string day = travelsByDate.Count() == 0 ? null : travelsByDate[0].date.Day.ToString();
+            string day =travelsByDate[0].date.Day.ToString();
+            //create a travel list for each contract
             foreach (var contract in contractUsed)
             {
                 if (contract.Key.isContract == false)
@@ -155,8 +183,8 @@ namespace BLL.Logic
                             t.Add(travel.Key);
                     }
                 }
-                CalculateResulte c = new CalculateResulte(contracts.Where(x => x.id == contract.Key.id).FirstOrDefault(), t, (type == "freeDay" ? true : false));
-                calculateResultes.Add(c);
+                CalculateResulte conresult = new CalculateResulte(contracts.Where(x => x.id == contract.Key.id).FirstOrDefault(), t, (type == "freeDay" ? true : false));
+                calculateResultes.Add(conresult);
             }
         }
         public static Contract FindContractExtentionOfTwoSmallContracts(int indexI, int indexJ)
@@ -218,9 +246,9 @@ namespace BLL.Logic
         //  }
         public static bool func()
         {
-            int conid = 0;
-            double difference = 0;
-            Contract extntionContract;
+            conid = 0;
+            difference = 0;
+            extntionContract=null;
             double sumOfTravelPrice = 0;
             for (int i = 0; i < contractUsed.Count() - 1; i++)
             {
@@ -245,7 +273,7 @@ namespace BLL.Logic
                         if ((type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) <= sumOfTravelPrice && sumOfTravelPrice - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) > difference)
                         {
                             conid = extntionContract.id;
-                            difference = sumOfTravelPrice - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth);
+                            difference = sumOfTravelPrice-(type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth);
                         }
                     }
                 }
@@ -253,25 +281,9 @@ namespace BLL.Logic
             if (conid == 0 && difference == 0)
                 return false;
             else
-            {
-                List<Contract> c = new List<Contract>();
-                foreach (var con in contractUsed)
-                {
-
-                }
-                    contracts.Select(x => x.AreaToContracts.Join
-                                 (item.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
-                                 .Where(y => y.AreaToCon.contractID == extntionContract.id)).tolist();
-                foreach (var travel in travelUsed) ;
-                {  }
-                //להוסיף את החוזה
-                //להוריד את החוזים שנכללים
-                //לעדכן את רשימת הנסיעות 
-                //לשים לב לנסיעות בודדות
                 return true;
-            }
-                
         }
     }
-
 }
+
+
