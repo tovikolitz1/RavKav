@@ -1,5 +1,5 @@
 import {Contracts} from './Contracts';
-import {Travel} from './travel.model ';
+import {Travel} from './travel.model'
 
 export class CalculateResulte{
       con:Contracts;

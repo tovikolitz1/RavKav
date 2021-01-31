@@ -7,10 +7,10 @@
     <p class="message">Not registered? <a routerLink="/Register">Create an account</a></p> 
 </form> -->
 <p>login</p>
- <form (submit)="login()" [formGroup]="form" #FormLogin>
+ <form (submit)="login()" [formGroup]="formLogin" #FormLogin>
     <!-- <form action="/action_page.php"> -->
     <input formControlName="ravkav" name="ravkav" type="text" placeholder=" מספר רב קו" />
-    <input formControlName="password" name="password" type="password" placeholder=" סיסמא" />
+    <input formControlName="pass" name="password" type="password" placeholder=" סיסמא" />
     <button [disabled]="FormLogin.valid"  type="submit">אישור</button>
   
     <!-- <p class="message">Not registered? <a routerLink="/Register">Create an account</a></p>  -->

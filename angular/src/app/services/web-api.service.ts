@@ -7,8 +7,8 @@ import { User } from '../models/user.model';
 })
 export class WebApiService {
   constructor(private httpClient: HttpClient) { }
-  IfExsistRavKav(ravKav: string, pass: string) {
-    return this.httpClient.get<number>("http://localhost:60000/api/User/IfExsistRavKav?ravKav=" + ravKav + "&pass=" + pass);
+  IfExsistRavKav(objec:{ravKav: string, pass: string}) {
+    return this.httpClient.get<number>("http://localhost:60000/api/User/IfExsistRavKav?ravKav=" + objec.ravKav + "&pass=" + objec.pass);
   }
   AddUser(user:User){
     return this.httpClient.post<boolean>("http://localhost:60000/api/User/AddUser",user);

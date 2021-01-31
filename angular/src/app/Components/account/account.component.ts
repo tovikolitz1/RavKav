@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WebApiService } from '../../services/web-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -17,7 +17,7 @@ public id:number=  Number(this.route.snapshot.paramMap.get('id'));
     
     var dt = new Date();
 document.getElementById("datetime").innerHTML = dt.toLocaleDateString();
-    this.webapi.CalculateThePayment(this.id).subscribe(y => {
+    this.webapi.CalculateThePayment(this.id,new Date()).subscribe(y => {
      this.amountPayable=y});
   }
 

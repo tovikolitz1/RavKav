@@ -8,7 +8,8 @@ import { LoginComponent } from './Components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountComponent } from './Components/account/account.component';
 import { ShowTravelsComponent } from './Components/show-travels/show-travels.component';
-import { FormsModule, FormGroup ,FormControl, Validators}   from '@angular/forms';
+import { FormsModule,ReactiveFormsModule}   from '@angular/forms';
+import { TravelComponent } from './travel/travel.component';
 //import swal from 'sweetalert';
 const routes:Routes=
 [
@@ -25,12 +26,14 @@ const routes:Routes=
     RegisterComponent,
     LoginComponent,
     AccountComponent,
-    ShowTravelsComponent
+    ShowTravelsComponent,
+    TravelComponent
   ],
   imports:[
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

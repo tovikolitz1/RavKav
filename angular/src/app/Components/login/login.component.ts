@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WebApiService } from '../../services/web-api.service';
-import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
-import {AppModule}from 'src/app/app.module';
-import { from } from 'rxjs';
-import { FormsModule, FormGroup ,FormControl, Validators}   from '@angular/forms';
+import {  FormGroup ,FormControl, Validators}   from '@angular/forms';
 //import swal from 'sweetalert';
 
 @Component({
@@ -26,7 +23,7 @@ export class LoginComponent implements OnInit {
     })
     
   }
-}
+
 //   ///אבא
 //   x:string
 //   ///בן
@@ -41,25 +38,27 @@ export class LoginComponent implements OnInit {
 //   this.clickList.subscribe(x=>)
 
 
-  // login() {
+   login() {
+    this.webapi.IfExsistRavKav({...this.formLogin.value}).subscribe(ID => {})
+   }
+  
+//      this.webapi.IfExsistRavKav(this.ravkav, this.password).subscribe(ID => {
+//     if (ID != 0)
+//        {
 
-  //   this.webapi.IfExsistRavKav(this.ravkav, this.password).subscribe(ID => {
-  //     if (ID != 0)
-  //     {
+//          window.localStorage.setItem('ID',String(ID));
 
-  //       window.localStorage.setItem('ID',String(ID));
-
-  //       this.router.navigate(['account',localStorage.getItem('ID')]);
-  //     }
-  //     else{
-  //       alert('hjk');
-  //     }
-  //   }
-  // }
-  //       else
-  //       {
-  //         swal({
-  //           title: "הכניסה נכשלה",
+//          this.router.navigate(['account',localStorage.getItem('ID')]);
+//        }
+//        else{
+//          alert('hjk');
+//        }
+//      }
+//  //}
+//          else
+       //  {
+  //swal({
+  //          title: "הכניסה נכשלה",
   //           text: "נסה שוב",
   //           icon: "warning",
   //           dangerMode: true,
@@ -71,7 +70,8 @@ export class LoginComponent implements OnInit {
         
   //   });
   // }
-  // newUser() {
-  // }
+  newUser() {
+   }
 
 
+  }
