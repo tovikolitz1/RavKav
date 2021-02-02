@@ -92,7 +92,7 @@ namespace BLL
             newTravel.areaName = travelTbl.Area?.name;
             return newTravel;
         }
-      /*  public static Travel Convertion(TravelsDTO travel)
+        public static Travel Convertion(TravelsDTO travel)
         {
             Travel newTravel = new Travel();
             newTravel.id = travel.id;
@@ -101,7 +101,6 @@ namespace BLL
             newTravel.areaID = travel.areaID;
            // newTravel.InternalOrIntermediate = travel.internalOrIntermediate;
             newTravel.travelTrip = travel.trvelTrip;
-            newTravel.userID = travel.userID;
             newTravel.date = travel.date;
             return newTravel;
         }
@@ -128,6 +127,6 @@ namespace BLL
             newUser.id = user.id;
             newUser.isManager = user.isManager;
             return newUser;
-        }*/
+        }
     }
 }

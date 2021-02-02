@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { WebApiService } from '../../services/web-api.service';
 import { Router } from '@angular/router';
 import {  FormGroup ,FormControl, Validators}   from '@angular/forms';
+//import {} from '../../../../src/styles.css';
+//import  './styles/bootstrap-3.3.7-dist/css/bootstrap.min.css';
 //import swal from 'sweetalert';
 
 @Component({

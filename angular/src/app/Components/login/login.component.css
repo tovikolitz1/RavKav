@@ -1,0 +1,9 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+.main{
+    background-color: lightgreen;
+}
+.header{
+font-weight: bold;
+font-family: math;
+color: darkslateblue;
+}

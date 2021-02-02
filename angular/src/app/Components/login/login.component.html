@@ -9,11 +9,24 @@
 <p>login</p>
  <form (submit)="login()" [formGroup]="formLogin" #FormLogin>
     <!-- <form action="/action_page.php"> -->
-    <input formControlName="ravkav" name="ravkav" type="text" placeholder=" מספר רב קו" />
+        <div class="container main" style="text-align: center;">
+            <div id=header>
+                <span class="header" style="font-size: 60px;">MY-KAV</span>
+                <br/>
+                <span class="header" style="font-size: 40px;">משתלם בדרך שלי</span>
+            </div>
+            <div id="main" >
+
+    <input formControlName="ravkav" name="ravkav" type="text" placeholder="מספר רב קו" />
+    <br/>
     <input formControlName="pass" name="password" type="password" placeholder=" סיסמא" />
+    <br/>
+   <div> <a>שכחתי סיסמא</a> | <a>רישום למערכת</a></div>
     <button [disabled]="FormLogin.valid"  type="submit">אישור</button>
   
     <!-- <p class="message">Not registered? <a routerLink="/Register">Create an account</a></p>  -->
-    <p>שכחתי סיסמא</p>
+    
+</div>
+</div>
 </form>
 <!-- <register  [t]="x"  (clickList)="login($event)"></register> -->

@@ -35,6 +35,8 @@ namespace BLL.Logic
             //free month
             type = "freeMounth";
             travelsByDate = travelsById;
+            if (travelsByDate.Count() == 0)
+                return null;
             ContractBase();
             ContractExtention();
             //free day
@@ -43,6 +45,7 @@ namespace BLL.Logic
             for (int i = 0; i < DateTime.DaysInMonth(date.Year, date.Month); i++)
             {
                 travelsByDate = travelsById.Where(x => x.date.Day == i).ToList();
+                if (travelsByDate.Count() == 0) continue;
                 ContractBase();
                 ContractExtention();
             }
@@ -57,7 +60,7 @@ namespace BLL.Logic
                 }
             }
             
-            CalculateResulte c = new CalculateResulte(t,type=="freeDay"?true:false,"sisnal travels",0, signalTravelsPrice);
+            CalculateResulte c = new CalculateResulte(t,type=="freeDay"?true:false, "נסיעה בודדת", 0, signalTravelsPrice);
             calculateResultes.Add(c);
             return calculateResultes;
         }
