@@ -1,5 +1,6 @@
 ﻿
 
+using BLL.ModelDTO;
 using DALL;
 using System;
 using System.Collections.Generic;
@@ -45,15 +46,18 @@ namespace BLL.Logic
                 ContractBase();
                 ContractExtention();
             }
-
-            List<Travel> t = new List<Travel>();
+            double signalTravelsPrice = 0;
+            List<TravelsDTO> t = new List<TravelsDTO>();
             foreach (var travel in travelsById)
             {
                 if (!travelUsed.ContainsKey(travel))
-                    t.Add(travel);
+                {
+                    signalTravelsPrice += travel.price;
+                    t.Add(Convertions.Convertion(travel));
+                }
             }
-
-            CalculateResulte c = new CalculateResulte(contracts.Where(x => x.id == 0).FirstOrDefault(), t, false);
+            
+            CalculateResulte c = new CalculateResulte(t,type=="freeDay"?true:false,"sisnal travels",0, signalTravelsPrice);
             calculateResultes.Add(c);
             return calculateResultes;
         }
@@ -165,14 +169,14 @@ namespace BLL.Logic
             {
                 if (contract.Key.isContract == false)
                     continue;
-                List<Travel> t = new List<Travel>();
+                List<TravelsDTO> t = new List<TravelsDTO>();
                 if (type == "freeMounth")
                 {
 
                     foreach (var travel in travelUsed)
                     {
                         if (travel.Value == contract.Key.id)
-                            t.Add(travel.Key);
+                            t.Add(Convertions.Convertion(travel.Key));
                     }
                 }
                 else
@@ -180,10 +184,10 @@ namespace BLL.Logic
                     foreach (var travel in travelUsed)
                     {
                         if (travel.Value == contract.Key.id && travel.Key.date.Day.ToString() == day)
-                            t.Add(travel.Key);
+                            t.Add(Convertions.Convertion(travel.Key));
                     }
                 }
-                CalculateResulte conresult = new CalculateResulte(contracts.Where(x => x.id == contract.Key.id).FirstOrDefault(), t, (type == "freeDay" ? true : false));
+                CalculateResulte conresult = new CalculateResulte(t,type == "freeDay" ? true : false,contracts.Where(x=>x.id==contract.Key.id).FirstOrDefault().Description, contract.Key.id, contract.Key.price);
                 calculateResultes.Add(conresult);
             }
         }

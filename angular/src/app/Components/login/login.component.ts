@@ -38,7 +38,15 @@ export class LoginComponent implements OnInit {
 //   this.clickList.subscribe(x=>)
 
 
+
    login() {
+     var d=5;
+     var b=d;;
+     b=7;
+     d=5;
+     var a=[1,2,3]
+     var c=a;
+     c=[...a]
     this.webapi.IfExsistRavKav({...this.formLogin.value}).subscribe(ID => {})
    }
   

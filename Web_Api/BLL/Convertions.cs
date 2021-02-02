@@ -8,22 +8,25 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    class Convertions
+   public class Convertions
     {
-        public static AreasDTO Convertion(Area areaTbl)
+       /* public static AreasDTO Convertion(Area areaTbl)
         {
             return  new AreasDTO(areaTbl.id) {
                 id = areaTbl.id,
                 name = areaTbl.name
+
             };
            
            
         }
         public static Area Convertion(AreasDTO area)
         {
+            
             return new Area() {
             id = area.id,
-            name = area.name
+            name = area.name,
+            
             };
             
         }
@@ -42,6 +45,7 @@ namespace BLL
             newareaToContracts.id = areaToContracts.id;
             newareaToContracts.areaID = areaToContracts.areaID;
             newareaToContracts.contractID = areaToContracts.contractID;
+            newareaToContracts=newareaToContracts.Area?.code;
             return newareaToContracts;
         }
         public static contractsDTO Convertion(Contract contractTbl)
@@ -75,22 +79,20 @@ namespace BLL
             newprofile.discount = profile.discount;
             newprofile.describe = profile.describe;
             return newprofile;
-        }
+        }*/
         public static TravelsDTO Convertion(Travel travelTbl)
         {
             TravelsDTO newTravel = new TravelsDTO();
-
             newTravel.id = travelTbl.id;
             newTravel.buss = travelTbl.bas;
             newTravel.price = travelTbl.price;
             newTravel.areaID = travelTbl.areaID;
-            //newTravel.internalOrIntermediate = travelTbl.InternalOrIntermediate;
             newTravel.trvelTrip = travelTbl.travelTrip;
-            newTravel.userID = travelTbl.userID;
             newTravel.date = travelTbl.date;
+            newTravel.areaName = travelTbl.Area?.name;
             return newTravel;
         }
-        public static Travel Convertion(TravelsDTO travel)
+      /*  public static Travel Convertion(TravelsDTO travel)
         {
             Travel newTravel = new Travel();
             newTravel.id = travel.id;
@@ -126,6 +128,6 @@ namespace BLL
             newUser.id = user.id;
             newUser.isManager = user.isManager;
             return newUser;
-        }
+        }*/
     }
 }

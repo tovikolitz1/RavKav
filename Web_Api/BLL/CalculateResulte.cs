@@ -1,4 +1,5 @@
-﻿using DALL;
+﻿using BLL.ModelDTO;
+using DALL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,19 @@ namespace BLL
 {
     public class CalculateResulte
     {
-        public Contract con { get; set; }
-        public List<Travel> travelToCon { get; set; }
+        public int id { get; set; }
+        public List<TravelsDTO> TravelToCon { get; set; }
         public bool isFreeDay { get; set; }
-        public CalculateResulte(Contract con, List<Travel> travelToCon, bool isFreeDay)
+        public string contractName { get; set; }
+        public int contractID { get; set; }
+        public double price { get; set; }
+        public CalculateResulte(List<TravelsDTO> travelToCon, bool isFreeDay, string contractName, int contractID, double price)
         {
-            this.con = con;
-            this.travelToCon = travelToCon;
+            this.TravelToCon = travelToCon;
             this.isFreeDay = isFreeDay;
+            this.contractID = contractID;
+            this.price = price;
+            this.contractName = contractName;
         }
     }
 }
