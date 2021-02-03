@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
+import { CalculateResulte } from 'src/app/models/calculateResult';
 import { Travel } from 'src/app/models/travel.model';
 
 @Component({
@@ -7,10 +8,11 @@ import { Travel } from 'src/app/models/travel.model';
   styleUrls: ['./contract.component.css']
 })
 export class ContractComponent implements OnInit {
-  
+ 
   constructor() { }
-@Input() contract:Travel;
+ @Input() contract:CalculateResulte;
   ngOnInit() {
+  
   }
 
 }

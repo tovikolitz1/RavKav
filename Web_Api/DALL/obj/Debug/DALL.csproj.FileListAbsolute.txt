@@ -10,3 +10,14 @@ F:\RAVKAV\RavKav\Web_Api\DALL\obj\Debug\DALL.csproj.CopyComplete
 F:\RAVKAV\RavKav\Web_Api\DALL\obj\Debug\DALL.dll
 F:\RAVKAV\RavKav\Web_Api\DALL\obj\Debug\DALL.pdb
 F:\RAVKAV\RavKav\Web_Api\DALL\obj\Debug\DALL.csprojAssemblyReference.cache
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\DALL.dll.config
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\DALL.dll
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\DALL.pdb
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\EntityFramework.dll
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\EntityFramework.SqlServer.dll
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\EntityFramework.xml
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\EntityFramework.SqlServer.xml
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\obj\Debug\DALL.csprojResolveAssemblyReference.cache
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\obj\Debug\DALL.csproj.CoreCompileInputs.cache
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\obj\Debug\DALL.dll
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\obj\Debug\DALL.pdb
