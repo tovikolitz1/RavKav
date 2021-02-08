@@ -454,8 +454,6 @@ D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\roslyn\VBCSCompiler.exe.config
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\Web_Api.dll.config
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\Web_Api.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\Web_Api.pdb
-D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\BL.dll
-D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DAL.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\EntityFramework.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\EntityFramework.SqlServer.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
@@ -474,10 +472,6 @@ D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\Unity.Abstractions.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\Unity.AspNet.WebApi.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\Unity.Container.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\WebActivatorEx.dll
-D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DAL.pdb
-D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DAL.dll.config
-D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\BL.pdb
-D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\BL.dll.config
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\EntityFramework.xml
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\EntityFramework.SqlServer.xml
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
@@ -571,3 +565,9 @@ F:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.csprojAssemblyReference.cache
 F:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.csproj.CopyComplete
 F:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.dll
 F:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.pdb
+D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\BLL.dll
+D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DALL.dll
+D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\BLL.pdb
+D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\BLL.dll.config
+D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DALL.pdb
+D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DALL.dll.config

@@ -1,8 +1,8 @@
 <div>
-  <span>חוזה:</span> <span id=contaractName></span>
+  <span>חוזה:</span> <span id="contaractName"></span>
   <br/>
-  <span id=>מחיר: </span><span id=price></span>
-  <span>סוג חוזה: </span><span id=type></span>
+  <span>מחיר:</span> <span id="price"></span>
+  <span>סוג חוזה: </span><span id="type"></span>
   <br/>
-  <app-travel *ngFor="let i of obj.travels" [travel]="i"></app-travel>
-</div>>
+  <app-travel *ngFor="let travel of contract.travel" [travel]="travel"></app-travel>
+</div>

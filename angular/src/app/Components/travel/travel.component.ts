@@ -7,10 +7,8 @@ import { Travel } from '../../models/travel.model';
   styleUrls: ['./travel.component.css']
 })
 export class TravelComponent implements OnInit {
-@Input()
-travel:Travel;
+@Input() travel:Travel;
   constructor() { }
-
   ngOnInit() {
   }
 

@@ -18,12 +18,10 @@ public contractList:Array<CalculateResulte>;
 public date:Date;
   ngOnInit() {
     //this.date=new Date(Date.now()).setMonth(-1);
-
     this.webapi.GetNameById(this.id).subscribe(y => {
       this.name=y});
      this.webapi.CalculateThePayment(this.id).subscribe(x=>{
        this.contractList = x;
-       
      })
   }
 }

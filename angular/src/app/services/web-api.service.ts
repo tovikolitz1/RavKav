@@ -17,10 +17,10 @@ export class WebApiService {
   GetNameById(id:number) {
     return this.httpClient.get<string>("http://localhost:60000/api/User/GetNameById?id=" + id);
   }
-  CalculateThePayment(id:number,dtDate:Date)
-  {
-    return this.httpClient.get<Array<CalculateResulte>>("http://localhost:60000/api/travel/CalaulateThePayment?id=" + id+"?date="+dtDate);
-  };
+ //CalculateThePayment(id:number,dtDate:Date)
+ // {
+ // return this.httpClient.get<Array<CalculateResulte>>("http://localhost:60000/api/travel/CalaulateThePayment?id=" + id+"?date="+dtDate);
+ // };
   CalculateThePayment(id:number)
   {
     return this.httpClient.get<Array<CalculateResulte>>("http://localhost:60000/api/travel/CalaulateThePayment?id=" + id);

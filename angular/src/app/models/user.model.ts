@@ -7,7 +7,15 @@ export class User {
     lastName: string;
     profileId: number;
 
-    constructor() {
+    constructor(id: number,isManager: boolean,ravkav: string,password: string,firstName: string,lastName: string,profileId: number)
+    {
+        this .id=id;
+        this.isManager=isManager;
+        this.ravkav=ravkav;
+        this.password=password;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.profileId=profileId;
 
     }
 }
