@@ -13,7 +13,6 @@ export class ShowTravelsComponent implements OnInit {
 
   constructor(private webapi: WebApiService, private route: ActivatedRoute, private router: Router) { }
   @Input() id:number;
-  @Input()contract:CalculateResulte;
 public name:string;
 public contractList:Array<CalculateResulte>;
 public date:Date;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WebApiService } from '../../services/web-api.service';
 import { Router } from '@angular/router';
 import {  FormGroup ,FormControl, Validators}   from '@angular/forms';
+import { User } from 'src/app/models/user.model';
 //import {} from '../../../../src/styles.css';
 //import  './styles/bootstrap-3.3.7-dist/css/bootstrap.min.css';
 //import swal from 'sweetalert';
@@ -25,7 +26,19 @@ export class LoginComponent implements OnInit {
     })
     
   }
+  login() {
+   user:User
+    this.webapi.IfExsistRavKav({...this.formLogin.value}).subscribe(u => {
+      if(u!=null)
+      {
+user=(u );
+        alert("hello "+user)
+      }
+      
 
+    })
+   }
+  
 //   ///אבא
 //   x:string
 //   ///בן
@@ -39,18 +52,14 @@ export class LoginComponent implements OnInit {
 
 //   this.clickList.subscribe(x=>)
 
+//var d=5;
+//var b=d;;/\
+//b=7;
+//d=5;
+//var a=[1,2,3]
+//var c=a;
+//c=[...a]
 
-
-   login() {
-     var d=5;
-     var b=d;;
-     b=7;
-     d=5;
-     var a=[1,2,3]
-     var c=a;
-     c=[...a]
-    this.webapi.IfExsistRavKav({...this.formLogin.value}).subscribe(ID => {})
-   }
   
 //      this.webapi.IfExsistRavKav(this.ravkav, this.password).subscribe(ID => {
 //     if (ID != 0)
