@@ -34,5 +34,16 @@ namespace Web_Api.Controllers
             };
             return Ok(UsersLogic.AddUser(user));
         }
+        [HttpGet]
+        public IHttpActionResult forgotPassword(int id)
+        {
+            return Ok(UsersLogic.forgotPassword(id));
+        }
+        [HttpGet]
+        public IHttpActionResult changePassword(string tempPass, string newPass, int id, string rnd)
+        {
+            return Ok(UsersLogic.changePassword(tempPass,newPass,id,rnd));
+        }
+        
     }
 }

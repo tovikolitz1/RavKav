@@ -9,7 +9,7 @@ import { CalculateResulte } from '../models/calculateResult';
 export class WebApiService {
   constructor(private httpClient: HttpClient) { }
   IfExsistRavKav(objec:{ravKav: string, pass: string}) {
-    return this.httpClient.get<number>("http://localhost:60000/api/User/IfExsistRavKav?ravKav=" + objec.ravKav + "&pass=" + objec.pass);
+    return this.httpClient.get<User>("http://localhost:60000/api/User/IfExsistRavKav?ravKav=" + objec.ravKav + "&pass=" + objec.pass);
   }
   AddUser(user:User){
     return this.httpClient.post<boolean>("http://localhost:60000/api/User/AddUser",user);
@@ -24,5 +24,14 @@ export class WebApiService {
   CalculateThePayment(id:number)
   {
     return this.httpClient.get<Array<CalculateResulte>>("http://localhost:60000/api/travel/CalaulateThePayment?id=" + id);
+  };
+  forgotPassword(id:number)
+  {
+    return this.httpClient.get<boolean>("http://localhost:60000/api/User/forgotPassword?id=" + id);
+  };
+  changePassword(id:number,tempPass:string,newPass:string,rnd:string)
+  {
+    return this.httpClient.get<boolean>("http://localhost:60000/api/User/changePassword?id=" + id+"&tempPass"+
+   tempPass+"&newPass"+newPass+"&id"+id+"&rnd"+rnd);
   };
 }

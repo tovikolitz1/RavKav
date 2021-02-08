@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { WebApiService } from '../../services/web-api.service';
 import { Router } from '@angular/router';
 import {  FormGroup ,FormControl, Validators}   from '@angular/forms';
@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   public ravkav: string;
   public password: string;
   formLogin:FormGroup;
+  @Output() user:User;
   
   ngOnInit() {
     this.formLogin=new FormGroup({
@@ -27,12 +28,12 @@ export class LoginComponent implements OnInit {
     
   }
   login() {
-   user:User
+   
     this.webapi.IfExsistRavKav({...this.formLogin.value}).subscribe(u => {
       if(u!=null)
       {
-user=(u );
-        alert("hello "+user)
+        this.user=u;
+        
       }
       
 

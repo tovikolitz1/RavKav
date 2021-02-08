@@ -3,7 +3,7 @@ using BLL.ModelDTO;
 using DALL;
 using System;
 using System.Linq;
-
+using System.Net.Mail;
 
 namespace BLL.Logic
 {
@@ -23,6 +23,36 @@ namespace BLL.Logic
                     return true;
             }
             catch 
+            {
+                return false;
+            }
+        }
+        public static bool forgotPassword(int id)
+        {
+           string to= db.Users.Where(x => x.id == id).FirstOrDefault().ToString();
+            string from = "mykav@gmail.com";
+            string subject = "שחזור סיסמה";
+            Random rnd = new Random();
+            rnd.Next(100000, 999999);
+            string body = "הסיסמה הזמנית שלך היא" + rnd;
+            MailMessage massage = new MailMessage(from, to, subject, body);
+            SendMessege.send(massage);
+            return true;
+        }
+        public static bool changePassword(string tempPass,string newPass, int id,string rnd)
+        {
+            if (tempPass != rnd)
+                return false;
+            User u = db.Users.Where(x => x.id == id).FirstOrDefault();
+            u.pass = newPass;
+            try
+            {
+                db.Users.Attach(u);
+                db.Entry(u).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
             {
                 return false;
             }

@@ -10,6 +10,7 @@ import { ShowTravelsComponent } from './Components/show-travels/show-travels.com
 import { FormsModule,ReactiveFormsModule}   from '@angular/forms';
 import { TravelComponent } from './Components/travel/travel.component';
 import { ContractComponent } from './Components/contract/contract.component';
+import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
 //import swal from 'sweetalert';
 const routes:Routes=
 [
@@ -25,7 +26,8 @@ const routes:Routes=
     RegisterComponent,
     ShowTravelsComponent,
     TravelComponent,
-    ContractComponent
+    ContractComponent,
+    ForgotPasswordComponent
   ],
   imports:[
     BrowserModule,
