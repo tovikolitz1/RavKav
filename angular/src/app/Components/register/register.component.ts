@@ -22,11 +22,13 @@ export class RegisterComponent implements OnInit {
   register() {
     alert(this.user.firstName)
     this.webapi.AddUser(this.user).subscribe(y => {
-      if (y == false)
-        alert("no");
-      else
+      if (y)
+      {
         alert("add!");
-        this.router.navigate(['/login'])
+        this.router.navigate(['/Home'])
+      }
+      else
+         alert("no");
     });
   }
 }
