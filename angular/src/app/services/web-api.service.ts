@@ -17,10 +17,6 @@ export class WebApiService {
   GetNameById(id:number) {
     return this.httpClient.get<string>("http://localhost:60000/api/User/GetNameById?id=" + id);
   }
- //CalculateThePayment(id:number,dtDate:Date)
- // {
- // return this.httpClient.get<Array<CalculateResulte>>("http://localhost:60000/api/travel/CalaulateThePayment?id=" + id+"?date="+dtDate);
- // };
   CalculateThePayment(id:number)
   {
     return this.httpClient.get<Array<CalculateResulte>>("http://localhost:60000/api/travel/CalaulateThePayment?id=" + id);
@@ -29,9 +25,9 @@ export class WebApiService {
   {
     return this.httpClient.get<boolean>("http://localhost:60000/api/User/forgotPassword?id=" + id);
   };
-  changePassword(id:number,tempPass:string,newPass:string,rnd:string)
+  changePassword(id:number,objec:{tempPass:string,newPass:string},rnd:string)
   {
     return this.httpClient.get<boolean>("http://localhost:60000/api/User/changePassword?id=" + id+"&tempPass"+
-   tempPass+"&newPass"+newPass+"&id"+id+"&rnd"+rnd);
+    objec.tempPass+"&newPass"+objec.newPass+"&rnd"+rnd);
   };
 }
