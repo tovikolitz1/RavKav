@@ -32,8 +32,9 @@ export class LoginComponent implements OnInit {
     this.webapi.IfExsistRavKav({...this.formLogin.value}).subscribe(u => {
       if(u!=null)
       {
-        //להוסיף בדיקה למנהל
         this.user=u;
+        if(this.user.isManager)
+        {this.router.navigate(['/showTravels/:'+this.user.id])}
         this.router.navigate(['/showTravels/:'+this.user.id])
       }
       else
