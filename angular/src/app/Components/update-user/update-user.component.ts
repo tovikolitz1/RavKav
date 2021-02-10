@@ -13,15 +13,17 @@ export class UpdateUserComponent implements OnInit {
 
   constructor(private webapi: WebApiService, private router: Router) { }
 @Input() user:User
-formLogin:FormGroup;
+formUpdateUser:FormGroup;
   ngOnInit() {
-    this.formLogin=new FormGroup({
+    this.formUpdateUser=new FormGroup({
       ravkav:new FormControl ('',[Validators.required]),
       firstName:new FormControl('',[Validators.required]),
       lastName:new FormControl('',[Validators.required]),
       profileId:new FormControl('',[Validators.required])
     })
+    this.user={...this.formUpdateUser.value};
   }
+  
 UpdateDetails(){
   this.webapi.UpdateUser({...this.user}).subscribe(x => {
   if(x){

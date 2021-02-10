@@ -37,8 +37,8 @@ namespace BLL.Logic
             travelsByDate = travelsById;
             if (travelsByDate.Count() == 0)
                 return null;
-            ContractBase();
-            ContractExtention();
+            ContractBase(id);
+            ContractExtention(id);
             //free day
             //Sending travels by day and appropriate contracts for that day
             type = "freeDay";
@@ -46,8 +46,8 @@ namespace BLL.Logic
             {
                 travelsByDate = travelsById.Where(x => x.date.Day == i).ToList();
                 if (travelsByDate.Count() == 0) continue;
-                ContractBase();
-                ContractExtention();
+                ContractBase(id);
+                ContractExtention(id);
             }
             double signalTravelsPrice = 0;
             List<TravelsDTO> t = new List<TravelsDTO>();
@@ -81,11 +81,11 @@ namespace BLL.Logic
         //the rule of base contract is:
         //contract who as Travel back and forth
         //With at least one more internal trip
-        public static void ContractBase()
+        public static void ContractBase(int id)
         {
             contractUsed = new Dictionary<ContractInformation, List<Area>>();
             //Dictionary of used travels
-
+            double profileDiscount = Convert.ToDouble(db.Profiles.Where(b => b.Users.Any(c => c.id == id)).FirstOrDefault().discount);
 
             double price = 0;
             List<Travel> travelsToCurrentContract;
@@ -106,7 +106,9 @@ namespace BLL.Logic
                     if (!travelUsed.ContainsKey(item))
                         price += item.price;
                 }
-                if ((type == "freeDay" ? currentContract.freeDay : currentContract.freeMounth) <= price)
+                
+                
+                if ((type == "freeDay" ? currentContract.freeDay : currentContract.freeMounth) <= price* profileDiscount)
                 {
                   
                     areaToCurrentContractTemp = new List<Area>();
@@ -134,9 +136,9 @@ namespace BLL.Logic
 
         }
 
-        public static void ContractExtention()
+        public static void ContractExtention(int id)
         {
-            bool b = func();
+            bool b = func(id);
             while (b)
             {
                 ContractInformation con = new ContractInformation(conid, (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth), true);
@@ -164,7 +166,7 @@ namespace BLL.Logic
                 }
                 //add extation contract to contractUsed
                 contractUsed.Add(con, areaToCurrentContractTemp);
-                b = func();
+                b = func(id);
             }
             string day =travelsByDate[0].date.Day.ToString();
             //create a travel list for each contract
@@ -251,8 +253,9 @@ namespace BLL.Logic
         //      //return true if ther is extention contract
         //      return response;
         //  }
-        public static bool func()
+        public static bool func(int id)
         {
+            double profileDiscount = Convert.ToDouble(db.Profiles.Where(b => b.Users.Any(c => c.id == id)).FirstOrDefault().discount);
             conid = 0;
             difference = 0;
             extntionContract=null;
@@ -277,7 +280,7 @@ namespace BLL.Logic
                             }
                         }
                         ///check if the extention contract is cheapest
-                        if ((type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) <= sumOfTravelPrice && sumOfTravelPrice - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) > difference)
+                        if ((type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) <= sumOfTravelPrice* profileDiscount && sumOfTravelPrice* profileDiscount - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) > difference)
                         {
                             conid = extntionContract.id;
                             difference = sumOfTravelPrice-(type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth);

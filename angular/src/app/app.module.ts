@@ -11,7 +11,8 @@ import { TravelComponent } from './Components/travel/travel.component';
 import { ContractComponent } from './Components/contract/contract.component';
 import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
 import { ManagerComponent } from './Components/manager/manager.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './Components/home/home.component';
+
 //import swal from 'sweetalert';
 const routes:Routes=
 [
