@@ -16,7 +16,7 @@ namespace Web_Api.Controllers
 
         {
             DateTime date = DateTime.Today;
-
+            date=date.AddMonths(-1);
             return Ok(TravelLogic.CalaulateThePayment(id, date));
         }
         [HttpGet]

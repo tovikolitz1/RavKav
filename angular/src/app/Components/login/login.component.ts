@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   public ravkav: string;
   public password: string;
   formLogin:FormGroup;
-  @Output() user:User;
   
   ngOnInit() {
     this.formLogin=new FormGroup({
@@ -28,14 +27,15 @@ export class LoginComponent implements OnInit {
     
   }
   login() {
-   
     this.webapi.IfExsistRavKav({...this.formLogin.value}).subscribe(u => {
       if(u!=null)
       {
-        this.user=u;
-        if(this.user.isManager)
-        {this.router.navigate(['/showTravels/:'+this.user.id])}
-        this.router.navigate(['/showTravels/:'+this.user.id])
+        
+        this.webapi.userEdit.emit(u);
+        if(u.isManager)
+        this.router.navigate(['/manager'])
+        else
+        this.router.navigate(['/showTravels'])
       }
       else
       {

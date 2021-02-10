@@ -1,19 +1,9 @@
 export class User {
-    id: number;
-    isManager: boolean;
-    ravkav: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    profileId: number;
+   
     
-    constructor(ravkav: string,password: string,firstName: string,lastName: string,profileId: number)
+    constructor(public id?:number,public ravkav?: string,public isManager?:boolean, public password?: string,public firstName?: string,public lastName?: string,public profileId?: number)
     {
-        this.ravkav=ravkav;
-        this.password=password;
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.profileId=profileId;
+        
     }
 
 

@@ -1,9 +1,9 @@
 
-<form (submit)="register()" >
-  <input formControlName="ravkav" name="ravkav" [(ngModel)]="user.ravkav" value="{{user.ravkav}}" type="text" placeholder="מספר רב קו" />
-  <input formControlName="firstName" name="firstName" [(ngModel)]="user.firstName"value="{{user.firstName}} type="text" placeholder="שם פרטי" />
-  <input formControlName="lastName" name="lastName" [(ngModel)]="user.lastName" type="text"value="{{user.lastName}} placeholder="שם משפחה" />
-  <select formControlName="profileId" placeholder="בחר פרופיל" [(ngModel)]="user.profileId"  name="profileId">
+<form [formGroup]="formUpdateUser" (submit)="UpdateDetails()" >
+  <input formControlName="ravkav" name="ravkav"  type="text" placeholder="מספר רב קו" />
+  <input formControlName="firstName" name="firstName"  type="text" placeholder="שם פרטי" />
+  <input formControlName="lastName" name="lastName"  type="text" placeholder="שם משפחה" />
+  <select formControlName="profileId" placeholder="בחר פרופיל"  name="profileId">
       <option value="1">כללי</option>
       <option value="2">אזרח ותיק</option>/option>
       <option value="3">סטודנט רגיל</option>
@@ -12,6 +12,6 @@
       <option value="7">נכה</option>
       <option value="8">נוער עד גיל 18</option>
   </select>
-  <button [disabled]="FormLogin.valid"  onclick="UpdateDetails()" type="submit">אישור</button>
+  <button [disabled]="FormLogin.valid" type="submit">אישור</button>
   </form>
   

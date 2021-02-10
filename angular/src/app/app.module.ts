@@ -19,8 +19,10 @@ const routes:Routes=
 {path:'',component:LoginComponent},
 {path:'login',component:LoginComponent},
 {path:'Register',component:RegisterComponent},
-{path:'showTravels/:id',component:ShowTravelsComponent},
-{path:'manager/:id',component:ManagerComponent},
+{path:'showTravels',component:ShowTravelsComponent},
+{path:'manager',component:ManagerComponent,children:[
+  {path:'Register',component:RegisterComponent},
+]},
 {path:'contract',component:ContractComponent},
 {path:'home',component:HomeComponent},
 {path:'ShowTravels',component:ShowTravelsComponent}

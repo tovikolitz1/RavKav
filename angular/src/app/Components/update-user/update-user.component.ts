@@ -11,21 +11,25 @@ import { WebApiService } from 'src/app/services/web-api.service';
 })
 export class UpdateUserComponent implements OnInit {
 
-  constructor(private webapi: WebApiService, private router: Router) { }
+constructor(private webapi: WebApiService, private router: Router) { }
 @Input() user:User
 formUpdateUser:FormGroup;
   ngOnInit() {
     this.formUpdateUser=new FormGroup({
-      ravkav:new FormControl ('',[Validators.required]),
-      firstName:new FormControl('',[Validators.required]),
-      lastName:new FormControl('',[Validators.required]),
-      profileId:new FormControl('',[Validators.required])
+      ravkav:new FormControl (this.user.ravkav,[Validators.required]),
+      firstName:new FormControl(this.user.firstName,[Validators.required]),
+      lastName:new FormControl(this.user.lastName,[Validators.required]),
+      profileId:new FormControl(this.user.profileId,[Validators.required])
     })
-    this.user={...this.formUpdateUser.value};
+   
   }
   
 UpdateDetails(){
-  this.webapi.UpdateUser({...this.user}).subscribe(x => {
+  const user={...this.formUpdateUser.value};
+  user["id"]=this.user.id;
+  
+  
+  this.webapi.UpdateUser(user).subscribe(x => {
   if(x){
     alert('good');
     this.router.navigate(['/home']);
