@@ -3,7 +3,7 @@
   <input formControlName="ravkav" name="ravkav" [(ngModel)]="user.ravkav" value="{{user.ravkav}}" type="text" placeholder="מספר רב קו" />
   <input formControlName="firstName" name="firstName" [(ngModel)]="user.firstName"value="{{user.firstName}} type="text" placeholder="שם פרטי" />
   <input formControlName="lastName" name="lastName" [(ngModel)]="user.lastName" type="text"value="{{user.lastName}} placeholder="שם משפחה" />
-  <select placeholder="בחר פרופיל" [(ngModel)]="user.profileId"  name="profileId">
+  <select formControlName="profileId" placeholder="בחר פרופיל" [(ngModel)]="user.profileId"  name="profileId">
       <option value="1">כללי</option>
       <option value="2">אזרח ותיק</option>/option>
       <option value="3">סטודנט רגיל</option>
@@ -11,10 +11,7 @@
       <option value="6">סטודנט מורחב</option>
       <option value="7">נכה</option>
       <option value="8">נוער עד גיל 18</option>
-    </select>
-    <input formControlName="password" name="password" [(ngModel)]="user.password" value="{{user.password}} type="password" placeholder="סיסמא" />
-  <input formControlName="verifyNewPass" name="verifyNewPass" type="text" placeholder="אימות סיסמה חדשה" />
-
+  </select>
   <button [disabled]="FormLogin.valid"  onclick="UpdateDetails()" type="submit">אישור</button>
   </form>
   

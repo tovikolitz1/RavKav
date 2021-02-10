@@ -16,10 +16,10 @@ export class UpdateUserComponent implements OnInit {
 formLogin:FormGroup;
   ngOnInit() {
     this.formLogin=new FormGroup({
-      firstName:new FormControl ('',[Validators.required]),
-      password:new FormControl('',[Validators.required]),
+      ravkav:new FormControl ('',[Validators.required]),
+      firstName:new FormControl('',[Validators.required]),
       lastName:new FormControl('',[Validators.required]),
-      verifyNewPass:new FormControl('',[Validators.required])
+      profileId:new FormControl('',[Validators.required])
     })
   }
 UpdateDetails(){
