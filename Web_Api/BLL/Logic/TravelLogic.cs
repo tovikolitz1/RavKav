@@ -85,10 +85,15 @@ namespace BLL.Logic
         {
             contractUsed = new Dictionary<ContractInformation, List<Area>>();
             //Dictionary of used travels
-            double profileDiscount = Convert.ToDouble(db.Profiles.Where(b => b.Users.Any(c => c.id == id)).FirstOrDefault().discount);
-
+            var profile = db.Profiles.Where(b => b.Users.Any(c => c.id == id)).FirstOrDefault();
+            double profileDiscount;
+           if (profile !=null)
+            {
+                profileDiscount =Convert.ToDouble(profile.discount);
+            }
             double price = 0;
             List<Travel> travelsToCurrentContract;
+            AreaToContract areaToCurrentContract;
             //Go over the travel list for the user
             for (int i = 0; i < travelsByDate.Count; i++)
             {
@@ -96,8 +101,14 @@ namespace BLL.Logic
                     continue;
                 price = 0;
                 //Finding the right and cheapest contract
-                currentContract = travelsByDate[i].Area.AreaToContracts.OrderBy(x => (type == "freeDay" ? x.Contract.freeDay : x.Contract.freeMounth)).FirstOrDefault().Contract;
+                
+                   areaToCurrentContract = travelsByDate[i].Area.AreaToContracts.OrderBy(x => (type == "freeDay" ? x.Contract.freeDay : x.Contract.freeMounth)).FirstOrDefault();
+                if(areaToCurrentContract != null)
+                {
+                    currentContract = areaToCurrentContract.Contract;
 
+                }
+                
                 //Pulling out all travel appropriate to the contract
                 travelsToCurrentContract = travelsByDate.Where(x => x.Area.AreaToContracts.Any(m => m.contractID == currentContract.id)).ToList();
                 foreach (var item in travelsToCurrentContract)
@@ -202,13 +213,21 @@ namespace BLL.Logic
             List<Area> areaI2 = contractUsed.ElementAt(indexJ).Value;
 
             //join with 3 tables to find extention contract of two contracts
-            var extntionContract = contracts.Select(x => x.AreaToContracts.Join
-             (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
-             (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 })
-             .OrderBy(f => (type == "freeDay" ? f.AreaToCon2.AreaToCon1.Contract.freeDay : f.AreaToCon2.AreaToCon1.Contract.freeMounth))
-             .FirstOrDefault().AreaToCon2.AreaToCon1.Contract).FirstOrDefault();
+            try
+            {
+                var extntionContract = contracts.Select(x => x.AreaToContracts.Join
+                 (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
+                 (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 })
+                 .OrderBy(f => (type == "freeDay" ? f.AreaToCon2.AreaToCon1.Contract.freeDay : f.AreaToCon2.AreaToCon1.Contract.freeMounth))
+                 .FirstOrDefault().AreaToCon2.AreaToCon1.Contract).FirstOrDefault();
 
-            return extntionContract;
+
+                return extntionContract;
+            }
+            catch (Exception x)
+            {
+                return null;
+            }
         }
         //public static bool AddTravelsToTheExtentionContract(Contract extntionContract)
         //  {
