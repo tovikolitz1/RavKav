@@ -20,6 +20,7 @@ public date:Date;
    
      this.webapi.CalculateThePayment().subscribe(x=>{
        debugger
+       console.log(x);
        this.contractList = x;
      })
   }

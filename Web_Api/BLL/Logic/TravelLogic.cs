@@ -84,9 +84,10 @@ namespace BLL.Logic
         public static void ContractBase(int id)
         {
             contractUsed = new Dictionary<ContractInformation, List<Area>>();
+            int contractTemp = -1;
             //Dictionary of used travels
             var profile = db.Profiles.Where(b => b.Users.Any(c => c.id == id)).FirstOrDefault();
-            double profileDiscount;
+            double profileDiscount = 0;
             if (profile != null)
             {
                 profileDiscount = Convert.ToDouble(profile.discount);
@@ -97,6 +98,7 @@ namespace BLL.Logic
             //Go over the travel list for the user
             for (int i = 0; i < travelsByDate.Count; i++)
             {
+
                 if (travelUsed.ContainsKey(travelsByDate[i]))
                     continue;
                 price = 0;
@@ -108,7 +110,9 @@ namespace BLL.Logic
                     currentContract = areaToCurrentContract.Contract;
 
                 }
-
+                if (currentContract.id == contractTemp)
+                    continue;
+                contractTemp = currentContract.id;
                 //Pulling out all travel appropriate to the contract
                 travelsToCurrentContract = travelsByDate.Where(x => x.Area.AreaToContracts.Any(m => m.contractID == currentContract.id)).ToList();
                 foreach (var item in travelsToCurrentContract)
@@ -142,7 +146,11 @@ namespace BLL.Logic
             foreach (var travel in travelsByDate)
             {
                 if (!travelUsed.ContainsKey(travel))
-                    contractUsed.Add(new ContractInformation(travel.id, travel.price, false), new List<Area>(travel.areaID));
+                {
+                    List<Area> listSignalArea = new List<Area>();
+                    listSignalArea.Add(travel.Area);
+                    contractUsed.Add(new ContractInformation(travel.id, travel.price, false), listSignalArea);
+                }
             }
 
         }
@@ -174,7 +182,7 @@ namespace BLL.Logic
                     foreach (var t in travelUsed)
                     { //changing the contract code for travels that were included in the contract that extaned
                         Contract g = contracts.Where(m => m.id == t.Value).FirstOrDefault();
-                        ContractInformation a;
+                        ContractInformation a = null;
                         if (g != null)
                             a = new ContractInformation(t.Value, (type == "freeDay" ? g.freeDay : g.freeMounth), true);
                         if (!contractUsed.ContainsKey(a))
@@ -218,70 +226,81 @@ namespace BLL.Logic
                 }
             }
         }
-            public static Contract FindContractExtentionOfTwoSmallContracts(int indexI, int indexJ)
+        public static Contract FindContractExtentionOfTwoSmallContracts(int indexI, int indexJ)
+        {
+            List<Area> areaI1 = contractUsed.ElementAt(indexI).Value;
+            List<Area> areaI2 = contractUsed.ElementAt(indexJ).Value;
+
+            //join with 3 tables to find extention contract of two contracts
+            try
             {
-                List<Area> areaI1 = contractUsed.ElementAt(indexI).Value;
-                List<Area> areaI2 = contractUsed.ElementAt(indexJ).Value;
-
-                //join with 3 tables to find extention contract of two contracts
-                try
-                {
-                    var extntionContract = contracts.Select(x => x.AreaToContracts.Join
-                     (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
-                     (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 })
-                     .OrderBy(f => (type == "freeDay" ? f.AreaToCon2.AreaToCon1.Contract.freeDay : f.AreaToCon2.AreaToCon1.Contract.freeMounth))
-                     .FirstOrDefault().AreaToCon2.AreaToCon1.Contract).FirstOrDefault();
+                //var extntionContract = contracts.Select(x => x.AreaToContracts.Join
+                // (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
+                // (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 })
+                // .OrderBy(f => type == "freeDay" ? f.AreaToCon2.AreaToCon1.Contract.freeDay : f.AreaToCon2.AreaToCon1.Contract.freeMounth)
+                // .FirstOrDefault().AreaToCon2.AreaToCon1.Contract).FirstOrDefault();
 
 
-                    return extntionContract;
-                }
-                catch (Exception x)
-                {
-                    return null;
-                }
+                var extntionContract = contracts.Join
+                 (areaI1, con1 => con1.AreaToContracts, AreI1 => AreI1.AreaToContracts, (con1, AreI1) => new { con1, AreI1 }).Join
+                 (areaI2, con2 => con2.AreI1.AreaToContracts, AreI2 => AreI2.AreaToContracts, (con2, AreI2) => new { con2, AreI2 })
+                 .OrderBy(f => type == "freeDay" ? f.con2.con1.freeDay : f.con2.con1.freeMounth).Select(o=>o.con2.con1).FirstOrDefault();
+
+                return extntionContract;
             }
-        
-            public static bool func(int id)
+            catch (Exception x)
             {
-                var profileDiscount = Convert.ToDouble(db.Profiles.Where(b => b.Users.Any(c => c.id == id)).FirstOrDefault().discount);
-                conid = 0;
-                difference = 0;
-                extntionContract = null;
-                double sumOfTravelPrice = 0;
-                for (int i = 0; i < contractUsed.Count() - 1; i++)
-                {
+                return null;
+            }
+        }
 
-                    for (int j = i + 1; j < contractUsed.Count(); j++)
+        public static bool func(int id)
+        {
+            var profileDiscount = Convert.ToDouble(db.Profiles.Where(b => b.Users.Any(c => c.id == id)).FirstOrDefault().discount);
+            conid = 0;
+            difference = 0;
+            extntionContract = null;
+            double sumOfTravelPrice = 0;
+            int areaTemp = -1;
+            for (int i = 0; i < contractUsed.Count() - 1; i++)
+            {
+                //check if contract akready has been checked (only fot signals travels)
+                if (contractUsed.ElementAt(i).Key.isContract == false && contractUsed.ElementAt(i).Value[0].id==areaTemp)
+                    continue;
+                areaTemp = contractUsed.ElementAt(i).Value[0].id;
+                for (int j = i + 1; j < contractUsed.Count(); j++)
+                {//chek if two signal travels have same area (To prevent duplicate testing)
+                    if (contractUsed.ElementAt(i).Key.isContract == false && contractUsed.ElementAt(j).Key.isContract == false && contractUsed.ElementAt(i).Value[0].id == contractUsed.ElementAt(j).Value[0].id)
+                        continue;
+                    //send two contract to check if there is extantion contract for them
+                    extntionContract = FindContractExtentionOfTwoSmallContracts(i, j);
+                    if (extntionContract != null)
                     {
-                        //send two contract to check if there is extantion contract for them
-                        extntionContract = FindContractExtentionOfTwoSmallContracts(i, j);
-                        if (extntionContract != null)
+                        foreach (var item in contractUsed)
                         {
-                            foreach (var item in contractUsed)
+                            //sum price of all contracts that include in the extention contract
+                            if (contracts.Select(x => x.AreaToContracts.Join
+                                (item.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
+                                .Where(y => y.AreaToCon.contractID == extntionContract.id)).Any())
                             {
-                                //sum price of all contracts that include in the extention contract
-                                if (contracts.Select(x => x.AreaToContracts.Join
-                                    (item.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
-                                    .Where(y => y.AreaToCon.contractID == extntionContract.id)).Any())
-                                {
-                                    sumOfTravelPrice += item.Key.price;
-                                }
+                                sumOfTravelPrice += item.Key.price;
                             }
-                            ///check if the extention contract is cheapest
-                            if ((type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) <= sumOfTravelPrice * profileDiscount && sumOfTravelPrice * profileDiscount - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) > difference)
-                            {
-                                conid = extntionContract.id;
-                                difference = sumOfTravelPrice - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth);
-                            }
+                        }
+                        ///check if the extention contract is cheapest
+                        if ((type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) <= sumOfTravelPrice * profileDiscount && sumOfTravelPrice * profileDiscount - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth) > difference)
+                        {
+                            conid = extntionContract.id;
+                            difference = sumOfTravelPrice - (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth);
                         }
                     }
                 }
-                if (conid == 0 && difference == 0)
-                    return false;
-                else
-                    return true;
             }
+            if (conid == 0 && difference == 0)
+                return false;
+            else
+                return true;
         }
     }
+}
 
 
