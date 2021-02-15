@@ -6,27 +6,25 @@
     <button  type="submit">אישור</button>
     <p class="message">Not registered? <a routerLink="/Register">Create an account</a></p> 
 </form> -->
-<p>login</p>
- <form (submit)="login()" [formGroup]="formLogin" #FormLogin>
+ <form (submit)="login()" [formGroup]="formLogin" #FormLogin class="d-flex justify-content-around" style="text-align: center;background: linear-gradient(white 10%,#EBFFB7 30%, #e5f9b0 20%, #bfe65e 80%,#99c52a 90%);">
     <!-- <form action="/action_page.php"> -->
-        <div class="container main" style="text-align: center;">
-            <div id=header>
-                <span class="header" style="font-size: 60px;">MY-KAV</span>
-                <br/>
-                <span class="header" style="font-size: 40px;">משתלם בדרך שלי</span>
-            </div>
-            <div id="main" >
+    <div class="container main d-flex justify-content-center">
+        <div id=header>
+            <img src="logo_MyKav.PNG" />
+         </div>
 
-    <input formControlName="ravkav" name="ravkav" type="text" placeholder="מספר רב קו" />
-    <br/>
-    <input formControlName="pass" name="password" type="password" placeholder=" סיסמא" />
-    <br/>
-   <div> <a>שכחתי סיסמא</a> | <a>משתמש חדש</a></div>
-    <button [disabled]="FormLogin.valid"  type="submit">אישור</button>
-  
+        <div id="main" style="background-color: #b4d64d;width: 300px;height: 350px;border-radius: 30px;margin-top: 120px;margin-bottom: 45%; padding: 30px;" >
+
+            <input formControlName="ravkav" name="ravkav" type="text" placeholder="מספר רב קו" />
+           
+             <input formControlName="pass" name="password" type="password" placeholder=" סיסמא" />
+            
+           
+            <button [disabled]="FormLogin.valid" style="display: block;margin: 20px;margin-left: 70px;width: 100px;background-color: #96379c;color: white;font-weight: bold;" type="submit">אישור</button>
+  <div> <a href="">שכחתי סיסמא</a> | <a href="">משתמש חדש</a></div>
     <!-- <p class="message">Not registered? <a routerLink="/Register">Create an account</a></p>  -->
     
-</div>
-</div>
+         </div>
+    </div>
 </form>
 <!-- <register  [t]="x"  (clickList)="login($event)"></register> -->
