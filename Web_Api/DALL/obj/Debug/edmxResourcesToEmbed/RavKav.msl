@@ -56,6 +56,9 @@
     <EntitySetMapping Name="Travels">
       <EntityTypeMapping TypeName="RavKavModel.Travel">
         <MappingFragment StoreEntitySet="Travel">
+          <ScalarProperty Name="contractType" ColumnName="contractType" />
+          <ScalarProperty Name="fContractID" ColumnName="fContractID" />
+          <ScalarProperty Name="fFinalAmountID" ColumnName="fFinalAmountID" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="bas" ColumnName="bas" />
           <ScalarProperty Name="price" ColumnName="price" />
@@ -64,6 +67,27 @@
           <ScalarProperty Name="userID" ColumnName="userID" />
           <ScalarProperty Name="date" ColumnName="date" />
           <ScalarProperty Name="time" ColumnName="time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FinalAmounts">
+      <EntityTypeMapping TypeName="RavKavModel.FinalAmount">
+        <MappingFragment StoreEntitySet="FinalAmount">
+          <ScalarProperty Name="monthDate" ColumnName="monthDate" />
+          <ScalarProperty Name="fUserID" ColumnName="fUserID" />
+          <ScalarProperty Name="finalAmount1" ColumnName="finalAmount" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VertificationCodes">
+      <EntityTypeMapping TypeName="RavKavModel.VertificationCode">
+        <MappingFragment StoreEntitySet="VertificationCode">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+          <ScalarProperty Name="fUserID" ColumnName="fUserID" />
+          <ScalarProperty Name="verificationCode" ColumnName="verificationCode" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

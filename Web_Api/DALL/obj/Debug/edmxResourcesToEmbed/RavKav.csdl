@@ -54,17 +54,12 @@
     <Property Name="profileId" Type="Int32" />
     <NavigationProperty Name="Profile" Relationship="Self.FK__User__profileId__44FF419A" FromRole="User" ToRole="Profile" />
     <NavigationProperty Name="Travels" Relationship="Self.FK__Travel__userID__4316F928" FromRole="User" ToRole="Travel" />
-    <NavigationProperty Name="Travels1" Relationship="Self.FK__Travel__userID__440B1D61" FromRole="User" ToRole="Travel" />
+    <NavigationProperty Name="FinalAmounts" Relationship="RavKavModel.FK__FinalAmou__fUser__5441852A" FromRole="User" ToRole="FinalAmount" />
+    <NavigationProperty Name="VertificationCodes" Relationship="RavKavModel.FK__Vertifica__fUser__534D60F1" FromRole="User" ToRole="VertificationCode" />
   </EntityType>
   <EntityType Name="Travel">
     <Key>
       <PropertyRef Name="id" />
-      <PropertyRef Name="bas" />
-      <PropertyRef Name="price" />
-      <PropertyRef Name="areaID" />
-      <PropertyRef Name="travelTrip" />
-      <PropertyRef Name="userID" />
-      <PropertyRef Name="date" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="bas" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
@@ -76,7 +71,11 @@
     <Property Name="time" Type="Time" Precision="6" />
     <NavigationProperty Name="Area" Relationship="Self.FK__Transit__areaID__6FE99F9F" FromRole="Travel" ToRole="Area" />
     <NavigationProperty Name="User" Relationship="Self.FK__Travel__userID__4316F928" FromRole="Travel" ToRole="User" />
-    <NavigationProperty Name="User1" Relationship="Self.FK__Travel__userID__440B1D61" FromRole="Travel" ToRole="User" />
+    <Property Name="fFinalAmountID" Type="Int32" />
+    <Property Name="fContractID" Type="Int32" />
+    <Property Name="contractType" Type="Boolean" />
+    <NavigationProperty Name="FinalAmount" Relationship="RavKavModel.FK__Travel__fContrac__5629CD9C" FromRole="Travel" ToRole="FinalAmount" />
+    <NavigationProperty Name="FinalAmount1" Relationship="RavKavModel.FK__Travel__fFinalAm__5535A963" FromRole="Travel" ToRole="FinalAmount" />
   </EntityType>
   <Association Name="FK__AreaToCon__areaI__6EF57B66">
     <End Role="Area" Type="Self.Area" Multiplicity="1" />
@@ -138,18 +137,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Travel__userID__440B1D61">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="Travel" Type="Self.Travel" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Travel">
-        <PropertyRef Name="userID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="RavKavEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Areas" EntityType="Self.Area" />
     <EntitySet Name="AreaToContracts" EntityType="Self.AreaToContract" />
@@ -177,9 +164,94 @@
       <End Role="User" EntitySet="Users" />
       <End Role="Travel" EntitySet="Travels" />
     </AssociationSet>
-    <AssociationSet Name="FK__Travel__userID__440B1D61" Association="Self.FK__Travel__userID__440B1D61">
+    <EntitySet Name="FinalAmounts" EntityType="RavKavModel.FinalAmount" />
+    <EntitySet Name="VertificationCodes" EntityType="RavKavModel.VertificationCode" />
+    <AssociationSet Name="FK__FinalAmou__fUser__5441852A" Association="RavKavModel.FK__FinalAmou__fUser__5441852A">
       <End Role="User" EntitySet="Users" />
+      <End Role="FinalAmount" EntitySet="FinalAmounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Travel__fContrac__5629CD9C" Association="RavKavModel.FK__Travel__fContrac__5629CD9C">
+      <End Role="FinalAmount" EntitySet="FinalAmounts" />
+      <End Role="Travel" EntitySet="Travels" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vertifica__fUser__534D60F1" Association="RavKavModel.FK__Vertifica__fUser__534D60F1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="VertificationCode" EntitySet="VertificationCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Travel__fFinalAm__5535A963" Association="RavKavModel.FK__Travel__fFinalAm__5535A963">
+      <End Role="FinalAmount" EntitySet="FinalAmounts" />
       <End Role="Travel" EntitySet="Travels" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="FinalAmount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="finalAmount1" Type="Double" />
+    <Property Name="fUserID" Type="Int32" />
+    <Property Name="monthDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="User" Relationship="RavKavModel.FK__FinalAmou__fUser__5441852A" FromRole="FinalAmount" ToRole="User" />
+    <NavigationProperty Name="Travels" Relationship="RavKavModel.FK__Travel__fContrac__5629CD9C" FromRole="FinalAmount" ToRole="Travel" />
+    <NavigationProperty Name="Travels1" Relationship="RavKavModel.FK__Travel__fFinalAm__5535A963" FromRole="FinalAmount" ToRole="Travel" />
+  </EntityType>
+  <EntityType Name="VertificationCode">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="verificationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fUserID" Type="Int32" />
+    <Property Name="IsUsed" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="User" Relationship="RavKavModel.FK__Vertifica__fUser__534D60F1" FromRole="VertificationCode" ToRole="User" />
+  </EntityType>
+  <Association Name="FK__FinalAmou__fUser__5441852A">
+    <End Type="RavKavModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="RavKavModel.FinalAmount" Role="FinalAmount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FinalAmount">
+        <PropertyRef Name="fUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Travel__fContrac__5629CD9C">
+    <End Type="RavKavModel.FinalAmount" Role="FinalAmount" Multiplicity="0..1" />
+    <End Type="RavKavModel.Travel" Role="Travel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FinalAmount">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Travel">
+        <PropertyRef Name="fContractID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vertifica__fUser__534D60F1">
+    <End Type="RavKavModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="RavKavModel.VertificationCode" Role="VertificationCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="VertificationCode">
+        <PropertyRef Name="fUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Travel__fFinalAm__5535A963">
+    <End Type="RavKavModel.FinalAmount" Role="FinalAmount" Multiplicity="0..1" />
+    <End Type="RavKavModel.Travel" Role="Travel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FinalAmount">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Travel">
+        <PropertyRef Name="fFinalAmountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

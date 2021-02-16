@@ -31,5 +31,7 @@ namespace DALL
         public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Travel> Travels { get; set; }
+        public virtual DbSet<FinalAmount> FinalAmounts { get; set; }
+        public virtual DbSet<VertificationCode> VertificationCodes { get; set; }
     }
 }

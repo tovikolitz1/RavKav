@@ -1,7 +1,7 @@
 ﻿
 
 using BLL.ModelDTO;
-using DALL;
+using DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -226,6 +226,12 @@ namespace BLL.Logic
                 }
             }
         }
+
+       /* public static IEnumerable<object> FullJoin(   IEnumerable<Area> first, IEnumerable<Area> second)
+        {
+           var d=first.Join(first,second=>)
+        }
+           */
         public static Contract FindContractExtentionOfTwoSmallContracts(int indexI, int indexJ)
         {
             List<Area> areaI1 = contractUsed.ElementAt(indexI).Value;
@@ -234,26 +240,28 @@ namespace BLL.Logic
             //join with 3 tables to find extention contract of two contracts
             try
             {
-                //var extntionContract = contracts.Select(x => x.AreaToContracts.Join
-                // (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 => AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
-                // (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 })
-                // .OrderBy(f => type == "freeDay" ? f.AreaToCon2.AreaToCon1.Contract.freeDay : f.AreaToCon2.AreaToCon1.Contract.freeMounth)
-                // .FirstOrDefault().AreaToCon2.AreaToCon1.Contract).FirstOrDefault();
+                var extntionContract = contracts.Select(x =>
+                x.AreaToContracts.Join
+                 (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 =>
+                 AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
+                 (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 }));
+                // .OrderBy(f => type == "freeDay" ? f.AreaToCon2.AreaToCon1.Contract.freeDay : f.AreaToCon2.AreaToCon1.Contract.freeMounth)).FirstOrDefault().FirstOrDefault().AreaToCon2.AreaToCon1.Contract;
+                
 
 
-                var extntionContract = contracts.Join
-                 (areaI1, con1 => con1.AreaToContracts, AreI1 => AreI1.AreaToContracts, (con1, AreI1) => new { con1, AreI1 }).Join
-                 (areaI2, con2 => con2.AreI1.AreaToContracts, AreI2 => AreI2.AreaToContracts, (con2, AreI2) => new { con2, AreI2 })
-                 .OrderBy(f => type == "freeDay" ? f.con2.con1.freeDay : f.con2.con1.freeMounth).Select(o=>o.con2.con1).FirstOrDefault();
+                //var extntionContract = contracts.Join
+                // (areaI1, con1 => con1.AreaToContracts, AreI1 => AreI1.AreaToContracts, (con1, AreI1) => new { con1, AreI1 }).Join
+                // (areaI2, con2 => con2.AreI1.AreaToContracts, AreI2 => AreI2.AreaToContracts, (con2, AreI2) => new { con2, AreI2 })
+                // .OrderBy(f => type == "freeDay" ? f.con2.con1.freeDay : f.con2.con1.freeMounth).Select(o=>o.con2.con1).FirstOrDefault();
 
-                return extntionContract;
+                return null;
             }
             catch (Exception x)
             {
                 return null;
             }
         }
-
+    
         public static bool func(int id)
         {
             var profileDiscount = Convert.ToDouble(db.Profiles.Where(b => b.Users.Any(c => c.id == id)).FirstOrDefault().discount);

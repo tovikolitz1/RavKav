@@ -1,6 +1,6 @@
 ﻿
 using BLL.ModelDTO;
-using DALL;
+using DAL;
 using System;
 using System.Linq;
 using System.Net.Mail;
@@ -17,7 +17,6 @@ namespace BLL.Logic
             User u = Convertions.Convertion(user);
             try
             {
-                
                     db.Users.Add(u);
                     db.SaveChanges();
                     return true;
@@ -27,29 +26,40 @@ namespace BLL.Logic
                 return false;
             }
         }
-        public static bool forgotPassword(int id)
+        public static bool forgotPassword(string ravkav)
         {
+            var u = db.Users.Where(x => x.ravkavNum == ravkav).FirstOrDefault();
+            if (u == null)
+                return false;
+            int id = u.id;
+            VertificationCode newVer = new VertificationCode(id);
            string to= db.Users.Where(x => x.id == id).FirstOrDefault().ToString();
             if (to != null)
             {
                 string from = "mykav@gmail.com";
                 string subject = "שחזור סיסמה";
-                Random rnd = new Random();
-                rnd.Next(100000, 999999);
-                string body = "הסיסמה הזמנית שלך היא" + rnd;
+                VertificationCode ver = db.VertificationCodes.Where(x => x.fUserID == id).FirstOrDefault();
+                if (ver == null)
+                    return false;
+                string tempPass = ver.verificationCode;
+                string body = "הסיסמה הזמנית שלך היא" +tempPass;
                 MailMessage massage = new MailMessage(from, to, subject, body);
                 SendMessege.send(massage);
                 return true;
             }
             else { return false; }
         }
-        public static bool changePassword(string tempPass,string newPass, int id,string rnd)
+        public static bool changePassword(string ravkav,string tempPass,string newPass)
         {
-            if (tempPass != rnd)
+            var u = db.Users.Where(x => x.ravkavNum == ravkav).FirstOrDefault();
+            if (u == null)
                 return false;
-            User u = db.Users.Where(x => x.id == id).FirstOrDefault();
-            if (u != null)
-            {
+            int id = u.id;
+            VertificationCode tempPassEmail= db.VertificationCodes.Where(x => x.fUserID == id).FirstOrDefault();
+            if (tempPassEmail == null||tempPassEmail.CreateDate<DateTime.Now.AddMinutes(-30)|| tempPass != tempPassEmail.verificationCode)
+                return false;
+          
+          
                 u.pass = newPass;
                 try
                 {
@@ -62,9 +72,6 @@ namespace BLL.Logic
                 {
                     return false;
                 }
-            }
-            else
-                return false;
         }
         public static bool UpdateUser(UserDTO user)
         {

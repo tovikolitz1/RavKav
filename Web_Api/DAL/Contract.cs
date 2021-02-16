@@ -21,9 +21,9 @@ namespace DAL
         }
     
         public int id { get; set; }
+        public int code { get; set; }
         public double freeDay { get; set; }
         public double freeMounth { get; set; }
-        public int code { get; set; }
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

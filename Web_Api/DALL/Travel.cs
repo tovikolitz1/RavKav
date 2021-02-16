@@ -22,9 +22,13 @@ namespace DALL
         public int userID { get; set; }
         public System.DateTime date { get; set; }
         public Nullable<System.TimeSpan> time { get; set; }
+        public Nullable<int> fFinalAmountID { get; set; }
+        public Nullable<int> fContractID { get; set; }
+        public Nullable<bool> contractType { get; set; }
     
         public virtual Area Area { get; set; }
         public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
+        public virtual FinalAmount FinalAmount { get; set; }
+        public virtual FinalAmount FinalAmount1 { get; set; }
     }
 }

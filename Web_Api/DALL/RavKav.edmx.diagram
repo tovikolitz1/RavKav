@@ -16,7 +16,12 @@
         <AssociationConnector Association="RavKavModel.FK__AreaToCon__contr__6E01572D" ManuallyRouted="false" />
         <AssociationConnector Association="RavKavModel.FK__User__profileId__44FF419A" ManuallyRouted="false" />
         <AssociationConnector Association="RavKavModel.FK__Travel__userID__4316F928" ManuallyRouted="false" />
-        <AssociationConnector Association="RavKavModel.FK__Travel__userID__440B1D61" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RavKavModel.FinalAmount" Width="1.5" PointX="9.625" PointY="8.5" />
+        <EntityTypeShape EntityType="RavKavModel.VertificationCode" Width="1.5" PointX="10.375" PointY="4.5" />
+        <AssociationConnector Association="RavKavModel.FK__FinalAmou__fUser__5441852A" />
+        <AssociationConnector Association="RavKavModel.FK__Travel__fContrac__5629CD9C" />
+        <AssociationConnector Association="RavKavModel.FK__Vertifica__fUser__534D60F1" />
+        <AssociationConnector Association="RavKavModel.FK__Travel__fFinalAm__5535A963" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,2 +1,0 @@
-F:\RAVKAV\RavKav\Web_Api\BL\obj\Debug\BL.csprojAssemblyReference.cache
-F:\RAVKAV\RavKav\Web_Api\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache

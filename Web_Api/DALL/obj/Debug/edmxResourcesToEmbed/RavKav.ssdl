@@ -26,6 +26,15 @@
     <Property Name="freeMounth" Type="float" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
+  <EntityType Name="FinalAmount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="finalAmount" Type="float" />
+    <Property Name="fUserID" Type="int" />
+    <Property Name="monthDate" Type="date" />
+  </EntityType>
   <EntityType Name="Profile">
     <Key>
       <PropertyRef Name="id" />
@@ -34,19 +43,11 @@
     <Property Name="discount" Type="float" />
     <Property Name="describe" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Travel">
     <Key>
       <PropertyRef Name="id" />
-      <PropertyRef Name="bas" />
-      <PropertyRef Name="price" />
-      <PropertyRef Name="areaID" />
-      <PropertyRef Name="travelTrip" />
-      <PropertyRef Name="userID" />
-      <PropertyRef Name="date" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="None" Nullable="false" />
     <Property Name="bas" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="price" Type="float" Nullable="false" />
     <Property Name="areaID" Type="int" Nullable="false" />
@@ -54,6 +55,9 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
     <Property Name="userID" Type="int" Nullable="false" />
     <Property Name="date" Type="date" Nullable="false" />
     <Property Name="time" Type="time" Precision="6" />
+    <Property Name="fFinalAmountID" Type="int" />
+    <Property Name="fContractID" Type="int" />
+    <Property Name="contractType" Type="bit" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -67,6 +71,16 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
     <Property Name="pass" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="ravkavNum" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="profileId" Type="int" />
+  </EntityType>
+  <EntityType Name="VertificationCode">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="verificationCode" Type="varchar" MaxLength="50" />
+    <Property Name="fUserID" Type="int" />
+    <Property Name="IsUsed" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" />
   </EntityType>
   <Association Name="FK__AreaToCon__areaI__6EF57B66">
     <End Role="Area" Type="Self.Area" Multiplicity="1" />
@@ -89,6 +103,18 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
       </Principal>
       <Dependent Role="AreaToContract">
         <PropertyRef Name="contractID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FinalAmou__fUser__5441852A">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="FinalAmount" Type="Self.FinalAmount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FinalAmount">
+        <PropertyRef Name="fUserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -140,24 +166,27 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Vertifica__fUser__534D60F1">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="VertificationCode" Type="Self.VertificationCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="VertificationCode">
+        <PropertyRef Name="fUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="RavKavModelStoreContainer">
     <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AreaToContract" EntityType="Self.AreaToContract" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FinalAmount" EntityType="Self.FinalAmount" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Travel" EntityType="Self.Travel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Travel" EntityType="Self.Travel" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Travel].[id] AS [id], 
-    [Travel].[bas] AS [bas], 
-    [Travel].[price] AS [price], 
-    [Travel].[areaID] AS [areaID], 
-    [Travel].[travelTrip] AS [travelTrip], 
-    [Travel].[userID] AS [userID], 
-    [Travel].[date] AS [date], 
-    [Travel].[time] AS [time]
-    FROM [dbo].[Travel] AS [Travel]</DefiningQuery>
-    </EntitySet>
+    <EntitySet Name="VertificationCode" EntityType="Self.VertificationCode" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__AreaToCon__areaI__6EF57B66" Association="Self.FK__AreaToCon__areaI__6EF57B66">
       <End Role="Area" EntitySet="Area" />
       <End Role="AreaToContract" EntitySet="AreaToContract" />
@@ -165,6 +194,10 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
     <AssociationSet Name="FK__AreaToCon__contr__6E01572D" Association="Self.FK__AreaToCon__contr__6E01572D">
       <End Role="Contract" EntitySet="Contract" />
       <End Role="AreaToContract" EntitySet="AreaToContract" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FinalAmou__fUser__5441852A" Association="Self.FK__FinalAmou__fUser__5441852A">
+      <End Role="User" EntitySet="User" />
+      <End Role="FinalAmount" EntitySet="FinalAmount" />
     </AssociationSet>
     <AssociationSet Name="FK__Transit__areaID__6FE99F9F" Association="Self.FK__Transit__areaID__6FE99F9F">
       <End Role="Area" EntitySet="Area" />
@@ -181,6 +214,10 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
     <AssociationSet Name="FK__User__profileId__44FF419A" Association="Self.FK__User__profileId__44FF419A">
       <End Role="Profile" EntitySet="Profile" />
       <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vertifica__fUser__534D60F1" Association="Self.FK__Vertifica__fUser__534D60F1">
+      <End Role="User" EntitySet="User" />
+      <End Role="VertificationCode" EntitySet="VertificationCode" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

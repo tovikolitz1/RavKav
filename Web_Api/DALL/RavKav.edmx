@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RavKavModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RavKavModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Area">
           <Key>
             <PropertyRef Name="id" />
@@ -31,6 +31,15 @@
           <Property Name="freeMounth" Type="float" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="FinalAmount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="finalAmount" Type="float" />
+          <Property Name="fUserID" Type="int" />
+          <Property Name="monthDate" Type="date" />
+        </EntityType>
         <EntityType Name="Profile">
           <Key>
             <PropertyRef Name="id" />
@@ -39,19 +48,11 @@
           <Property Name="discount" Type="float" />
           <Property Name="describe" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Travel">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="bas" />
-            <PropertyRef Name="price" />
-            <PropertyRef Name="areaID" />
-            <PropertyRef Name="travelTrip" />
-            <PropertyRef Name="userID" />
-            <PropertyRef Name="date" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="None" Nullable="false" />
           <Property Name="bas" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="price" Type="float" Nullable="false" />
           <Property Name="areaID" Type="int" Nullable="false" />
@@ -59,6 +60,9 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
           <Property Name="userID" Type="int" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="time" Type="time" Precision="6" />
+          <Property Name="fFinalAmountID" Type="int" />
+          <Property Name="fContractID" Type="int" />
+          <Property Name="contractType" Type="bit" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -72,6 +76,16 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
           <Property Name="pass" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="ravkavNum" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="profileId" Type="int" />
+        </EntityType>
+        <EntityType Name="VertificationCode">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="verificationCode" Type="varchar" MaxLength="50" />
+          <Property Name="fUserID" Type="int" />
+          <Property Name="IsUsed" Type="bit" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
         <Association Name="FK__AreaToCon__areaI__6EF57B66">
           <End Role="Area" Type="Self.Area" Multiplicity="1" />
@@ -94,6 +108,18 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
             </Principal>
             <Dependent Role="AreaToContract">
               <PropertyRef Name="contractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FinalAmou__fUser__5441852A">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="FinalAmount" Type="Self.FinalAmount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FinalAmount">
+              <PropertyRef Name="fUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -145,24 +171,27 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Vertifica__fUser__534D60F1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="VertificationCode" Type="Self.VertificationCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VertificationCode">
+              <PropertyRef Name="fUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="RavKavModelStoreContainer">
           <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AreaToContract" EntityType="Self.AreaToContract" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinalAmount" EntityType="Self.FinalAmount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Travel" EntityType="Self.Travel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Travel" EntityType="Self.Travel" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Travel].[id] AS [id], 
-    [Travel].[bas] AS [bas], 
-    [Travel].[price] AS [price], 
-    [Travel].[areaID] AS [areaID], 
-    [Travel].[travelTrip] AS [travelTrip], 
-    [Travel].[userID] AS [userID], 
-    [Travel].[date] AS [date], 
-    [Travel].[time] AS [time]
-    FROM [dbo].[Travel] AS [Travel]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="VertificationCode" EntityType="Self.VertificationCode" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__AreaToCon__areaI__6EF57B66" Association="Self.FK__AreaToCon__areaI__6EF57B66">
             <End Role="Area" EntitySet="Area" />
             <End Role="AreaToContract" EntitySet="AreaToContract" />
@@ -170,6 +199,10 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
           <AssociationSet Name="FK__AreaToCon__contr__6E01572D" Association="Self.FK__AreaToCon__contr__6E01572D">
             <End Role="Contract" EntitySet="Contract" />
             <End Role="AreaToContract" EntitySet="AreaToContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FinalAmou__fUser__5441852A" Association="Self.FK__FinalAmou__fUser__5441852A">
+            <End Role="User" EntitySet="User" />
+            <End Role="FinalAmount" EntitySet="FinalAmount" />
           </AssociationSet>
           <AssociationSet Name="FK__Transit__areaID__6FE99F9F" Association="Self.FK__Transit__areaID__6FE99F9F">
             <End Role="Area" EntitySet="Area" />
@@ -187,9 +220,12 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
             <End Role="Profile" EntitySet="Profile" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <AssociationSet Name="FK__Vertifica__fUser__534D60F1" Association="Self.FK__Vertifica__fUser__534D60F1">
+            <End Role="User" EntitySet="User" />
+            <End Role="VertificationCode" EntitySet="VertificationCode" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RavKavModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -247,17 +283,12 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
           <Property Name="profileId" Type="Int32" />
           <NavigationProperty Name="Profile" Relationship="Self.FK__User__profileId__44FF419A" FromRole="User" ToRole="Profile" />
           <NavigationProperty Name="Travels" Relationship="Self.FK__Travel__userID__4316F928" FromRole="User" ToRole="Travel" />
-          <NavigationProperty Name="Travels1" Relationship="Self.FK__Travel__userID__440B1D61" FromRole="User" ToRole="Travel" />
+          <NavigationProperty Name="FinalAmounts" Relationship="RavKavModel.FK__FinalAmou__fUser__5441852A" FromRole="User" ToRole="FinalAmount" />
+          <NavigationProperty Name="VertificationCodes" Relationship="RavKavModel.FK__Vertifica__fUser__534D60F1" FromRole="User" ToRole="VertificationCode" />
         </EntityType>
         <EntityType Name="Travel">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="bas" />
-            <PropertyRef Name="price" />
-            <PropertyRef Name="areaID" />
-            <PropertyRef Name="travelTrip" />
-            <PropertyRef Name="userID" />
-            <PropertyRef Name="date" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="bas" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
@@ -269,7 +300,11 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
           <Property Name="time" Type="Time" Precision="6" />
           <NavigationProperty Name="Area" Relationship="Self.FK__Transit__areaID__6FE99F9F" FromRole="Travel" ToRole="Area" />
           <NavigationProperty Name="User" Relationship="Self.FK__Travel__userID__4316F928" FromRole="Travel" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="Self.FK__Travel__userID__440B1D61" FromRole="Travel" ToRole="User" />
+          <Property Name="fFinalAmountID" Type="Int32" />
+          <Property Name="fContractID" Type="Int32" />
+          <Property Name="contractType" Type="Boolean" />
+          <NavigationProperty Name="FinalAmount" Relationship="RavKavModel.FK__Travel__fContrac__5629CD9C" FromRole="Travel" ToRole="FinalAmount" />
+          <NavigationProperty Name="FinalAmount1" Relationship="RavKavModel.FK__Travel__fFinalAm__5535A963" FromRole="Travel" ToRole="FinalAmount" />
         </EntityType>
         <Association Name="FK__AreaToCon__areaI__6EF57B66">
           <End Role="Area" Type="Self.Area" Multiplicity="1" />
@@ -331,18 +366,6 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Travel__userID__440B1D61">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Travel" Type="Self.Travel" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Travel">
-              <PropertyRef Name="userID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="RavKavEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Areas" EntityType="Self.Area" />
           <EntitySet Name="AreaToContracts" EntityType="Self.AreaToContract" />
@@ -370,11 +393,96 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
             <End Role="User" EntitySet="Users" />
             <End Role="Travel" EntitySet="Travels" />
           </AssociationSet>
-          <AssociationSet Name="FK__Travel__userID__440B1D61" Association="Self.FK__Travel__userID__440B1D61">
+          <EntitySet Name="FinalAmounts" EntityType="RavKavModel.FinalAmount" />
+          <EntitySet Name="VertificationCodes" EntityType="RavKavModel.VertificationCode" />
+          <AssociationSet Name="FK__FinalAmou__fUser__5441852A" Association="RavKavModel.FK__FinalAmou__fUser__5441852A">
             <End Role="User" EntitySet="Users" />
+            <End Role="FinalAmount" EntitySet="FinalAmounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Travel__fContrac__5629CD9C" Association="RavKavModel.FK__Travel__fContrac__5629CD9C">
+            <End Role="FinalAmount" EntitySet="FinalAmounts" />
+            <End Role="Travel" EntitySet="Travels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vertifica__fUser__534D60F1" Association="RavKavModel.FK__Vertifica__fUser__534D60F1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="VertificationCode" EntitySet="VertificationCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Travel__fFinalAm__5535A963" Association="RavKavModel.FK__Travel__fFinalAm__5535A963">
+            <End Role="FinalAmount" EntitySet="FinalAmounts" />
             <End Role="Travel" EntitySet="Travels" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="FinalAmount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="finalAmount1" Type="Double" />
+          <Property Name="fUserID" Type="Int32" />
+          <Property Name="monthDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="User" Relationship="RavKavModel.FK__FinalAmou__fUser__5441852A" FromRole="FinalAmount" ToRole="User" />
+          <NavigationProperty Name="Travels" Relationship="RavKavModel.FK__Travel__fContrac__5629CD9C" FromRole="FinalAmount" ToRole="Travel" />
+          <NavigationProperty Name="Travels1" Relationship="RavKavModel.FK__Travel__fFinalAm__5535A963" FromRole="FinalAmount" ToRole="Travel" />
+        </EntityType>
+        <EntityType Name="VertificationCode">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="verificationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fUserID" Type="Int32" />
+          <Property Name="IsUsed" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="RavKavModel.FK__Vertifica__fUser__534D60F1" FromRole="VertificationCode" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__FinalAmou__fUser__5441852A">
+          <End Type="RavKavModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="RavKavModel.FinalAmount" Role="FinalAmount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FinalAmount">
+              <PropertyRef Name="fUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Travel__fContrac__5629CD9C">
+          <End Type="RavKavModel.FinalAmount" Role="FinalAmount" Multiplicity="0..1" />
+          <End Type="RavKavModel.Travel" Role="Travel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalAmount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Travel">
+              <PropertyRef Name="fContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vertifica__fUser__534D60F1">
+          <End Type="RavKavModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="RavKavModel.VertificationCode" Role="VertificationCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VertificationCode">
+              <PropertyRef Name="fUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Travel__fFinalAm__5535A963">
+          <End Type="RavKavModel.FinalAmount" Role="FinalAmount" Multiplicity="0..1" />
+          <End Type="RavKavModel.Travel" Role="Travel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalAmount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Travel">
+              <PropertyRef Name="fFinalAmountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -436,6 +544,9 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
           <EntitySetMapping Name="Travels">
             <EntityTypeMapping TypeName="RavKavModel.Travel">
               <MappingFragment StoreEntitySet="Travel">
+                <ScalarProperty Name="contractType" ColumnName="contractType" />
+                <ScalarProperty Name="fContractID" ColumnName="fContractID" />
+                <ScalarProperty Name="fFinalAmountID" ColumnName="fFinalAmountID" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="bas" ColumnName="bas" />
                 <ScalarProperty Name="price" ColumnName="price" />
@@ -444,6 +555,27 @@ warning 6002: The table/view 'RavKav.dbo.Travel' does not have a primary key def
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="time" ColumnName="time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinalAmounts">
+            <EntityTypeMapping TypeName="RavKavModel.FinalAmount">
+              <MappingFragment StoreEntitySet="FinalAmount">
+                <ScalarProperty Name="monthDate" ColumnName="monthDate" />
+                <ScalarProperty Name="fUserID" ColumnName="fUserID" />
+                <ScalarProperty Name="finalAmount1" ColumnName="finalAmount" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VertificationCodes">
+            <EntityTypeMapping TypeName="RavKavModel.VertificationCode">
+              <MappingFragment StoreEntitySet="VertificationCode">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+                <ScalarProperty Name="fUserID" ColumnName="fUserID" />
+                <ScalarProperty Name="verificationCode" ColumnName="verificationCode" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { $ } from 'protractor';
 import { User } from 'src/app/models/user.model';
 import { WebApiService } from 'src/app/services/web-api.service';
 
@@ -12,33 +13,48 @@ import { WebApiService } from 'src/app/services/web-api.service';
 export class ForgotPasswordComponent implements OnInit {
 
   constructor(private webapi: WebApiService, private router: Router) { }
-  formLogin:FormGroup;
-  @Input() user:User;
+  formForgotPassword: FormGroup;
+  public ravkav: string;
+  public tempPass: string;
+  public newPass: string;
+  public verifyNewPass: string;
   ngOnInit() {
-    this.formLogin=new FormGroup({
-      tempPass:new FormControl ('',[Validators.required]),
-      newPass:new FormControl('',[Validators.required]),
-      verifyNewPass:new FormControl('',[Validators.required])
+
+    this.formForgotPassword = new FormGroup({
+      ravKav: new FormControl('', [Validators.required])
     })
   }
+
   changePassword() {
-   
-    this.webapi.forgotPassword(this.user.id).subscribe(x => {
-      if(x)
-      {
-        this.webapi.changePassword(this.user.id,{...this.formLogin.value},"rnd").subscribe(y => {
-          if(y)
-          {
-          alert("succes");
+    debugger
+    //if (document.getElementById("vertification").className != "d-none") {
+      this.webapi.forgotPassword(this.ravkav).subscribe(x => {
+        if (x) {
+          alert('הסיסמה נשלחה בהצלחה, אנא הזן קוד אימות');
+        //  $("#vertification").removeClass('d-none');
+        //  $("#ravkav").addClass('d-none');
+        }
+      })
+    }
+ //  else {
+   // }
+    fg(){
+      // this.formForgotPassword = new FormGroup({
+      //   tempPass: new FormControl('', [Validators.required]),
+      //   newPass: new FormControl('', [Validators.required]),
+      //   verifyNewPass: new FormControl('', [Validators.required])
+      // })
+      if(this.newPass!=this.verifyNewPass)
+      alert("אימות סיסמה לא תואם")
+      this.webapi.changePassword({ ...this.formForgotPassword.value }).subscribe(y => {
+        if (y) {
+          alert("succes")
           this.router.navigate(['/login'])
         }
-          else
+        else
           alert("try again");
-        })
-        
-      }
-      else
-      alert("try again");
-    })
-   }
+      })
+    }
+
+ // }
 }

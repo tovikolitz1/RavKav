@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_Api", "Web_Api\Web_Api.csproj", "{C3FE3086-5C1A-4498-A451-C00B004B64CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{D695544A-5A72-4344-8686-D8A3A3954B28}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALL", "DALL\DALL.csproj", "{AE5456E1-AC83-450F-8B68-BCD960085D8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{7A20629B-59DB-478E-9821-E74DC72A2427}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{AE5456E1-AC83-450F-8B68-BCD960085D8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE5456E1-AC83-450F-8B68-BCD960085D8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE5456E1-AC83-450F-8B68-BCD960085D8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A20629B-59DB-478E-9821-E74DC72A2427}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A20629B-59DB-478E-9821-E74DC72A2427}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A20629B-59DB-478E-9821-E74DC72A2427}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A20629B-59DB-478E-9821-E74DC72A2427}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

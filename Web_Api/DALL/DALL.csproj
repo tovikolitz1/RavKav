@@ -60,6 +60,9 @@
     <Compile Include="Contract.cs">
       <DependentUpon>RavKav.tt</DependentUpon>
     </Compile>
+    <Compile Include="FinalAmount.cs">
+      <DependentUpon>RavKav.tt</DependentUpon>
+    </Compile>
     <Compile Include="Profile.cs">
       <DependentUpon>RavKav.tt</DependentUpon>
     </Compile>
@@ -83,6 +86,9 @@
       <DependentUpon>RavKav.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
+      <DependentUpon>RavKav.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VertificationCode.cs">
       <DependentUpon>RavKav.tt</DependentUpon>
     </Compile>
   </ItemGroup>

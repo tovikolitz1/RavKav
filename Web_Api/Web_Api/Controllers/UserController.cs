@@ -35,14 +35,14 @@ namespace Web_Api.Controllers
             return Ok(UsersLogic.AddUser(user));
         }
         [HttpGet]
-        public IHttpActionResult forgotPassword(int id)
+        public IHttpActionResult forgotPassword(string ravkav)
         {
-            return Ok(UsersLogic.forgotPassword(id));
+            return Ok(UsersLogic.forgotPassword(ravkav));
         }
         [HttpGet]
-        public IHttpActionResult changePassword(string tempPass, string newPass, int id, string rnd)
+        public IHttpActionResult changePassword(string ravkav,string tempPass, string newPass)
         {
-            return Ok(UsersLogic.changePassword(tempPass,newPass,id,rnd));
+            return Ok(UsersLogic.changePassword(ravkav,tempPass, newPass));
         }
         
     }

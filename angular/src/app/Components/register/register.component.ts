@@ -26,9 +26,7 @@ export class RegisterComponent implements OnInit {
       profileId:new FormControl('',[Validators.required])  
       
     })
-    debugger
     this.user = new User({...this.formRegister.value});
-    debugger
   }
 
   register() {

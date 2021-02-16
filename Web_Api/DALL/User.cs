@@ -18,7 +18,8 @@ namespace DALL
         public User()
         {
             this.Travels = new HashSet<Travel>();
-            this.Travels1 = new HashSet<Travel>();
+            this.FinalAmounts = new HashSet<FinalAmount>();
+            this.VertificationCodes = new HashSet<VertificationCode>();
         }
     
         public int id { get; set; }
@@ -34,6 +35,8 @@ namespace DALL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Travel> Travels { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Travel> Travels1 { get; set; }
+        public virtual ICollection<FinalAmount> FinalAmounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VertificationCode> VertificationCodes { get; set; }
     }
 }
