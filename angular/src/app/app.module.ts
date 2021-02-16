@@ -25,7 +25,8 @@ const routes:Routes=
 ]},
 {path:'contract',component:ContractComponent},
 {path:'home',component:HomeComponent},
-{path:'ShowTravels',component:ShowTravelsComponent}
+{path:'ShowTravels',component:ShowTravelsComponent},
+{path:'ForgotPassword',component:ForgotPasswordComponent}
 
 ]
 @NgModule({
@@ -39,6 +40,7 @@ const routes:Routes=
     ForgotPasswordComponent,
     ManagerComponent,
     HomeComponent
+    
   ],
   imports:[
     BrowserModule,

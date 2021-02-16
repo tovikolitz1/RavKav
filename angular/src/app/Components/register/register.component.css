@@ -1,0 +1,30 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.header{
+font-weight: bold;
+font-family: math;
+color: darkslateblue;
+}
+input{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+body{
+color: #7a7a7a !important;
+text-align: center;
+}
+input,select,
+button{
+     border-radius: 5px;
+      font-style: italic;
+       text-align: center;
+      height: 40px;
+      border: 0px;
+      
+}
+a{
+    color: blue;
+    font-style: oblique;
+    text-decoration: underline;
+}
+

@@ -10,7 +10,8 @@
     <!-- <form action="/action_page.php"> -->
     <div class="container main d-flex justify-content-center">
         <div id=header>
-            <img src="logo_MyKav.PNG" />
+
+            <img src="src\app\IMages\logo_MyKav.PNG" />
          </div>
 
         <div id="main" style="background-color: #b4d64d;width: 300px;height: 350px;border-radius: 30px;margin-top: 120px;margin-bottom: 45%; padding: 30px;" >
@@ -21,7 +22,7 @@
             
            
             <button [disabled]="FormLogin.valid" style="display: block;margin: 20px;margin-left: 70px;width: 100px;background-color: #96379c;color: white;font-weight: bold;" type="submit">אישור</button>
-  <div> <a href="">שכחתי סיסמא</a> | <a href="">משתמש חדש</a></div>
+  <div> <a routerLink="/ForgotPassword">שכחתי סיסמא</a> | <a routerLink="/Register">משתמש חדש</a></div>
     <!-- <p class="message">Not registered? <a routerLink="/Register">Create an account</a></p>  -->
     
          </div>
