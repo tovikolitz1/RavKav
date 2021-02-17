@@ -28,7 +28,6 @@ namespace DALL
     
         public virtual Area Area { get; set; }
         public virtual User User { get; set; }
-        public virtual FinalAmount FinalAmount { get; set; }
-        public virtual FinalAmount FinalAmount1 { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

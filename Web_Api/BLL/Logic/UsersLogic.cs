@@ -2,6 +2,7 @@
 using BLL.ModelDTO;
 using DAL;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 
@@ -28,17 +29,23 @@ namespace BLL.Logic
         }
         public static bool forgotPassword(string ravkav)
         {
-            var u = db.Users.Where(x => x.ravkavNum == ravkav).FirstOrDefault();
+            User u = db.Users.Where(x => x.ravkavNum == ravkav).FirstOrDefault();
             if (u == null)
                 return false;
-            int id = u.id;
-            VertificationCode newVer = new VertificationCode(id);
-           string to= db.Users.Where(x => x.id == id).FirstOrDefault().ToString();
+            int fUserID = u.id;
+           var vcid=  db.sp_vretificationCode_Insert(fUserID);
+            int y = 0;
+            if (vcid == null)
+            {
+                return false;
+            }
+           
+            string to= u.email;
             if (to != null)
             {
                 string from = "mykav@gmail.com";
                 string subject = "שחזור סיסמה";
-                VertificationCode ver = db.VertificationCodes.Where(x => x.fUserID == id).FirstOrDefault();
+                VertificationCode ver = db.VertificationCodes.Where(x => x.id ==y).FirstOrDefault();
                 if (ver == null)
                     return false;
                 string tempPass = ver.verificationCode;

@@ -91,5 +91,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_vretificationCode_Insert" FunctionName="RavKavModel.Store.sp_vretificationCode_Insert" />
+    <FunctionImportMapping FunctionImportName="Area_Insert" FunctionName="RavKavModel.Store.Area_Insert" />
+    <FunctionImportMapping FunctionImportName="AreaToContract_Insert" FunctionName="RavKavModel.Store.AreaToContract_Insert" />
+    <FunctionImportMapping FunctionImportName="AreaToContract_Insert_V2" FunctionName="RavKavModel.Store.AreaToContract_Insert_V2" />
+    <FunctionImportMapping FunctionImportName="Contract_Insert" FunctionName="RavKavModel.Store.Contract_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_travel_Order" FunctionName="RavKavModel.Store.sp_travel_Order">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RavKavModel.sp_travel_Order_Result">
+          <ScalarProperty Name="bas" ColumnName="bas" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="areaID" ColumnName="areaID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="travelTrip" ColumnName="travelTrip" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="time" ColumnName="time" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -235,5 +235,23 @@
       <End Role="User" EntitySet="Users" />
       <End Role="VertificationCode" EntitySet="VertificationCodes" />
     </AssociationSet>
+    <FunctionImport Name="sp_vretificationCode_Insert" ReturnType="Collection(Decimal)">
+      <Parameter Name="fUserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Area_Insert" />
+    <FunctionImport Name="AreaToContract_Insert" />
+    <FunctionImport Name="AreaToContract_Insert_V2" />
+    <FunctionImport Name="Contract_Insert" />
+    <FunctionImport Name="sp_travel_Order" ReturnType="Collection(RavKavModel.sp_travel_Order_Result)" />
   </EntityContainer>
+  <ComplexType Name="sp_travel_Order_Result">
+    <Property Type="String" Name="bas" Nullable="false" MaxLength="3" />
+    <Property Type="Double" Name="price" Nullable="false" />
+    <Property Type="Int32" Name="areaID" Nullable="false" />
+    <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="travelTrip" Nullable="false" />
+    <Property Type="Int32" Name="userID" Nullable="false" />
+    <Property Type="DateTime" Name="date" Nullable="false" />
+    <Property Type="Time" Name="time" Nullable="true" />
+  </ComplexType>
 </Schema>

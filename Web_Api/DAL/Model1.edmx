@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RavKavModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RavKavModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Area">
           <Key>
             <PropertyRef Name="id" />
@@ -183,6 +183,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Area_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="AreaToContract_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="AreaToContract_Insert_V2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Contract_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_travel_Order" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_vretificationCode_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fUserID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="RavKavModelStoreContainer">
           <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AreaToContract" EntityType="Self.AreaToContract" Schema="dbo" store:Type="Tables" />
@@ -225,8 +233,7 @@
             <End Role="VertificationCode" EntitySet="VertificationCode" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RavKavModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -465,7 +472,25 @@
             <End Role="User" EntitySet="Users" />
             <End Role="VertificationCode" EntitySet="VertificationCodes" />
           </AssociationSet>
+          <FunctionImport Name="sp_vretificationCode_Insert" ReturnType="Collection(Decimal)">
+          <Parameter Name="fUserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Area_Insert" />
+          <FunctionImport Name="AreaToContract_Insert" />
+          <FunctionImport Name="AreaToContract_Insert_V2" />
+          <FunctionImport Name="Contract_Insert" />
+          <FunctionImport Name="sp_travel_Order" ReturnType="Collection(RavKavModel.sp_travel_Order_Result)" />
         </EntityContainer>
+        <ComplexType Name="sp_travel_Order_Result">
+          <Property Type="String" Name="bas" Nullable="false" MaxLength="3" />
+          <Property Type="Double" Name="price" Nullable="false" />
+          <Property Type="Int32" Name="areaID" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="travelTrip" Nullable="false" />
+          <Property Type="Int32" Name="userID" Nullable="false" />
+          <Property Type="DateTime" Name="date" Nullable="false" />
+          <Property Type="Time" Name="time" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -562,6 +587,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_vretificationCode_Insert" FunctionName="RavKavModel.Store.sp_vretificationCode_Insert" />
+          <FunctionImportMapping FunctionImportName="Area_Insert" FunctionName="RavKavModel.Store.Area_Insert" />
+          <FunctionImportMapping FunctionImportName="AreaToContract_Insert" FunctionName="RavKavModel.Store.AreaToContract_Insert" />
+          <FunctionImportMapping FunctionImportName="AreaToContract_Insert_V2" FunctionName="RavKavModel.Store.AreaToContract_Insert_V2" />
+          <FunctionImportMapping FunctionImportName="Contract_Insert" FunctionName="RavKavModel.Store.Contract_Insert" />
+          <FunctionImportMapping FunctionImportName="sp_travel_Order" FunctionName="RavKavModel.Store.sp_travel_Order">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RavKavModel.sp_travel_Order_Result">
+                <ScalarProperty Name="bas" ColumnName="bas" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="areaID" ColumnName="areaID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="travelTrip" ColumnName="travelTrip" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="time" ColumnName="time" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

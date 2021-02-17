@@ -21,9 +21,5 @@ namespace DAL
         public Nullable<System.DateTime> CreateDate { get; set; }
     
         public virtual User User { get; set; }
-        public VertificationCode(int id)
-        {
-            this.fUserID = id;
-        }
     }
 }

@@ -17,8 +17,9 @@ namespace DALL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Travels = new HashSet<Travel>();
             this.FinalAmounts = new HashSet<FinalAmount>();
+            this.Travels = new HashSet<Travel>();
+            this.Travels1 = new HashSet<Travel>();
             this.VertificationCodes = new HashSet<VertificationCode>();
         }
     
@@ -31,11 +32,13 @@ namespace DALL
         public string ravkavNum { get; set; }
         public Nullable<int> profileId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FinalAmount> FinalAmounts { get; set; }
         public virtual Profile Profile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Travel> Travels { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FinalAmount> FinalAmounts { get; set; }
+        public virtual ICollection<Travel> Travels1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VertificationCode> VertificationCodes { get; set; }
     }
