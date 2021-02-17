@@ -34,9 +34,11 @@ public userEdit=new EventEmitter<User>();
   GetNameById(id:number) {
     return this.httpClient.get<string>("http://localhost:60000/api/User/GetNameById?id=" + id);
   }
-forgotPassword(ravkav:string)
+forgotPassword(objec:{ravkav:string})
   {
-    return this.httpClient.get<boolean>("http://localhost:60000/api/User/forgotPassword?ravkav=" + ravkav);
+    debugger
+    return this.httpClient.get<boolean>("http://localhost:60000/api/User/forgotPassword?ravkav=" +objec.ravkav);
+    debugger
   };
   changePassword(objec:{ravkav:string,tempPass:string,newPass:string})
   {

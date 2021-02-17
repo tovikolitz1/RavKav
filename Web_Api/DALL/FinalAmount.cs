@@ -14,22 +14,11 @@ namespace DALL
     
     public partial class FinalAmount
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FinalAmount()
-        {
-            this.Travels = new HashSet<Travel>();
-            this.Travels1 = new HashSet<Travel>();
-        }
-    
         public int id { get; set; }
         public Nullable<double> finalAmount1 { get; set; }
         public Nullable<int> fUserID { get; set; }
         public Nullable<System.DateTime> monthDate { get; set; }
     
         public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Travel> Travels { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Travel> Travels1 { get; set; }
     }
 }

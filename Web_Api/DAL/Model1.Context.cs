@@ -12,6 +12,8 @@ namespace DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class RavKavEntities : DbContext
     {
@@ -33,5 +35,39 @@ namespace DAL
         public virtual DbSet<Travel> Travels { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<VertificationCode> VertificationCodes { get; set; }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_vretificationCode_Insert(Nullable<int> fUserID)
+        {
+            var fUserIDParameter = fUserID.HasValue ?
+                new ObjectParameter("fUserID", fUserID) :
+                new ObjectParameter("fUserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_vretificationCode_Insert", fUserIDParameter);
+        }
+    
+        public virtual int Area_Insert()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Area_Insert");
+        }
+    
+        public virtual int AreaToContract_Insert()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AreaToContract_Insert");
+        }
+    
+        public virtual int AreaToContract_Insert_V2()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AreaToContract_Insert_V2");
+        }
+    
+        public virtual int Contract_Insert()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Contract_Insert");
+        }
+    
+        public virtual ObjectResult<sp_travel_Order_Result> sp_travel_Order()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_travel_Order_Result>("sp_travel_Order");
+        }
     }
 }
