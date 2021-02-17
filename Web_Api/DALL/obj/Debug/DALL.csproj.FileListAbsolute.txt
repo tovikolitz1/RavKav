@@ -1,0 +1,10 @@
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\DALL.dll.config
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\DALL.dll
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\DALL.pdb
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\EntityFramework.dll
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\EntityFramework.SqlServer.dll
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\EntityFramework.xml
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\EntityFramework.SqlServer.xml
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\obj\Debug\DALL.csproj.CoreCompileInputs.cache
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\obj\Debug\DALL.dll
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\obj\Debug\DALL.pdb

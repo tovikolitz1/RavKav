@@ -1,7 +1,7 @@
 ﻿
 
 using BLL.ModelDTO;
-using DAL;
+using DALL;
 using System;
 using System.Collections.Generic;
 using System.Linq;

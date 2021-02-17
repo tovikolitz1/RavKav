@@ -637,9 +637,9 @@ G:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.csproj.CoreCompileInputs.cach
 G:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.csproj.CopyComplete
 G:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.dll
 G:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.pdb
-D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DAL.dll
-D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DAL.pdb
-D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DAL.dll.config
 F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DAL.dll
 F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DAL.pdb
 F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DAL.dll.config
+D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DALL.dll
+D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DALL.pdb
+D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DALL.dll.config
