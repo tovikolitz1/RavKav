@@ -542,7 +542,6 @@ F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\Unity.Abstractions.dll
 F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\Unity.AspNet.WebApi.dll
 F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\Unity.Container.dll
 F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\WebActivatorEx.dll
-F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DALL.dll
 F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\BLL.pdb
 F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\BLL.dll.config
 F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\EntityFramework.xml
@@ -559,8 +558,6 @@ F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\Unity.Abstractions.pdb
 F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\Unity.AspNet.WebApi.pdb
 F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\Unity.Container.pdb
 F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\Newtonsoft.Json.xml
-F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DALL.pdb
-F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DALL.dll.config
 F:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.csprojAssemblyReference.cache
 F:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.csproj.CopyComplete
 F:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.dll
@@ -643,3 +640,6 @@ G:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.pdb
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DAL.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DAL.pdb
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DAL.dll.config
+F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DAL.dll
+F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DAL.pdb
+F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DAL.dll.config
