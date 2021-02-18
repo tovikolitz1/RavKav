@@ -36,9 +36,9 @@ D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.xml
 D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.xml
 D:\מסמכים\GitHub\RavKav\Web_Api\BLL\obj\Debug\BLL.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\BLL\obj\Debug\BLL.pdb
-F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.dll
-F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.pdb
-F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.dll.config
 D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\DALL.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\DALL.pdb
 D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\DALL.dll.config
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.dll
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.pdb
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.dll.config
