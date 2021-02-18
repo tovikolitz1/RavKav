@@ -38,7 +38,6 @@ forgotPassword(objec:{ravkav:string})
   {
     debugger
     return this.httpClient.get<boolean>("http://localhost:60000/api/User/forgotPassword?ravkav=" +objec.ravkav);
-    debugger
   };
   changePassword(objec:{ravkav:string,tempPass:string,newPass:string})
   {

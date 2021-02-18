@@ -8,3 +8,4 @@ D:\מסמכים\GitHub\RavKav\Web_Api\DALL\bin\Debug\EntityFramework.SqlServer.x
 D:\מסמכים\GitHub\RavKav\Web_Api\DALL\obj\Debug\DALL.csproj.CoreCompileInputs.cache
 D:\מסמכים\GitHub\RavKav\Web_Api\DALL\obj\Debug\DALL.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\DALL\obj\Debug\DALL.pdb
+D:\מסמכים\GitHub\RavKav\Web_Api\DALL\obj\Debug\DALL.csprojResolveAssemblyReference.cache

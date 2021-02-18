@@ -10,7 +10,31 @@ namespace BLL.Logic
 {
 
     public static class UsersLogic
-    { 
+    {
+        public static string send(MailMessage message)
+        {
+            //string to = "jane@contoso.com";
+            //string from = "ben@contoso.com";
+            //MailMessage message = new MailMessage(from, to);
+            //message.Subject = "Using the new SMTP client.";
+            //message.Body = @"Using this new feature, you can send an email message from an application very easily.";
+            SmtpClient client = new SmtpClient("smtp.gmail.com");
+            //Credentials are necessary if the server requires the client
+            //  to authenticate before it will send email on the client's behalf.
+            client.UseDefaultCredentials = true;
+
+            try
+            {
+                client.Send(message);
+                return "good";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception caught in CreateTestMessage2(): {0}",
+                    ex.ToString());
+                return ex.ToString();
+            }
+        }
         static RavKavEntities db = new RavKavEntities();
 
         public static bool AddUser(UserDTO user)
@@ -18,11 +42,11 @@ namespace BLL.Logic
             User u = Convertions.Convertion(user);
             try
             {
-                    db.Users.Add(u);
-                    db.SaveChanges();
-                    return true;
+                db.Users.Add(u);
+                db.SaveChanges();
+                return true;
             }
-            catch 
+            catch
             {
                 return false;
             }
@@ -33,52 +57,51 @@ namespace BLL.Logic
             if (u == null)
                 return false;
             int fUserID = u.id;
-           var vcid=  db.sp_vretificationCode_Insert(fUserID);
-            int y = 0;
+            var vcid = db.sp_vretificationCode_Insert(fUserID).FirstOrDefault();
             if (vcid == null)
             {
                 return false;
             }
-           
-            string to= u.email;
+            int vc = Convert.ToInt32(vcid);
+            string to = u.email;
             if (to != null)
             {
-                string from = "mykav@gmail.com";
+                string from = "mykav2021@gmail.com";
                 string subject = "שחזור סיסמה";
-                VertificationCode ver = db.VertificationCodes.Where(x => x.id ==y).FirstOrDefault();
+                VertificationCode ver = db.VertificationCodes.Where(x => x.id == vc).FirstOrDefault();
                 if (ver == null)
                     return false;
                 string tempPass = ver.verificationCode;
-                string body = "הסיסמה הזמנית שלך היא" +tempPass;
+                string body = "הסיסמה הזמנית שלך היא" + tempPass;
                 MailMessage massage = new MailMessage(from, to, subject, body);
-                SendMessege.send(massage);
+                string b = send(massage);
                 return true;
             }
             else { return false; }
         }
-        public static bool changePassword(string ravkav,string tempPass,string newPass)
+        public static bool changePassword(string ravkav, string tempPass, string newPass)
         {
             var u = db.Users.Where(x => x.ravkavNum == ravkav).FirstOrDefault();
             if (u == null)
                 return false;
             int id = u.id;
-            VertificationCode tempPassEmail= db.VertificationCodes.Where(x => x.fUserID == id).FirstOrDefault();
-            if (tempPassEmail == null||tempPassEmail.CreateDate<DateTime.Now.AddMinutes(-30)|| tempPass != tempPassEmail.verificationCode)
+            VertificationCode tempPassEmail = db.VertificationCodes.Where(x => x.fUserID == id).FirstOrDefault();
+            if (tempPassEmail == null || tempPassEmail.CreateDate < DateTime.Now.AddMinutes(-30) || tempPass != tempPassEmail.verificationCode)
                 return false;
-          
-          
-                u.pass = newPass;
-                try
-                {
-                    db.Users.Attach(u);
-                    db.Entry(u).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChanges();
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    return false;
-                }
+
+
+            u.pass = newPass;
+            try
+            {
+                db.Users.Attach(u);
+                db.Entry(u).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
         public static bool UpdateUser(UserDTO user)
         {
@@ -86,7 +109,7 @@ namespace BLL.Logic
             try
             {
                 db.Users.Attach(u);
-                db.Entry<User>(u).State=System.Data.Entity.EntityState.Modified;
+                db.Entry<User>(u).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return true;
             }
@@ -102,12 +125,12 @@ namespace BLL.Logic
             {
                 return Convertions.Convertion(user);
             }
-            
+
             return null;
-        }                                                                                                                            
-        public static string GetNameById(int id)                                                                                     
-        {                                                                                                 
-             return db.Users.Where(x=> x.id==id).Select(x=> x.fName+" "+x.lName).ToString();                               
-        }                                                                                                                            
+        }
+        public static string GetNameById(int id)
+        {
+            return db.Users.Where(x => x.id == id).Select(x => x.fName + " " + x.lName).ToString();
+        }
     }
 }
