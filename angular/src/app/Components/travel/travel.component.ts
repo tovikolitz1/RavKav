@@ -8,8 +8,11 @@ import { Travel } from '../../models/travel.model';
 })
 export class TravelComponent implements OnInit {
 @Input() travel:Travel;
+@Input() type:boolean;
   constructor() { }
   ngOnInit() {
+    if(this.type == true)
+    document.getElementById('singleTravelPrice').classList.remove('d-none');
   }
 
 }

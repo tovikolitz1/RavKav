@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
     this.webapi.IfExsistRavKav({...this.formLogin.value}).subscribe(u => {
       if(u!=null)
       {
-        
         this.webapi.userEdit.emit(u);
         if(u.isManager)
         this.router.navigate(['/manager'])

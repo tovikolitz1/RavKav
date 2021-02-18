@@ -7,9 +7,11 @@ import { CalculateResulte } from '../models/calculateResult';
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class WebApiService {
 private user:User;
-public userEdit=new EventEmitter<User>();
+public userEdit : EventEmitter<User> = new EventEmitter<User>();
 
   constructor(private httpClient: HttpClient) {
     this.userEdit.subscribe(x=>this.user=x);
@@ -36,7 +38,6 @@ public userEdit=new EventEmitter<User>();
   }
 forgotPassword(objec:{ravkav:string})
   {
-    debugger
     return this.httpClient.get<boolean>("http://localhost:60000/api/User/forgotPassword?ravkav=" +objec.ravkav);
   };
   changePassword(objec:{ravkav:string,tempPass:string,newPass:string})
@@ -48,8 +49,7 @@ forgotPassword(objec:{ravkav:string})
   //Calculate
   CalculateThePayment()
   {
-debugger;
-    return this.httpClient.get<Array<CalculateResulte>>("http://localhost:60000/api/travel/CalaulateThePayment?id=" + this.user.id);
+    return this.httpClient.get<Array<CalculateResulte>>("http://localhost:60000/api/travel/CalaulateThePayment?id=" + "1");// this.user.id);
   };
   
 }

@@ -20,6 +20,7 @@ import { WebApiService } from 'src/app/services/web-api.service';
 
     constructor(private webapi: WebApiService, private router: Router) { }
     formForgotPassword: FormGroup;
+    // applyPassword: FormGroup;
     public ravkav: string;
     public tempPass: string;
     public newPass: string;
@@ -29,6 +30,11 @@ import { WebApiService } from 'src/app/services/web-api.service';
       this.formForgotPassword = new FormGroup({
         ravkav: new FormControl('', [Validators.required])
       })
+      // this.applyPassword = new FormGroup({
+      //   tempPass: new FormControl('', [Validators.required]),
+      //   newPass: new FormControl('', [Validators.required]),
+      //   verifyNewPass: new FormControl('', [Validators.required])
+      // })
     }
   
 
@@ -43,25 +49,27 @@ import { WebApiService } from 'src/app/services/web-api.service';
           }
         })
       }
- //  else {
-   // }
-    // fg(){
-    //   // this.formForgotPassword = new FormGroup({
-    //   //   tempPass: new FormControl('', [Validators.required]),
-    //   //   newPass: new FormControl('', [Validators.required]),
-    //   //   verifyNewPass: new FormControl('', [Validators.required])
-    //   // })
-    //   if(this.newPass!=this.verifyNewPass)
-    //   alert("אימות סיסמה לא תואם")
-    //   this.webapi.changePassword({ ...this.formForgotPassword.value }).subscribe(y => {
-    //     if (y) {
-    //       alert("succes")
-    //       this.router.navigate(['/login'])
-    //     }
-    //     else
-    //       alert("try again");
-    //   })
-    // }
+      
+//     applyPassword(){
+//       this.formForgotPassword = new FormGroup({
+//         tempPass: new FormControl('', [Validators.required]),
+//         newPass: new FormControl('', [Validators.required]),
+//         verifyNewPass: new FormControl('', [Validators.required])
+//       })
+//       if(this.newPass!=this.verifyNewPass)
+//       {
+//       alert("אימות סיסמה לא תואם")
+//       return;
+//       }
+//       this.webapi.changePassword({ ...this.formForgotPassword.value }).subscribe(y => {
+//         if (y) {
+//           alert("succes")
+//           this.router.navigate(['/login'])
+//         }
+//         else
+//           alert("try again");
+//       })
+//     }
 
- // }
+//  }
 }

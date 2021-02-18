@@ -1,8 +1,20 @@
-<div>
-  <span>חוזה:</span> <span id="contaractName"></span>
-  <br/>
-  <span>מחיר:</span> <span id="price"></span>
-  <span>סוג חוזה: </span><span id="type"></span>
-  <br/>
-  <app-travel *ngFor="let travel of contract.travel" [travel]="travel"></app-travel>
+<div class="contractDiv row">
+  <!-- <div class="col col-md-6"> -->
+    <div class="col">
+      <span>שם החוזה: </span> <span id="contaractName">{{contract.contractName}}</span>
+    </div>
+    <div class="col"><span>מחיר: </span> <span id="price">{{contract.price}}</span>
+    </div>
+    <div class="col"><span>סוג חוזה: </span><span id="type"></span>
+    </div>
+  <!-- </div> -->
 </div>
+<div class="row travelHeader">
+  <span id="buss" class="col">קו</span>
+  <span id="area" class="col">אזור נסיעה</span>
+  <span id="area" class="col">תאריך</span>
+  <div id="singleTravelPrice" class="d-none col">
+    <span>מחיר:</span>
+  </div>
+</div>
+<app-travel *ngFor="let travel of contract.TravelToCon" [travel]="travel" [type]="contract.type"></app-travel>

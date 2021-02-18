@@ -19,7 +19,6 @@ public date:Date;
     //this.date=new Date(Date.now()).setMonth(-1);
    
      this.webapi.CalculateThePayment().subscribe(x=>{
-       debugger
        console.log(x);
        this.contractList = x;
      })

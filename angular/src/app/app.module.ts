@@ -12,6 +12,7 @@ import { ContractComponent } from './Components/contract/contract.component';
 import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
 import { ManagerComponent } from './Components/manager/manager.component';
 import { HomeComponent } from './Components/home/home.component';
+import { HeaderComponent } from './Components/header/header.component';
 
 //import swal from 'sweetalert';
 const routes:Routes=
@@ -26,8 +27,8 @@ const routes:Routes=
 {path:'contract',component:ContractComponent},
 {path:'home',component:HomeComponent},
 {path:'ShowTravels',component:ShowTravelsComponent},
-{path:'ForgotPassword',component:ForgotPasswordComponent}
-
+{path:'ForgotPassword',component:ForgotPasswordComponent},
+{path:'Header',component:HeaderComponent}
 ]
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ const routes:Routes=
     ContractComponent,
     ForgotPasswordComponent,
     ManagerComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent
     
   ],
   imports:[

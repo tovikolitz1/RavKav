@@ -1,7 +1,6 @@
-<br>
-<br>
-<!-- <input [(ngModel)]="name" name="name" type="string"/>  -->
-<!-- <contract *ngFor="let contract of contractList" [contract]="contract"></contract> -->
-<app-contract *ngFor="let contract of contractList" [contract]="contract"></app-contract>
-
-<!-- <input *ngFor="let item of items" [(ngModel)]="item.fName" type="text" name="firstname" class="form-control"> -->
+<h3>פירוט נסיעות וחוזים</h3>
+<div class="row d-flex justify-content-center">
+<div id="mainDiv" class="col col-md-10">
+        <app-contract *ngFor="let contract of contractList" [contract]="contract"></app-contract>
+</div>
+</div>

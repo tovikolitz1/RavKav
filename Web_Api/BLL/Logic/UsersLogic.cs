@@ -75,6 +75,7 @@ namespace BLL.Logic
                 string body = "הסיסמה הזמנית שלך היא" + tempPass;
                 MailMessage massage = new MailMessage(from, to, subject, body);
                 string b = send(massage);
+                //צריך להחזיר את הסיסמה הזמנית לאנגולר כדי שנוכל לוודא תקינות
                 return true;
             }
             else { return false; }
