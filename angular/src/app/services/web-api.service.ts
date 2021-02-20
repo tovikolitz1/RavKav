@@ -14,9 +14,11 @@ private user:User;
 public userEdit : EventEmitter<User> = new EventEmitter<User>();
 
   constructor(private httpClient: HttpClient) {
-    this.userEdit.subscribe(x=>this.user=x);
+    debugger
+    this.userEdit.subscribe(x=>this.user={...x});
    }
    getUSer(){
+
      return {...this.user}
    } 
 
@@ -49,7 +51,7 @@ forgotPassword(objec:{ravkav:string})
   //Calculate
   CalculateThePayment()
   {
-    return this.httpClient.get<Array<CalculateResulte>>("http://localhost:60000/api/travel/CalaulateThePayment?id=" + "1");// this.user.id);
+    return this.httpClient.get<Array<CalculateResulte>>("http://localhost:60000/api/travel/CalaulateThePayment?id=" +  this.user.id);
   };
   
 }

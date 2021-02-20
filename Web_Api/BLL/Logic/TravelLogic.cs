@@ -235,20 +235,28 @@ namespace BLL.Logic
         public static Contract FindContractExtentionOfTwoSmallContracts(int indexI, int indexJ)
         {
             List<Area> areaI1 = contractUsed.ElementAt(indexI).Value;
-            List<Area> areaI2 = contractUsed.ElementAt(indexJ).Value;
-
-            //join with 3 tables to find extention contract of two contracts
+            areaI1.AddRange(contractUsed.ElementAt(indexJ).Value);
+            areaI1= areaI1.Distinct().ToList();
+          
             try
             {
-                var extntionContract = contracts.Select(x =>
-                x.AreaToContracts.Join
-                 (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 =>
-                 AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
-                 (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 }));
-                // .OrderBy(f => type == "freeDay" ? f.AreaToCon2.AreaToCon1.Contract.freeDay : f.AreaToCon2.AreaToCon1.Contract.freeMounth)).FirstOrDefault().FirstOrDefault().AreaToCon2.AreaToCon1.Contract;
+                //var ss = db.AreaToContracts.Where(q => areaI1.Contains(q.Area)).GroupBy(g => g.contractID)
+                //.Where(sd => sd.Count() == areaI1.Count()).Select(k => k.Key).ToList();
+                //   var b=   db.AreaToContracts.Select(f => contracts.Where(m => m.AreaToContracts.Contains(f)).GroupBy());
+                var d = contracts.ToList().Select(x => 
+                x.AreaToContracts.Where(f => areaI1.Contains(f.Area))
+                .GroupBy(g=>g.contractID)
+                .Where(sd=>sd.Count()==areaI1.Count()).Select(k=>k.Key).ToList()).Where(x=>x.Count()==1);
+                 //   .Select(x=>x.;
+                    
+                   // (v=>v.);
+                //var extntionContract = contracts.Select(x =>
+                //x.AreaToContracts.Join
+                // (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 =>
+                // AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
+                // (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 }));
+                //// .OrderBy(f => type == "freeDay" ? f.AreaToCon2.AreaToCon1.Contract.freeDay : f.AreaToCon2.AreaToCon1.Contract.freeMounth)).FirstOrDefault().FirstOrDefault().AreaToCon2.AreaToCon1.Contract;
                 
-
-
                 //var extntionContract = contracts.Join
                 // (areaI1, con1 => con1.AreaToContracts, AreI1 => AreI1.AreaToContracts, (con1, AreI1) => new { con1, AreI1 }).Join
                 // (areaI2, con2 => con2.AreI1.AreaToContracts, AreI2 => AreI2.AreaToContracts, (con2, AreI2) => new { con2, AreI2 })
