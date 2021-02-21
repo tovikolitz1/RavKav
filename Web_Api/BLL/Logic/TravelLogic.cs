@@ -240,29 +240,14 @@ namespace BLL.Logic
           
             try
             {
-                //var ss = db.AreaToContracts.Where(q => areaI1.Contains(q.Area)).GroupBy(g => g.contractID)
-                //.Where(sd => sd.Count() == areaI1.Count()).Select(k => k.Key).ToList();
-                //   var b=   db.AreaToContracts.Select(f => contracts.Where(m => m.AreaToContracts.Contains(f)).GroupBy());
-                var d = contracts.ToList().Select(x => 
-                x.AreaToContracts.Where(f => areaI1.Contains(f.Area))
-                .GroupBy(g=>g.contractID)
-                .Where(sd=>sd.Count()==areaI1.Count()).Select(k=>k.Key).ToList()).Where(x=>x.Count()==1);
-                 //   .Select(x=>x.;
-                    
-                   // (v=>v.);
-                //var extntionContract = contracts.Select(x =>
-                //x.AreaToContracts.Join
-                // (areaI1, AreaToCon1 => AreaToCon1.areaID, AreI1 =>
-                // AreI1.id, (AreaToCon1, AreI1) => new { AreaToCon1, AreI1 }).Join
-                // (areaI2, AreaToCon2 => AreaToCon2.AreI1.id, AreI2 => AreI2.id, (AreaToCon2, AreI2) => new { AreaToCon2, AreI2 }));
-                //// .OrderBy(f => type == "freeDay" ? f.AreaToCon2.AreaToCon1.Contract.freeDay : f.AreaToCon2.AreaToCon1.Contract.freeMounth)).FirstOrDefault().FirstOrDefault().AreaToCon2.AreaToCon1.Contract;
-                
-                //var extntionContract = contracts.Join
-                // (areaI1, con1 => con1.AreaToContracts, AreI1 => AreI1.AreaToContracts, (con1, AreI1) => new { con1, AreI1 }).Join
-                // (areaI2, con2 => con2.AreI1.AreaToContracts, AreI2 => AreI2.AreaToContracts, (con2, AreI2) => new { con2, AreI2 })
-                // .OrderBy(f => type == "freeDay" ? f.con2.con1.freeDay : f.con2.con1.freeMounth).Select(o=>o.con2.con1).FirstOrDefault();
-
-                return null;
+                var conID = contracts.ToList().Select(x =>
+                x.AreaToContracts.Where(f => areaI1.Contains(f.Area)).OrderBy(a=> type == "freeDay" ? a.Contract.freeDay : a.Contract.freeMounth)
+                .GroupBy(g => g.contractID)
+                .Where(sd => sd.Count() == areaI1.Count()).Select(k => k.Key).ToList()).Where(x => x.Count() == 1).FirstOrDefault();
+                int conIDint = Convert.ToInt32(conID.Capacity);
+                extntionContract = contracts.Where(b => b.id == conIDint).FirstOrDefault();
+               
+                return extntionContract;
             }
             catch (Exception x)
             {
@@ -295,9 +280,26 @@ namespace BLL.Logic
                         foreach (var item in contractUsed)
                         {
                             //sum price of all contracts that include in the extention contract
-                            if (contracts.Select(x => x.AreaToContracts.Join
-                                (item.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
-                                .Where(y => y.AreaToCon.contractID == extntionContract.id)).Any())
+                            /*if (contracts.Select(x => x.AreaToContracts.Join
+                                (item.Value, AreaToCon => AreaToCon.areaID,
+                                itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
+                                .Where(y => y.AreaToCon.contractID == extntionContract.id)).Any()) { }*/
+                            var temp = contracts.ToList().Where(x => x.id == extntionContract.id)
+                            .Select(u => u.AreaToContracts.Where(f => item.Value.Contains(f.Area))).FirstOrDefault();
+                            //try
+                            //{
+                            //   List<AreaToContract> temp3 = contracts.Where(x => x.id == extntionContract.id)
+                            //.Select(u => u.AreaToContracts.Where(f => item.Value.Contains(f.Area))).ToList();
+                            //}
+                            //catch (x)
+                            //{
+
+                            //}
+                            var t2 = contracts.ToList().Where(x => x.id == extntionContract.id)
+                                .Select(u => u.AreaToContracts.Where(f => item.Value.Contains(f.Area))).Count();
+                            if ((contracts.ToList().Where(x =>x.id == extntionContract.id)
+                                .Select(u => u.AreaToContracts.Where(f => item.Value.Contains(f.Area))).Any())==true)
+                                              
                             {
                                 sumOfTravelPrice += item.Key.price;
                             }
