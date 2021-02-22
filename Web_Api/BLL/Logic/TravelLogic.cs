@@ -31,6 +31,8 @@ namespace BLL.Logic
         public static List<CalculateResulte> CalaulateThePayment(int id, DateTime date)
         {
 
+            travelUsed.Clear();
+            calculateResultes.Clear();
             GetTravelsAndContractsByIdAndMonth(id, date);
             //free month
             type = "freeMounth";
@@ -42,6 +44,7 @@ namespace BLL.Logic
             //free day
             //Sending travels by day and appropriate contracts for that day
             type = "freeDay";
+
             for (int i = 0; i < DateTime.DaysInMonth(date.Year, date.Month); i++)
             {
                 travelsByDate = travelsById.Where(x => x.date.Day == i).ToList();
@@ -75,7 +78,7 @@ namespace BLL.Logic
 
             //get all contracts appropriate to the user's travel
             contracts = db.Contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f =>
-            (f.userID == id && f.date.Year == date.Year && f.date.Month == date.Month)))).ToList();
+            f.userID == id && f.date.Year == date.Year && f.date.Month == date.Month))).ToList();
         }
         //find base contract
         //the rule of base contract is:
@@ -225,28 +228,46 @@ namespace BLL.Logic
                     }
                 }
             }
+            if (type != "freeDay")
+            {
+                foreach (var item in contractUsed)
+                {
+                    if (item.Key.isContract == false)
+                        contractUsed.Remove(item);
+                }
+            }
+
         }
 
-       /* public static IEnumerable<object> FullJoin(   IEnumerable<Area> first, IEnumerable<Area> second)
-        {
-           var d=first.Join(first,second=>)
-        }
-           */
+        /* public static IEnumerable<object> FullJoin(   IEnumerable<Area> first, IEnumerable<Area> second)
+         {
+            var d=first.Join(first,second=>)
+         }
+            */
         public static Contract FindContractExtentionOfTwoSmallContracts(int indexI, int indexJ)
         {
-            List<Area> areaI1 = contractUsed.ElementAt(indexI).Value;
-            areaI1.AddRange(contractUsed.ElementAt(indexJ).Value);
-            areaI1= areaI1.Distinct().ToList();
-          
+            List<Area> areaI1 = new List<Area>();
+            foreach (var item in contractUsed.ElementAt(indexI).Value)
+            {
+                areaI1.Add(item);
+            }
+            //areaI1 =contractUsed.ElementAt(indexI).Value;
+            foreach (var item in contractUsed.ElementAt(indexJ).Value)
+            {
+                areaI1.Add(item);
+            }
+            areaI1 = areaI1.Distinct().ToList();
+
+
             try
             {
                 var conID = contracts.ToList().Select(x =>
-                x.AreaToContracts.Where(f => areaI1.Contains(f.Area)).OrderBy(a=> type == "freeDay" ? a.Contract.freeDay : a.Contract.freeMounth)
+                x.AreaToContracts.Where(f => areaI1.Contains(f.Area)).OrderBy(a => type == "freeDay" ? a.Contract.freeDay : a.Contract.freeMounth)
                 .GroupBy(g => g.contractID)
                 .Where(sd => sd.Count() == areaI1.Count()).Select(k => k.Key).ToList()).Where(x => x.Count() == 1).FirstOrDefault();
                 int conIDint = Convert.ToInt32(conID[0]);
                 extntionContract = contracts.Where(b => b.id == conIDint).FirstOrDefault();
-               
+
                 return extntionContract;
             }
             catch (Exception x)
@@ -254,7 +275,7 @@ namespace BLL.Logic
                 return null;
             }
         }
-    
+
         public static bool func(int id)
         {
             var profileDiscount = Convert.ToDouble(db.Profiles.Where(b => b.Users.Any(c => c.id == id)).FirstOrDefault().discount);
@@ -263,31 +284,30 @@ namespace BLL.Logic
             extntionContract = null;
             double sumOfTravelPrice = 0;
             int areaTemp = -1;
+            int areaTempJ = -1;
             for (int i = 0; i < contractUsed.Count() - 1; i++)
             {
-                //check if contract akready has been checked (only fot signals travels)
-                if (contractUsed.ElementAt(i).Key.isContract == false && contractUsed.ElementAt(i).Value[0].id==areaTemp)
+                //check if contract already has been checked (only fot signals travels)
+                if (contractUsed.ElementAt(i).Key.isContract == false && contractUsed.ElementAt(i).Value[0].id == areaTemp)
                     continue;
                 areaTemp = contractUsed.ElementAt(i).Value[0].id;
                 for (int j = i + 1; j < contractUsed.Count(); j++)
                 {//chek if two signal travels have same area (To prevent duplicate testing)
-                    if (contractUsed.ElementAt(i).Key.isContract == false && contractUsed.ElementAt(j).Key.isContract == false && contractUsed.ElementAt(i).Value[0].id == contractUsed.ElementAt(j).Value[0].id)
+                    if (contractUsed.ElementAt(i).Key.isContract == false && (contractUsed.ElementAt(j).Key.isContract == false && contractUsed.ElementAt(i).Value[0].id == contractUsed.ElementAt(j).Value[0].id || contractUsed.ElementAt(j).Value[0].id == areaTempJ))
                         continue;
+                    areaTempJ = contractUsed.ElementAt(j).Value[0].id;
                     //send two contract to check if there is extantion contract for them
                     extntionContract = FindContractExtentionOfTwoSmallContracts(i, j);
                     if (extntionContract != null)
                     {
+                        //create area list of extention contract
+                        List<Area> l = db.AreaToContracts.Where(r => r.contractID == extntionContract.id).Select(h => h.Area).ToList();
                         foreach (var item in contractUsed)
                         {
-                           
-                            
-                            //create area list of extention contract
-                            List<Area> l = db.AreaToContracts.Where(r => r.contractID == extntionContract.id).Select(h => h.Area).ToList();
-
-                            //לא מצליח להמיר את התוצאה לרשימה
-                            var temp = contracts.ToList().Where(x => x.id == extntionContract.id).Select(u => u.AreaToContracts.Where(p=>item.Value.Intersect(l).ToList())).ToList()();
- //sum price of all contracts that include in the extention contract
-                             if(temp==true)
+                            //check if contract include in the extention contract
+                            List<Area> a = l.Intersect(item.Value).ToList();
+                            //sum price of all contracts that include in the extention contract
+                            if (a.Count() == item.Value.Count())
                             {
                                 sumOfTravelPrice += item.Key.price;
                             }
@@ -306,7 +326,9 @@ namespace BLL.Logic
             else
                 return true;
         }
+
     }
+
 }
 
 
