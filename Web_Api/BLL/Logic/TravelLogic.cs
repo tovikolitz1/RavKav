@@ -244,7 +244,7 @@ namespace BLL.Logic
                 x.AreaToContracts.Where(f => areaI1.Contains(f.Area)).OrderBy(a=> type == "freeDay" ? a.Contract.freeDay : a.Contract.freeMounth)
                 .GroupBy(g => g.contractID)
                 .Where(sd => sd.Count() == areaI1.Count()).Select(k => k.Key).ToList()).Where(x => x.Count() == 1).FirstOrDefault();
-                int conIDint = Convert.ToInt32(conID.Capacity);
+                int conIDint = Convert.ToInt32(conID[0]);
                 extntionContract = contracts.Where(b => b.id == conIDint).FirstOrDefault();
                
                 return extntionContract;
@@ -279,27 +279,15 @@ namespace BLL.Logic
                     {
                         foreach (var item in contractUsed)
                         {
-                            //sum price of all contracts that include in the extention contract
-                            /*if (contracts.Select(x => x.AreaToContracts.Join
-                                (item.Value, AreaToCon => AreaToCon.areaID,
-                                itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea })
-                                .Where(y => y.AreaToCon.contractID == extntionContract.id)).Any()) { }*/
-                            var temp = contracts.ToList().Where(x => x.id == extntionContract.id)
-                            .Select(u => u.AreaToContracts.Where(f => item.Value.Contains(f.Area))).FirstOrDefault();
-                            //try
-                            //{
-                            //   List<AreaToContract> temp3 = contracts.Where(x => x.id == extntionContract.id)
-                            //.Select(u => u.AreaToContracts.Where(f => item.Value.Contains(f.Area))).ToList();
-                            //}
-                            //catch (x)
-                            //{
+                           
+                            
+                            //create area list of extention contract
+                            List<Area> l = db.AreaToContracts.Where(r => r.contractID == extntionContract.id).Select(h => h.Area).ToList();
 
-                            //}
-                            var t2 = contracts.ToList().Where(x => x.id == extntionContract.id)
-                                .Select(u => u.AreaToContracts.Where(f => item.Value.Contains(f.Area))).Count();
-                            if ((contracts.ToList().Where(x =>x.id == extntionContract.id)
-                                .Select(u => u.AreaToContracts.Where(f => item.Value.Contains(f.Area))).Any())==true)
-                                              
+                            //לא מצליח להמיר את התוצאה לרשימה
+                            var temp = contracts.ToList().Where(x => x.id == extntionContract.id).Select(u => u.AreaToContracts.Where(p=>item.Value.Intersect(l).ToList())).ToList()();
+ //sum price of all contracts that include in the extention contract
+                             if(temp==true)
                             {
                                 sumOfTravelPrice += item.Key.price;
                             }
