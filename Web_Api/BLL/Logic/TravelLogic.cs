@@ -17,9 +17,10 @@ namespace BLL.Logic
         static Contract currentContract;
         static List<Area> areaToCurrentContractTemp;
         //Dictionary of contracts, with their own areas
-        static IDictionary<ContractInformation, List<Area>> contractUsed;
+        static IDictionary<ContractInformation, List<Area>> contractUsed = new Dictionary<ContractInformation, List<Area>>();
         static IDictionary<Travel, int> travelUsed = new Dictionary<Travel, int>();
         static List<Contract> contracts = new List<Contract>();
+        static List<TravelsDTO> travelsToCurrentContractDTO;
         static string type;
         //   static List<Contract> contractsByDate = new List<Contract>();
         //contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f => (f.userID == id && f.date.Year == date.Year && f.date.Month == date.Month && f.date.Day == i)))).ToList()
@@ -33,38 +34,56 @@ namespace BLL.Logic
 
             travelUsed.Clear();
             calculateResultes.Clear();
+
+            calculateResultes.Add(new CalculateResulte(new List<TravelsDTO>(), false, "נסיעות בודדות", 0, 0));
             GetTravelsAndContractsByIdAndMonth(id, date);
             //free month
             type = "freeMounth";
             travelsByDate = travelsById;
             if (travelsByDate.Count() == 0)
                 return null;
+            
             ContractBase(id);
             ContractExtention(id);
+            addToCalculateResulte();
+            //int w = 0;
+            //while (contractUsed.Count() > w)
+            //{
+            //    if (contractUsed.ElementAt(w).Key.isContract == false)
+            //        contractUsed.Remove(contractUsed.ElementAt(w));
+            //    else
+            //        w++;
+            //}
+            contractUsed.Clear();
+
             //free day
             //Sending travels by day and appropriate contracts for that day
             type = "freeDay";
 
             for (int i = 0; i < DateTime.DaysInMonth(date.Year, date.Month); i++)
             {
+                travelUsed.Clear();
                 travelsByDate = travelsById.Where(x => x.date.Day == i).ToList();
                 if (travelsByDate.Count() == 0) continue;
                 ContractBase(id);
                 ContractExtention(id);
+                addToCalculateResulte();
             }
-            double signalTravelsPrice = 0;
-            List<TravelsDTO> t = new List<TravelsDTO>();
-            foreach (var travel in travelsById)
-            {
-                if (!travelUsed.ContainsKey(travel))
-                {
-                    signalTravelsPrice += travel.price;
-                    t.Add(Convertions.Convertion(travel));
-                }
-            }
+            //  double signalTravelsPrice = 0;
+            //List<TravelsDTO> t = new List<TravelsDTO>();
+            //foreach (var travel in travelsById)
+            //{
+            //    if (!travelUsed.ContainsKey(travel))
+            //    {
+            //        signalTravelsPrice += travel.price;
+            //        t.Add(Convertions.Convertion(travel));
+            //    }
+            //}
 
-            CalculateResulte c = new CalculateResulte(t, type == "freeDay" ? true : false, "נסיעה בודדת", 0, signalTravelsPrice);
-            calculateResultes.Add(c);
+            //CalculateResulte c = new CalculateResulte(t, type == "freeDay" ? true : false, "נסיעה בודדת", 0, signalTravelsPrice);
+            if (calculateResultes[0].price == 0)
+                calculateResultes.Remove(calculateResultes[0]);
+           // calculateResultes.Add(c);
             return calculateResultes;
         }
         public static void GetTravelsAndContractsByIdAndMonth(int id, DateTime date)
@@ -86,7 +105,7 @@ namespace BLL.Logic
         //With at least one more internal trip
         public static void ContractBase(int id)
         {
-            contractUsed = new Dictionary<ContractInformation, List<Area>>();
+            //contractUsed = new Dictionary<ContractInformation, List<Area>>();
             int contractTemp = -1;
             //Dictionary of used travels
             var profile = db.Profiles.Where(b => b.Users.Any(c => c.id == id)).FirstOrDefault();
@@ -98,6 +117,7 @@ namespace BLL.Logic
             double price = 0;
             List<Travel> travelsToCurrentContract;
             AreaToContract areaToCurrentContract;
+
             //Go over the travel list for the user
             for (int i = 0; i < travelsByDate.Count; i++)
             {
@@ -124,12 +144,12 @@ namespace BLL.Logic
                     if (!travelUsed.ContainsKey(item))
                         price += item.price;
                 }
-
-
                 if ((type == "freeDay" ? currentContract.freeDay : currentContract.freeMounth) <= price * profileDiscount)
+
                 {
 
                     areaToCurrentContractTemp = new List<Area>();
+                    travelsToCurrentContractDTO = new List<TravelsDTO>();
                     //Add the travels to the travelUsed that for them a contract has been found
                     foreach (var item in travelsToCurrentContract)
                     {
@@ -137,14 +157,16 @@ namespace BLL.Logic
                         {
                             areaToCurrentContractTemp.Add(item.Area);
                             travelUsed.Add(item, currentContract.id);
+                            travelsToCurrentContractDTO.Add(Convertions.Convertion(item));
                         }
                     }
                     //add the current contract to dictionary contractUsed
                     contractUsed.Add(new ContractInformation(currentContract.id,
-                        (type == "freeDay" ? currentContract.freeDay : currentContract.freeMounth), true), areaToCurrentContractTemp);
+                        (type == "freeDay" ? currentContract.freeDay : currentContract.freeMounth), true, travelsToCurrentContractDTO), areaToCurrentContractTemp);
                 }
 
             }
+
             //add signal travels to contract used dictionary
             foreach (var travel in travelsByDate)
             {
@@ -163,7 +185,7 @@ namespace BLL.Logic
             bool b = func(id);
             while (b)
             {
-                ContractInformation con = new ContractInformation(conid, (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth), true);
+                ContractInformation con;
                 foreach (var c in contractUsed)
                 {
                     if (contracts.Select(x => x.AreaToContracts.Join(c.Value, AreaToCon => AreaToCon.areaID, itemArea => itemArea.id, (AreaToCon, itemArea) => new { AreaToCon, itemArea }).Where(y => y.AreaToCon.contractID == conid)).Any())
@@ -190,8 +212,10 @@ namespace BLL.Logic
                             a = new ContractInformation(t.Value, (type == "freeDay" ? g.freeDay : g.freeMounth), true);
                         if (!contractUsed.ContainsKey(a))
                             travelUsed[t.Key] = conid;
+                        travelsToCurrentContractDTO.Add(Convertions.Convertion(t.Key));
                     }
                     //add extation contract to contractUsed
+                    con = new ContractInformation(conid, (type == "freeDay" ? extntionContract.freeDay : extntionContract.freeMounth), true, travelsToCurrentContractDTO);
                     contractUsed.Add(con, areaToCurrentContractTemp);
                     b = func(id);
                 }
@@ -228,14 +252,7 @@ namespace BLL.Logic
                     }
                 }
             }
-            if (type != "freeDay")
-            {
-                foreach (var item in contractUsed)
-                {
-                    if (item.Key.isContract == false)
-                        contractUsed.Remove(item);
-                }
-            }
+
 
         }
 
@@ -251,7 +268,6 @@ namespace BLL.Logic
             {
                 areaI1.Add(item);
             }
-            //areaI1 =contractUsed.ElementAt(indexI).Value;
             foreach (var item in contractUsed.ElementAt(indexJ).Value)
             {
                 areaI1.Add(item);
@@ -262,13 +278,13 @@ namespace BLL.Logic
             try
             {
                 var conID = contracts.ToList().Select(x =>
-                x.AreaToContracts.Where(f => areaI1.Contains(f.Area)).OrderBy(a => type == "freeDay" ? a.Contract.freeDay : a.Contract.freeMounth)
+                x.AreaToContracts.Where(f => areaI1.Contains(f.Area))
+                .OrderBy(a => type == "freeDay" ? a.Contract.freeDay : a.Contract.freeMounth)
                 .GroupBy(g => g.contractID)
-                .Where(sd => sd.Count() == areaI1.Count()).Select(k => k.Key).ToList()).Where(x => x.Count() == 1).FirstOrDefault();
-                int conIDint = Convert.ToInt32(conID[0]);
-                extntionContract = contracts.Where(b => b.id == conIDint).FirstOrDefault();
-
-                return extntionContract;
+                .Where(sd => sd.Count() == areaI1.Count())
+                .Select(k => k.Key).ToList())
+                .Where(x => x.Count() == 1).FirstOrDefault();
+                 return extntionContract;
             }
             catch (Exception x)
             {
@@ -326,7 +342,36 @@ namespace BLL.Logic
             else
                 return true;
         }
+        public static void addToCalculateResulte()
+        {
+            Contract con3;
+            foreach (var item in contractUsed)
+            {
 
+                if (item.Key.isContract == true)
+                {
+                    con3 = contracts.Where(u => u.id == item.Key.idContractOrTravel).FirstOrDefault();
+                    if (con3 != null)
+                    {
+                        CalculateResulte c = new CalculateResulte(travelsToCurrentContractDTO, type == "freeDay" ? true : false,con3.Description, item.Key.idContractOrTravel,item.Key.price);
+                        calculateResultes.Add(c);
+                    }
+                }
+                else
+                {
+                    if (type == "freeDay")
+                    {
+                        Travel tr = db.Travels.Where(q => q.id == item.Key.idContractOrTravel).FirstOrDefault();
+                        if (tr != null)
+                        {
+                            TravelsDTO trDTO = Convertions.Convertion(tr);
+                            calculateResultes[0].TravelToCon.Add(trDTO);
+                            calculateResultes[0].price += item.Key.price;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }
