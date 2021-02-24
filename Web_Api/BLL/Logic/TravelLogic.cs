@@ -268,7 +268,6 @@ namespace BLL.Logic
             {
                 areaI1.Add(item);
             }
-            //areaI1 =contractUsed.ElementAt(indexI).Value;
             foreach (var item in contractUsed.ElementAt(indexJ).Value)
             {
                 areaI1.Add(item);
@@ -279,13 +278,13 @@ namespace BLL.Logic
             try
             {
                 var conID = contracts.ToList().Select(x =>
-                x.AreaToContracts.Where(f => areaI1.Contains(f.Area)).OrderBy(a => type == "freeDay" ? a.Contract.freeDay : a.Contract.freeMounth)
+                x.AreaToContracts.Where(f => areaI1.Contains(f.Area))
+                .OrderBy(a => type == "freeDay" ? a.Contract.freeDay : a.Contract.freeMounth)
                 .GroupBy(g => g.contractID)
-                .Where(sd => sd.Count() == areaI1.Count()).Select(k => k.Key).ToList()).Where(x => x.Count() == 1).FirstOrDefault();
-                int conIDint = Convert.ToInt32(conID[0]);
-                extntionContract = contracts.Where(b => b.id == conIDint).FirstOrDefault();
-
-                return extntionContract;
+                .Where(sd => sd.Count() == areaI1.Count())
+                .Select(k => k.Key).ToList())
+                .Where(x => x.Count() == 1).FirstOrDefault();
+                 return extntionContract;
             }
             catch (Exception x)
             {
