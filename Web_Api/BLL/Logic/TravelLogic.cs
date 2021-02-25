@@ -95,14 +95,14 @@ namespace BLL.Logic
                                             x.date.Month == date.Month)
                          .OrderBy(x => x.price).ThenBy(x => x.areaID).ToList();
 
-            //get all contracts appropriate to the user's travel
+            //get all contracts whom may appropriate to the user's travels
             contracts = db.Contracts.Where(x => x.AreaToContracts.Any(m => m.Area.Travels.Any(f =>
             f.userID == id && f.date.Year == date.Year && f.date.Month == date.Month))).ToList();
         }
         //find base contract
-        //the rule of base contract is:
-        //contract who as Travel back and forth
-        //With at least one more internal trip
+        //the rules of base contract are:
+        //contract who as the area of current travel 
+        //and this contract is cheapest cheapest
         public static void ContractBase(int id)
         {
             //contractUsed = new Dictionary<ContractInformation, List<Area>>();
@@ -127,7 +127,9 @@ namespace BLL.Logic
                 price = 0;
                 //Finding the right and cheapest contract
 
-                areaToCurrentContract = travelsByDate[i].Area.AreaToContracts.OrderBy(x => (type == "freeDay" ? x.Contract.freeDay : x.Contract.freeMounth)).FirstOrDefault();
+                areaToCurrentContract = travelsByDate[i].Area.AreaToContracts.
+                    OrderBy(x => (type == "freeDay" ? x.Contract.freeDay : x.Contract.freeMounth)).FirstOrDefault();
+                
                 if (areaToCurrentContract != null)
                 {
                     currentContract = areaToCurrentContract.Contract;
@@ -147,7 +149,6 @@ namespace BLL.Logic
                 if ((type == "freeDay" ? currentContract.freeDay : currentContract.freeMounth) <= price * profileDiscount)
 
                 {
-
                     areaToCurrentContractTemp = new List<Area>();
                     travelsToCurrentContractDTO = new List<TravelsDTO>();
                     //Add the travels to the travelUsed that for them a contract has been found
@@ -261,6 +262,8 @@ namespace BLL.Logic
             var d=first.Join(first,second=>)
          }
             */
+
+            //find contract whos containing two small contracts
         public static Contract FindContractExtentionOfTwoSmallContracts(int indexI, int indexJ)
         {
             List<Area> areaI1 = new List<Area>();
@@ -273,7 +276,6 @@ namespace BLL.Logic
                 areaI1.Add(item);
             }
             areaI1 = areaI1.Distinct().ToList();
-
 
             try
             {

@@ -14,7 +14,6 @@ private user:User;
 public userEdit : EventEmitter<User> = new EventEmitter<User>();
 
   constructor(private httpClient: HttpClient) {
-    debugger
     this.userEdit.subscribe(x=>this.user={...x});
    }
    getUSer(){

@@ -1,0 +1,39 @@
+input{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    
+}
+.formTamplate{
+    background-color: #b4d64d;width: 
+    300px;height: 350px;
+    border-radius: 30px;
+    margin-top: 120px;
+    margin-bottom: 45%;
+     padding: 30px;
+}
+.btn-wide{
+    
+    width: 150px;
+    
+    margin-right: 43px; 
+    
+}
+button{
+    background-color: #96379c;
+    color: white;
+    font-weight: bold;
+    display: block;
+    margin: 20px;
+    height: 40px;
+     border-radius: 5px;
+     border: 0px;;
+}
+.formGreen{
+    background:linear-gradient(white 10%,#EBFFB7 30%, #e5f9b0 20%, #bfe65e 80%,#99c52a 90%);
+}
+form{
+    text-align: center;
+}
+.greyForm{
+    background-color:rgb(242, 242, 242);
+}

@@ -7,7 +7,7 @@ import { WebApiService } from 'src/app/services/web-api.service';
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
-  styleUrls: ['./update-user.component.css']
+  styleUrls: ['./update-user.component.css','../globalStyle.css']
 })
 export class UpdateUserComponent implements OnInit {
 
