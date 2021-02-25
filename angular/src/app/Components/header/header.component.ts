@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
     if(localStorage.getItem("userName")!=null)
     this.userName = localStorage.getItem("userName");
 else
-    localStorage.setItem("userName", 'טובי תחפשי בקומפוננטה HEADER את השורה הזאת ובמקומה תכתבי את השם שלך');
+    localStorage.setItem("userName", 'רחלי');
   }
 
 }
