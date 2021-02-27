@@ -9,15 +9,7 @@ color: darkslateblue;
 body{
 color: #7a7a7a !important;
 }
-input,
-button{
-     border-radius: 5px;
-      font-style: italic;
-       text-align: center;
-      height: 40px;
-      border: 0px;
-      
-}
+
 a{
     color: blue;
     font-style: oblique;

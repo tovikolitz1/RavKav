@@ -4,7 +4,7 @@ import { Travel } from '../../models/travel.model';
 @Component({
   selector: 'app-travel',
   templateUrl: './travel.component.html',
-  styleUrls: ['./travel.component.css','../globalStyle.css']
+  styleUrls: ['./travel.component.css']//,'../globalStyle.css']
 })
 export class TravelComponent implements OnInit {
 @Input() travel:Travel;

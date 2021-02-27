@@ -7,7 +7,7 @@ import { CalculateResulte } from 'src/app/models/calculateResult';
 @Component({
   selector: 'app-show-travels',
   templateUrl: './show-travels.component.html',
-  styleUrls: ['./show-travels.component.css','../globalStyle.css']
+  styleUrls: ['./show-travels.component.css']//,'../globalStyle.css']
 })
 export class ShowTravelsComponent implements OnInit {
 

@@ -7,7 +7,7 @@ import { WebApiService } from 'src/app/services/web-api.service';
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
-  styleUrls: ['./update-user.component.css','../globalStyle.css']
+  styleUrls: ['./update-user.component.css']//,'../globalStyle.css']
 })
 export class UpdateUserComponent implements OnInit {
 
@@ -17,8 +17,8 @@ formUpdateUser:FormGroup;
   ngOnInit() {
     this.formUpdateUser=new FormGroup({
       ravkav:new FormControl (this.user.ravkav,[Validators.required]),
-      firstName:new FormControl(this.user.firstName,[Validators.required]),
-      lastName:new FormControl(this.user.lastName,[Validators.required]),
+      fName:new FormControl(this.user.fName,[Validators.required]),
+      lName:new FormControl(this.user.lName,[Validators.required]),
       profileId:new FormControl(this.user.profileId,[Validators.required])
     })
    

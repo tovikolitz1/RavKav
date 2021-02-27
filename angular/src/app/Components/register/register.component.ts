@@ -8,7 +8,7 @@ import {  FormGroup ,FormControl, Validators} from '@angular/forms';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css','../globalStyle.css']
+  styleUrls: ['./register.component.css']//,'../globalStyle.css']
 })
 export class RegisterComponent implements OnInit {
 
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    alert(this.user.firstName)
+   // alert(this.user.firstName)
     this.webapi.AddUser(this.user).subscribe(y => {
       if (y)
       {

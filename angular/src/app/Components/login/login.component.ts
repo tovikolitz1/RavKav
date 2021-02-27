@@ -11,7 +11,7 @@ import { User } from 'src/app/models/user.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css','../globalStyle.css']
+  styleUrls: ['./login.component.css']//,'../styleGlobal']
 })
 export class LoginComponent implements OnInit {
 
@@ -30,13 +30,15 @@ export class LoginComponent implements OnInit {
   login() {
      
     this.webapi.IfExsistRavKav({...this.formLogin.value}).subscribe(u => {
+     console.log(u)
       if(u!=null)
       {
         debugger
+        console.log("lllllllllllllllllllllllllll",u)
         this.webapi.userEdit.emit(
           {...u});
           //Save the user display name on login
-         localStorage.setItem("userName", u.firstName);
+         localStorage.setItem("userName", u.fName);
         if(u.isManager)
         this.router.navigate(['/manager'])
         else

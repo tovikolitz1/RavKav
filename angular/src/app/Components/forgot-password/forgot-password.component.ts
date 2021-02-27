@@ -12,7 +12,7 @@ import { WebApiService } from 'src/app/services/web-api.service';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css','../globalStyle.css']
+  styleUrls: ['./forgot-password.component.css']
 })
 
 
@@ -21,37 +21,37 @@ import { WebApiService } from 'src/app/services/web-api.service';
     constructor(private webapi: WebApiService, private router: Router) { }
     formForgotPassword: FormGroup;
     // applyPassword: FormGroup;
-    public ravkav: string;
-    public tempPass: string;
-    public newPass: string;
-    public verifyNewPass: string;
+    // public ravkav: string;
+    // public tempPass: string;
+    // public newPass: string;
+    // public verifyNewPass: string;
+    isRetuenPassword:boolean=false;
     ngOnInit() {
-      this.formForgotPassword = new FormGroup({
-        ravkav: new FormControl('', [Validators.required])
-      })
-      // this.applyPassword = new FormGroup({
-      //   tempPass: new FormControl('', [Validators.required]),
-      //   newPass: new FormControl('', [Validators.required]),
-      //   verifyNewPass: new FormControl('', [Validators.required])
-      // })
-
-
-    }
-  
     
-
-    changePassword() {
+      this.formForgotPassword = new FormGroup({
+        ravkav: new FormControl('', [Validators.required]),
+        tempPass: new FormControl('', [Validators.required]),
+        newPass: new FormControl('', [Validators.required]),
+        verifyNewPass: new FormControl('', [Validators.required])
+      });
+    }
+    changePassword() {this. isRetuenPassword=true;
       debugger
+      if(this.isRetuenPassword){
+      }
+      else{
+     
       //if (document.getElementById("vertification").className != "d-none") {
-        this.webapi.forgotPassword({...this.formForgotPassword.value}).subscribe(x => {
-          if (x) {
+        this.webapi.forgotPassword(this.formForgotPassword.controls['ravkav'].value).subscribe(x => {
+          if (x) { 
+            
             alert('הסיסמה נשלחה בהצלחה, אנא הזן קוד אימות');
           //  $("#vertification").removeClass('d-none');
           //  $("#ravkav").addClass('d-none');
           }
         })
       }
-      
+    }
 //     applyPassword(){
 //       this.formForgotPassword = new FormGroup({
 //         tempPass: new FormControl('', [Validators.required]),
