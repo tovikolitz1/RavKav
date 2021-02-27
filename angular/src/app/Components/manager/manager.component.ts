@@ -6,7 +6,7 @@ import { WebApiService } from 'src/app/services/web-api.service';
 @Component({
   selector: 'app-manager',
   templateUrl: './manager.component.html',
-  styleUrls: ['./manager.component.css']
+  styleUrls: ['./manager.component.css','../globalStyle.css']
 })
 export class ManagerComponent implements OnInit {
 user:User;

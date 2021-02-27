@@ -12,7 +12,7 @@ import { WebApiService } from 'src/app/services/web-api.service';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.css','../globalStyle.css']
 })
 
 
@@ -26,7 +26,6 @@ import { WebApiService } from 'src/app/services/web-api.service';
     public newPass: string;
     public verifyNewPass: string;
     ngOnInit() {
-  
       this.formForgotPassword = new FormGroup({
         ravkav: new FormControl('', [Validators.required])
       })
@@ -35,8 +34,11 @@ import { WebApiService } from 'src/app/services/web-api.service';
       //   newPass: new FormControl('', [Validators.required]),
       //   verifyNewPass: new FormControl('', [Validators.required])
       // })
+
+
     }
   
+    
 
     changePassword() {
       debugger

@@ -7,7 +7,7 @@ import { WebApiService } from './services/web-api.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css','./Components/globalStyle.css']
 })
 export class AppComponent implements OnInit {
  title = 'project';

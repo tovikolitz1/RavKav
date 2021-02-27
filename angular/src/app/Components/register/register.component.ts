@@ -8,7 +8,7 @@ import {  FormGroup ,FormControl, Validators} from '@angular/forms';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css','../globalStyle.css']
 })
 export class RegisterComponent implements OnInit {
 

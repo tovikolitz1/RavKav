@@ -3,6 +3,7 @@ import { WebApiService } from '../../services/web-api.service';
 import { Router } from '@angular/router';
 import {  FormGroup ,FormControl, Validators}   from '@angular/forms';
 import { User } from 'src/app/models/user.model';
+
 //import {} from '../../../../src/styles.css';
 //import  './styles/bootstrap-3.3.7-dist/css/bootstrap.min.css';
 //import swal from 'sweetalert';
@@ -10,7 +11,7 @@ import { User } from 'src/app/models/user.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css','../globalStyle.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -27,16 +28,26 @@ export class LoginComponent implements OnInit {
     
   }
   login() {
+     
     this.webapi.IfExsistRavKav({...this.formLogin.value}).subscribe(u => {
       if(u!=null)
       {
         debugger
         this.webapi.userEdit.emit(
           {...u});
+          //Save the user display name on login
+         localStorage.setItem("userName", u.firstName);
         if(u.isManager)
         this.router.navigate(['/manager'])
         else
         this.router.navigate(['/showTravels'])
+        //
+        //      
+
+    
+
+
+
       }
       else
       {
