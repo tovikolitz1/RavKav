@@ -1,7 +1,8 @@
 .btnMain{
-    height: 150px;
+    height: 140px;
     width: 150px;
     background-color: purple;
 color: white;
+display: inline;
 
 }

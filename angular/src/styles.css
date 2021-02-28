@@ -56,7 +56,7 @@ form{
     background-color: #b4d64d;
     width: 300px;height: auto;
     border-radius: 30px;
-    margin-top: 120px;
+    margin-top: 80px;
      padding: 30px;
 }
 input 
@@ -66,4 +66,12 @@ select{
 }
 :disabled{
     cursor: not-allowed;
+}
+.height40{
+   min-height: 40px;
+}
+.travelHeader{
+    font-weight: bold;
+    background-color: rgb(194,207,33);
+    padding-top: 7px;
 }

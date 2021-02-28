@@ -2,6 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import {  HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { CalculateResulte } from '../models/calculateResult';
+import { Travel } from '../models/travel.model';
 
 
 @Injectable({
@@ -52,5 +53,8 @@ forgotPassword(objec:{ravkav:string})
   {
     return this.httpClient.get<Array<CalculateResulte>>("http://localhost:60000/api/travel/CalaulateThePayment?id=" +  this.user.id);
   };
-  
+  getTravels()
+  {
+    return this.httpClient.get<Array<Travel>>("http://localhost:60000/api/travel/getTravels?id=" +  this.user.id);
+  };
 }

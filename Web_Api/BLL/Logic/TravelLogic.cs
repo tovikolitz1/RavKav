@@ -403,8 +403,10 @@ namespace BLL.Logic
                 }
             }
         }
-        public static List<TravelsDTO> getTravels(int id,int month, int year)
+        public static List<TravelsDTO> getTravels(int id)
         {
+            int month = 01;
+            int year = 2021;
             List<Travel> travel = db.Travels.Where(l => l.userID == id && l.date.Month == month && l.date.Year == year).ToList();
             List<TravelsDTO> travelDTO = new List<TravelsDTO>();
             foreach (var item in travel)
@@ -419,7 +421,7 @@ namespace BLL.Logic
             if (m != null)
             {
                 if (m.isManager == true)
-                    return getTravels(idUser, month,year);
+                    return getTravels(idUser);
                 else
                     return null;
             }
