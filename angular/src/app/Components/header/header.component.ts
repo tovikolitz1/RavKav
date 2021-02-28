@@ -14,13 +14,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     //         //Get the user display name before login
-    if(localStorage.getItem("userName")!=null)
-    this.userName = localStorage.getItem("userName");
-else
-    localStorage.setItem("userName", 'רחלי');
+    
+    this.userName = "היי אורח,"
+
   
-  this.userSer.userEdit.subscribe((x:User)=>{
-    this.userName=x.fName+" "+x.lName;
+  this.userSer.userEdit.subscribe((user:User)=>{
+    this.userName="היי "+ user.fName+" "+user.lName+",";
+    //Save the user display name on login
+    localStorage.setItem("userID", String(user.id));
   })
 }
 }

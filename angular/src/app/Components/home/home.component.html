@@ -1,4 +1,12 @@
-<div class="row d-flex justify-content-around">
-<button class="btnMain" (click)="showTravel()">צפיה בנסיעות שלי</button>
-<button class="btnMain" (click)="calculate()">חישוב התשלום</button>
+
+<div class="row d-flex justify-content-center">
+
+<a routerLink="/ShowTravels"><button class="btnMain" >צפיה בנסיעות שלי</button></a>
+<a routerLink="/ShowTravels"><button class="btnMain">חישוב התשלום</button></a>
+<a routerLink="/update-user"><button class="btnMain" >עידכון פרטים</button></a>
+<div *ngIf="isManager">
+    <h3>סביבת מנהלים</h3>
+    <a routerLink="/ShowTravels"><button class="btnMain" >צפיה בנסיעות משתמשים </button></a>
+<a routerLink="/update-user"><button class="btnMain">עידכון פרטי משתמשים</button></a>
+</div>
 </div>
