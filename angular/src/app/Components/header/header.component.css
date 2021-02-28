@@ -1,0 +1,8 @@
+@media only screen and (max-width: 800px) {
+    #Logo {
+     width: 150px !important;
+    }
+    #home{
+        width: 60px !important;
+    }
+  }
