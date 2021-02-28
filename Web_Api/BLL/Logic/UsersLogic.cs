@@ -4,6 +4,7 @@ using DALL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 
 namespace BLL.Logic
@@ -51,6 +52,37 @@ namespace BLL.Logic
                 return false;
             }
         }
+        public static void SendMail(string subjecct, string body, string Address, string from = null)
+        {
+            MailMessage msg = new MailMessage() { From = new MailAddress(from, "MyKav") };
+            if (from != null)
+            {
+                msg.ReplyToList.Add(from);
+            }
+            msg.To.Add(Address);
+            msg.Subject = subjecct;
+            msg.Body = body;
+            msg.IsBodyHtml = true;
+            msg.BodyEncoding = System.Text.Encoding.UTF8;
+            try
+            {
+                using (SmtpClient client = new SmtpClient())
+                {
+                    client.EnableSsl = true;
+                    client.UseDefaultCredentials = false;
+                    client.Credentials = new NetworkCredential(from,"0583284840");
+                    client.Host = "smtp.gmail.com";
+                    client.Port = 587;
+                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.Send(msg);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+
+            }
+        }
         public static bool forgotPassword(string ravkav)
         {
             User u = db.Users.Where(x => x.ravkavNum == ravkav).FirstOrDefault();
@@ -73,9 +105,7 @@ namespace BLL.Logic
                     return false;
                 string tempPass = ver.verificationCode;
                 string body = "הסיסמה הזמנית שלך היא" + tempPass;
-                MailMessage massage = new MailMessage(from, to, subject, body);
-                string b = send(massage);
-                //צריך להחזיר את הסיסמה הזמנית לאנגולר כדי שנוכל לוודא תקינות
+                SendMail(subject, body, to, from);
                 return true;
             }
             else { return false; }

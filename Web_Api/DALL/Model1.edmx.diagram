@@ -21,6 +21,7 @@
         <AssociationConnector Association="RavKavModel.FK__Travel__userID__4316F928" ManuallyRouted="false" />
         <AssociationConnector Association="RavKavModel.FK__Travel__userID__440B1D61" ManuallyRouted="false" />
         <AssociationConnector Association="RavKavModel.FK__Vertifica__fUser__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="RavKavModel.FK__Travel__fFinalAm__6E01572D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

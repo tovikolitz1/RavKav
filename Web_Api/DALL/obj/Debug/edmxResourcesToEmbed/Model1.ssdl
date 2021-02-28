@@ -130,6 +130,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Travel__fFinalAm__6E01572D">
+    <End Role="FinalAmount" Type="Self.FinalAmount" Multiplicity="0..1" />
+    <End Role="Travel" Type="Self.Travel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FinalAmount">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Travel">
+        <PropertyRef Name="fFinalAmountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Travel__userID__4316F928">
     <End Role="User" Type="Self.User" Multiplicity="1" />
     <End Role="Travel" Type="Self.Travel" Multiplicity="*" />
@@ -178,6 +190,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="sp_finalAmountForUser_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="fUserID" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_vretificationCode_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="fUserID" Type="int" Mode="In" />
   </Function>
@@ -204,6 +219,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__Transit__areaID__6FE99F9F" Association="Self.FK__Transit__areaID__6FE99F9F">
       <End Role="Area" EntitySet="Area" />
+      <End Role="Travel" EntitySet="Travel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Travel__fFinalAm__6E01572D" Association="Self.FK__Travel__fFinalAm__6E01572D">
+      <End Role="FinalAmount" EntitySet="FinalAmount" />
       <End Role="Travel" EntitySet="Travel" />
     </AssociationSet>
     <AssociationSet Name="FK__Travel__userID__4316F928" Association="Self.FK__Travel__userID__4316F928">

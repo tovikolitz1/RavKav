@@ -44,5 +44,14 @@ namespace DALL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_vretificationCode_Insert", fUserIDParameter);
         }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_finalAmountForUser_Insert(Nullable<int> fUserID)
+        {
+            var fUserIDParameter = fUserID.HasValue ?
+                new ObjectParameter("fUserID", fUserID) :
+                new ObjectParameter("fUserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_finalAmountForUser_Insert", fUserIDParameter);
+        }
     }
 }

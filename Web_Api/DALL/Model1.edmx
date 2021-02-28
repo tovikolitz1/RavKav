@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RavKavModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RavKavModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Area">
           <Key>
             <PropertyRef Name="id" />
@@ -135,6 +135,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Travel__fFinalAm__6E01572D">
+          <End Role="FinalAmount" Type="Self.FinalAmount" Multiplicity="0..1" />
+          <End Role="Travel" Type="Self.Travel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalAmount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Travel">
+              <PropertyRef Name="fFinalAmountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Travel__userID__4316F928">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Travel" Type="Self.Travel" Multiplicity="*" />
@@ -183,6 +195,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_finalAmountForUser_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fUserID" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_vretificationCode_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="fUserID" Type="int" Mode="In" />
         </Function>
@@ -211,6 +226,10 @@
             <End Role="Area" EntitySet="Area" />
             <End Role="Travel" EntitySet="Travel" />
           </AssociationSet>
+          <AssociationSet Name="FK__Travel__fFinalAm__6E01572D" Association="Self.FK__Travel__fFinalAm__6E01572D">
+            <End Role="FinalAmount" EntitySet="FinalAmount" />
+            <End Role="Travel" EntitySet="Travel" />
+          </AssociationSet>
           <AssociationSet Name="FK__Travel__userID__4316F928" Association="Self.FK__Travel__userID__4316F928">
             <End Role="User" EntitySet="User" />
             <End Role="Travel" EntitySet="Travel" />
@@ -228,8 +247,7 @@
             <End Role="VertificationCode" EntitySet="VertificationCode" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RavKavModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -273,6 +291,7 @@
           <Property Name="fUserID" Type="Int32" />
           <Property Name="monthDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="User" Relationship="Self.FK__FinalAmou__fUser__5441852A" FromRole="FinalAmount" ToRole="User" />
+          <NavigationProperty Name="Travels" Relationship="RavKavModel.FK__Travel__fFinalAm__6E01572D" FromRole="FinalAmount" ToRole="Travel" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -301,6 +320,7 @@
           <NavigationProperty Name="Area" Relationship="Self.FK__Transit__areaID__6FE99F9F" FromRole="Travel" ToRole="Area" />
           <NavigationProperty Name="User" Relationship="Self.FK__Travel__userID__4316F928" FromRole="Travel" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Self.FK__Travel__userID__440B1D61" FromRole="Travel" ToRole="User" />
+          <NavigationProperty Name="FinalAmount" Relationship="RavKavModel.FK__Travel__fFinalAm__6E01572D" FromRole="Travel" ToRole="FinalAmount" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -469,9 +489,28 @@
             <End Role="VertificationCode" EntitySet="VertificationCodes" />
           </AssociationSet>
           <FunctionImport Name="sp_vretificationCode_Insert" ReturnType="Collection(Decimal)">
+          <Parameter Name="fUserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <AssociationSet Name="FK__Travel__fFinalAm__6E01572D" Association="RavKavModel.FK__Travel__fFinalAm__6E01572D">
+            <End Role="FinalAmount" EntitySet="FinalAmounts" />
+            <End Role="Travel" EntitySet="Travels" />
+          </AssociationSet>
+          <FunctionImport Name="sp_finalAmountForUser_Insert" ReturnType="Collection(Decimal)">
             <Parameter Name="fUserID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
+        <Association Name="FK__Travel__fFinalAm__6E01572D">
+          <End Type="RavKavModel.FinalAmount" Role="FinalAmount" Multiplicity="0..1" />
+          <End Type="RavKavModel.Travel" Role="Travel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalAmount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Travel">
+              <PropertyRef Name="fFinalAmountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -569,6 +608,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_vretificationCode_Insert" FunctionName="RavKavModel.Store.sp_vretificationCode_Insert" />
+          <FunctionImportMapping FunctionImportName="sp_finalAmountForUser_Insert" FunctionName="RavKavModel.Store.sp_finalAmountForUser_Insert" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

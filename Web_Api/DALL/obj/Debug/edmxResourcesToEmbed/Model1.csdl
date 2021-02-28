@@ -40,6 +40,7 @@
     <Property Name="fUserID" Type="Int32" />
     <Property Name="monthDate" Type="DateTime" Precision="0" />
     <NavigationProperty Name="User" Relationship="Self.FK__FinalAmou__fUser__5441852A" FromRole="FinalAmount" ToRole="User" />
+    <NavigationProperty Name="Travels" Relationship="RavKavModel.FK__Travel__fFinalAm__6E01572D" FromRole="FinalAmount" ToRole="Travel" />
   </EntityType>
   <EntityType Name="Profile">
     <Key>
@@ -68,6 +69,7 @@
     <NavigationProperty Name="Area" Relationship="Self.FK__Transit__areaID__6FE99F9F" FromRole="Travel" ToRole="Area" />
     <NavigationProperty Name="User" Relationship="Self.FK__Travel__userID__4316F928" FromRole="Travel" ToRole="User" />
     <NavigationProperty Name="User1" Relationship="Self.FK__Travel__userID__440B1D61" FromRole="Travel" ToRole="User" />
+    <NavigationProperty Name="FinalAmount" Relationship="RavKavModel.FK__Travel__fFinalAm__6E01572D" FromRole="Travel" ToRole="FinalAmount" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -238,5 +240,24 @@
     <FunctionImport Name="sp_vretificationCode_Insert" ReturnType="Collection(Decimal)">
       <Parameter Name="fUserID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <AssociationSet Name="FK__Travel__fFinalAm__6E01572D" Association="RavKavModel.FK__Travel__fFinalAm__6E01572D">
+      <End Role="FinalAmount" EntitySet="FinalAmounts" />
+      <End Role="Travel" EntitySet="Travels" />
+    </AssociationSet>
+    <FunctionImport Name="sp_finalAmountForUser_Insert" ReturnType="Collection(Decimal)">
+      <Parameter Name="fUserID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
+  <Association Name="FK__Travel__fFinalAm__6E01572D">
+    <End Type="RavKavModel.FinalAmount" Role="FinalAmount" Multiplicity="0..1" />
+    <End Type="RavKavModel.Travel" Role="Travel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FinalAmount">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Travel">
+        <PropertyRef Name="fFinalAmountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
