@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 
-//import {} from '../../../../src/styles.css';
-//import  './styles/bootstrap-3.3.7-dist/css/bootstrap.min.css';
 //import swal from 'sweetalert';
 
 @Component({
@@ -20,33 +18,33 @@ export class LoginComponent implements OnInit {
   public password: string;
   public ID: number;
   formLogin: FormGroup;
- 
+
   ngOnInit() {
     this.formLogin = new FormGroup({
       ravkav: new FormControl('', [Validators.required]),
       pass: new FormControl('', [Validators.required])
     });
-  //   if (localStorage.getItem("userID") != null) { 
-  //   this.ID = parseInt(localStorage.getItem("userID"));
-  //   this.webapi.UserDetails(this.ID).subscribe(u => {
-  //     if (u != null)
-  //       this.webapi.userEdit.emit(
-  //         { ...u });
-  //   });
-  // }
+    if (localStorage.getItem("userID") != null) {
+      this.ID = parseInt(localStorage.getItem("userID"));
+      this.webapi.UserDetails(this.ID).subscribe(u => {
+        if (u != null)
+          this.webapi.userEdit.emit(
+            { ...u });
+
+      });
+
+    }
   }
   login() {
-
     this.webapi.IfExsistRavKav({ ...this.formLogin.value }).subscribe(u => {
       debugger
       if (u != null) {
         console.log(u)
         this.webapi.userEdit.emit(
           { ...u });
-        
-          this.router.navigate(['/home']);
-        //
-        //     
+        //Save the user display name on login
+        localStorage.setItem("userID", String(u.id));
+        this.router.navigate(['/home']);
       }
       else {
         //להוסיף הערות בתצוגה שאחד מהנתונים שגוי

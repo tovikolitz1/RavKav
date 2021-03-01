@@ -1,5 +1,6 @@
 ﻿
 using BLL.ModelDTO;
+using DAL;
 using DALL;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,23 @@ namespace BLL.Logic
     {
        
         static RavKavEntities db = new RavKavEntities();
+        public static List<UserDTO> GetUsersList(int id)
+        {
+            if(db.Users.FirstOrDefault(x=>x.id==id).isManager)
+            {
+              return Convertions.Convertion(db.Users.Where(y => !y.isManager || y.id == id).ToList());
 
+            }
+            return null;
+        }
+
+        public static UserDTO UserDetails(int id)
+        {
+            return Convertions.Convertion(db.Users.FirstOrDefault(x => x.id == id));
+        }
         public static bool AddUser(UserDTO user)
         {
-            db.s
+         //   db.s
 
 
 
@@ -66,7 +80,7 @@ namespace BLL.Logic
         }
         public static bool forgotPassword(string ravkav)
         {
-            User u = db.Users.Where(x => x.ravkavNum == ravkav).FirstOrDefault();
+            User u = db.Users.FirstOrDefault(x => x.ravkavNum == ravkav);
             if (u == null)
                 return false;
             int fUserID = u.id;
@@ -163,7 +177,7 @@ namespace BLL.Logic
         }
         public static string GetNameById(int id)
         {
-            return db.Users.Where(x => x.id == id).Select(x => x.fName + " " + x.lName).ToString();
+            return db.Users.Where(x => x.id == id).Select(x => x.fName + " " + x.lName).FirstOrDefault();
         }
     }
 }

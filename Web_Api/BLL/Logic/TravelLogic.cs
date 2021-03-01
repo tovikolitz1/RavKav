@@ -1,6 +1,7 @@
 ﻿
 
 using BLL.ModelDTO;
+using DAL;
 using DALL;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,7 @@ namespace BLL.Logic
         }
         public static List<CalculateResulte> CalaulateThePayment(int id, DateTime date)
         {
-            var faid = db.sp_finalAmountForUser_Insert(id);
+            var faid = db.sp_travel_Order();
             var fa = db.FinalAmounts.Where(t => t.fUserID == id).FirstOrDefault();
             if (fa != null)
                 finalAmount = fa;

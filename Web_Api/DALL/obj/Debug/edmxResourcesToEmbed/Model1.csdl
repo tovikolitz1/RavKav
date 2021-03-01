@@ -82,7 +82,7 @@
     <Property Name="isManager" Type="Boolean" Nullable="false" />
     <Property Name="pass" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ravkavNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="profileId" Type="Int32" />
+    <Property Name="profileId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="FinalAmounts" Relationship="Self.FK__FinalAmou__fUser__5441852A" FromRole="User" ToRole="FinalAmount" />
     <NavigationProperty Name="Profile" Relationship="Self.FK__User__profileId__44FF419A" FromRole="User" ToRole="Profile" />
     <NavigationProperty Name="Travels" Relationship="Self.FK__Travel__userID__4316F928" FromRole="User" ToRole="Travel" />
@@ -246,6 +246,14 @@
     </AssociationSet>
     <FunctionImport Name="sp_finalAmountForUser_Insert" ReturnType="Collection(Decimal)">
       <Parameter Name="fUserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_addUder_Insert" ReturnType="Collection(Decimal)">
+      <Parameter Name="fName" Mode="In" Type="String" />
+      <Parameter Name="lName" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="pass" Mode="In" Type="String" />
+      <Parameter Name="ravkavNum" Mode="In" Type="String" />
+      <Parameter Name="profileId" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <Association Name="FK__Travel__fFinalAm__6E01572D">

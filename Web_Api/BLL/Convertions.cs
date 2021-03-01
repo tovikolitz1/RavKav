@@ -1,4 +1,5 @@
 ﻿using BLL.ModelDTO;
+using DAL;
 using DALL;
 using System;
 using System.Collections.Generic;
@@ -115,6 +116,11 @@ namespace BLL
             newUser.id = userTbl.id;
             newUser.isManager = userTbl.isManager;
             return newUser;
+        }
+        public static List<UserDTO> Convertion(List<User> userTbl)
+        {
+            return userTbl.Select(x => Convertion(x)).ToList();
+            
         }
         public static User Convertion(UserDTO user)
         {

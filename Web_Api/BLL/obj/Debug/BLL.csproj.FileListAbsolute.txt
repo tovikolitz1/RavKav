@@ -57,3 +57,6 @@ E:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
 E:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CopyComplete
 E:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.dll
 E:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.pdb
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.dll
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.pdb
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.dll.config

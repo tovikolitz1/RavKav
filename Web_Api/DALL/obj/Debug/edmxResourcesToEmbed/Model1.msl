@@ -93,5 +93,6 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="sp_vretificationCode_Insert" FunctionName="RavKavModel.Store.sp_vretificationCode_Insert" />
     <FunctionImportMapping FunctionImportName="sp_finalAmountForUser_Insert" FunctionName="RavKavModel.Store.sp_finalAmountForUser_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_addUder_Insert" FunctionName="RavKavModel.Store.sp_addUder_Insert" />
   </EntityContainerMapping>
 </Mapping>

@@ -76,6 +76,10 @@
       <Project>{d57ce8d2-ff25-494d-bb02-31b04265ea22}</Project>
       <Name>DALL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{7A20629B-59DB-478E-9821-E74DC72A2427}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

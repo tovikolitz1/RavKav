@@ -35,7 +35,8 @@ import { WebApiService } from 'src/app/services/web-api.service';
         verifyNewPass: new FormControl('', [Validators.required])
       });
     }
-    changePassword() {this. isRetuenPassword=true;
+    changePassword() {
+      this. isRetuenPassword=true;
       debugger
       if(this.isRetuenPassword){
         this.webapi.forgotPassword(this.formForgotPassword.controls['ravkav'].value).subscribe(x => {
@@ -48,31 +49,15 @@ import { WebApiService } from 'src/app/services/web-api.service';
         })
       }
       else{
-     
-      //if (document.getElementById("vertification").className != "d-none") {
-        
-      }
-    }
-//     applyPassword(){
-//       this.formForgotPassword = new FormGroup({
-//         tempPass: new FormControl('', [Validators.required]),
-//         newPass: new FormControl('', [Validators.required]),
-//         verifyNewPass: new FormControl('', [Validators.required])
-//       })
-//       if(this.newPass!=this.verifyNewPass)
-//       {
-//       alert("אימות סיסמה לא תואם")
-//       return;
-//       }
-//       this.webapi.changePassword({ ...this.formForgotPassword.value }).subscribe(y => {
-//         if (y) {
-//           alert("succes")
-//           this.router.navigate(['/login'])
-//         }
-//         else
-//           alert("try again");
-//       })
-//     }
+        this.webapi.changePassword({...this.formForgotPassword.value}).subscribe(l => {
+          if (l) { 
+            
+            alert('הסיסמה עודכנה בהצלחה');
+            this.router.navigate(['/home']);
 
-//  }
-}
+      }
+      console.log(l);
+    }
+
+        )}}
+    }

@@ -640,9 +640,6 @@ G:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.pdb
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DALL.dll
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DALL.pdb
 D:\מסמכים\GitHub\RavKav\Web_Api\Web_Api\bin\DALL.dll.config
-F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DALL.dll
-F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DALL.pdb
-F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DALL.dll.config
 E:\RAVKAV\RavKav\Web_Api\Web_Api\bin\roslyn\csc.exe
 E:\RAVKAV\RavKav\Web_Api\Web_Api\bin\roslyn\csc.exe.config
 E:\RAVKAV\RavKav\Web_Api\Web_Api\bin\roslyn\csc.rsp
@@ -715,3 +712,6 @@ E:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.csproj.CoreCompileInputs.cach
 E:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.csproj.CopyComplete
 E:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.dll
 E:\RAVKAV\RavKav\Web_Api\Web_Api\obj\Debug\Web_Api.pdb
+F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DAL.dll
+F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DAL.pdb
+F:\RAVKAV\RavKav\Web_Api\Web_Api\bin\DAL.dll.config

@@ -12,5 +12,13 @@
 </a>
     </div>
 </div>
+<label> חיפוש</label>
+<input placeholder="התחל הקלדה"  [(ngModel)]="filter" (change)="filterL()" />
+<div>
+    <select [(ngModel)]="userSelected"  > 
+        <option *ngFor="let item of userListFilter" value="item">{{item.fName}} {{item.lName}}</option>
+    </select>
+</div>
+
 
 

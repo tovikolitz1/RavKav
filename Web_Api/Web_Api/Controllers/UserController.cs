@@ -51,10 +51,20 @@ namespace Web_Api.Controllers
         {
             return Ok(UsersLogic.changePassword(ravkav,tempPass, newPass));
         }
+        [HttpGet]
         public IHttpActionResult updateAsManager(int mID, int uID)
         {
             return Ok(UsersLogic.updateAsManager(mID, uID));
         }
-        
+        [HttpGet]
+        public IHttpActionResult GetUsersList(int id)
+        {
+            return Ok(UsersLogic.GetUsersList(id));
+        }
+        [HttpGet]
+        public IHttpActionResult UserDetails(int id)
+        {
+            return Ok(UsersLogic.UserDetails(id));
+        }
     }
 }
