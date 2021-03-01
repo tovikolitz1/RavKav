@@ -29,9 +29,9 @@ namespace Web_Api.Controllers
             date = date.AddMonths(-1);
             return Ok(TravelLogic.CalaulateThePayment(idUser, date));
         }
-        public IHttpActionResult getTravels(int id,int date)
+        public IHttpActionResult getTravels(int id)//,int date)
         {
-            return Ok(TravelLogic.getTravels(id, date / 100, date % 100));
+            return Ok(TravelLogic.getTravels(id));//, date / 100, date % 100));
         }
         public IHttpActionResult getTravelsForManager(int idManager, int idUser, int date)
         {

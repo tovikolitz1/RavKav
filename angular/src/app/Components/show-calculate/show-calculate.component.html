@@ -1,0 +1,8 @@
+<h3> פירוט נסיעות , וחוזים מומלצים לחודש האחרון</h3>
+<h3>משתלם לי החודש:{{price}}</h3>
+<h3>החודש הזה חסכת: {{fullPrice-price}}</h3>
+<div class="row d-flex justify-content-center">
+<div id="mainDiv" class="col col-md-10">
+        <app-contract *ngFor="let contract of contractList" [contract]="contract"></app-contract>
+</div>
+</div>

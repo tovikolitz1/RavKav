@@ -2,7 +2,7 @@
   <span id="buss" class="col">{{travel.buss}}</span>
   <span id="area"class="col">{{travel.areaName}}</span>
   <span id="area"class="col">{{travel.date}}</span>
-  <div id="singleTravelPrice" class="d-none col">
+  <div *ngIf="type" id="singleTravelPrice" class="col">
     <span>מחיר:</span> <span id="price">{{travel.price}}</span>
   </div>
 </div>

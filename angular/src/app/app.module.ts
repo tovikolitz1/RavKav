@@ -13,6 +13,7 @@ import { ForgotPasswordComponent } from './Components/forgot-password/forgot-pas
 import { ManagerComponent } from './Components/manager/manager.component';
 import { HomeComponent } from './Components/home/home.component';
 import { HeaderComponent } from './Components/header/header.component';
+import { ShowCalculateComponent } from './Components/show-calculate/show-calculate.component';
 
 //import swal from 'sweetalert';
 const routes:Routes=
@@ -21,11 +22,17 @@ const routes:Routes=
 {path:'login',component:LoginComponent},
 {path:'Register',component:RegisterComponent},
 {path:'showTravels',component:ShowTravelsComponent},
+{path:'show-calculate',component:ShowCalculateComponent},
+
+{path:'showTravels',component:ShowTravelsComponent},
 {path:'manager',component:ManagerComponent,children:[
   {path:'Register',component:RegisterComponent},
 ]},
 {path:'contract',component:ContractComponent},
 {path:'home',component:HomeComponent},
+{path:'ShowTravels',component:ShowTravelsComponent},
+{path:'show-calculate',component:ShowCalculateComponent},
+
 {path:'ShowTravels',component:ShowTravelsComponent},
 {path:'ForgotPassword',component:ForgotPasswordComponent},
 {path:'Header',component:HeaderComponent}
@@ -41,7 +48,8 @@ const routes:Routes=
     ForgotPasswordComponent,
     ManagerComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    ShowCalculateComponent
     
   ],
   imports:[

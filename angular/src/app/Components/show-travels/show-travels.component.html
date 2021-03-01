@@ -1,6 +1,15 @@
-<h3>פירוט נסיעות וחוזים</h3>
+<h3>פירוט נסיעות לחודש האחרון</h3>
 <div class="row d-flex justify-content-center">
 <div id="mainDiv" class="col col-md-10">
-        <app-contract *ngFor="let contract of contractList" [contract]="contract"></app-contract>
+        <div class="contractDiv row height40 travelHeader">
+        <div class="col">
+                <span>קו</span> 
+              </div>
+              <div class="col"><span>אזור נסיעה: </span> 
+              </div>
+              <div class="col"><span>תאריך: </span>
+              </div><div class="col"><span>מחיר: </span>
+              </div></div>
+        <app-travel *ngFor="let travel of travelList" [travel]="travel" [type]="true"></app-travel>
 </div>
 </div>
