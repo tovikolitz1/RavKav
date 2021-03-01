@@ -68,14 +68,14 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="lName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="isManager" Type="bit" Nullable="false" />
           <Property Name="pass" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="ravkavNum" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="profileId" Type="int" />
+          <Property Name="profileId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="VertificationCode">
           <Key>
@@ -172,7 +172,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__User__profileId__44FF419A">
-          <End Role="Profile" Type="Self.Profile" Multiplicity="0..1" />
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Profile">
@@ -195,6 +195,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_addUder_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fName" Type="varchar" Mode="In" />
+          <Parameter Name="lName" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="pass" Type="varchar" Mode="In" />
+          <Parameter Name="ravkavNum" Type="varchar" Mode="In" />
+          <Parameter Name="profileId" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_finalAmountForUser_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="fUserID" Type="int" Mode="In" />
         </Function>
@@ -333,7 +341,7 @@
           <Property Name="isManager" Type="Boolean" Nullable="false" />
           <Property Name="pass" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ravkavNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="profileId" Type="Int32" />
+          <Property Name="profileId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FinalAmounts" Relationship="Self.FK__FinalAmou__fUser__5441852A" FromRole="User" ToRole="FinalAmount" />
           <NavigationProperty Name="Profile" Relationship="Self.FK__User__profileId__44FF419A" FromRole="User" ToRole="Profile" />
           <NavigationProperty Name="Travels" Relationship="Self.FK__Travel__userID__4316F928" FromRole="User" ToRole="Travel" />
@@ -496,7 +504,15 @@
             <End Role="Travel" EntitySet="Travels" />
           </AssociationSet>
           <FunctionImport Name="sp_finalAmountForUser_Insert" ReturnType="Collection(Decimal)">
-            <Parameter Name="fUserID" Mode="In" Type="Int32" />
+          <Parameter Name="fUserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_addUder_Insert" ReturnType="Collection(Decimal)">
+            <Parameter Name="fName" Mode="In" Type="String" />
+            <Parameter Name="lName" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+            <Parameter Name="ravkavNum" Mode="In" Type="String" />
+            <Parameter Name="profileId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <Association Name="FK__Travel__fFinalAm__6E01572D">
@@ -609,6 +625,7 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_vretificationCode_Insert" FunctionName="RavKavModel.Store.sp_vretificationCode_Insert" />
           <FunctionImportMapping FunctionImportName="sp_finalAmountForUser_Insert" FunctionName="RavKavModel.Store.sp_finalAmountForUser_Insert" />
+          <FunctionImportMapping FunctionImportName="sp_addUder_Insert" FunctionName="RavKavModel.Store.sp_addUder_Insert" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

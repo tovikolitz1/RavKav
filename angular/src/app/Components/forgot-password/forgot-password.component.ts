@@ -38,10 +38,6 @@ import { WebApiService } from 'src/app/services/web-api.service';
     changePassword() {this. isRetuenPassword=true;
       debugger
       if(this.isRetuenPassword){
-      }
-      else{
-     
-      //if (document.getElementById("vertification").className != "d-none") {
         this.webapi.forgotPassword(this.formForgotPassword.controls['ravkav'].value).subscribe(x => {
           if (x) { 
             
@@ -50,6 +46,11 @@ import { WebApiService } from 'src/app/services/web-api.service';
           //  $("#ravkav").addClass('d-none');
           }
         })
+      }
+      else{
+     
+      //if (document.getElementById("vertification").className != "d-none") {
+        
       }
     }
 //     applyPassword(){

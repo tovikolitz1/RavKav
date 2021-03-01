@@ -12,34 +12,15 @@ namespace BLL.Logic
 
     public static class UsersLogic
     {
-        public static string send(MailMessage message)
-        {
-            //string to = "jane@contoso.com";
-            //string from = "ben@contoso.com";
-            //MailMessage message = new MailMessage(from, to);
-            //message.Subject = "Using the new SMTP client.";
-            //message.Body = @"Using this new feature, you can send an email message from an application very easily.";
-            SmtpClient client = new SmtpClient("smtp.gmail.com");
-            //Credentials are necessary if the server requires the client
-            //  to authenticate before it will send email on the client's behalf.
-            client.UseDefaultCredentials = true;
-
-            try
-            {
-                client.Send(message);
-                return "good";
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception caught in CreateTestMessage2(): {0}",
-                    ex.ToString());
-                return ex.ToString();
-            }
-        }
+       
         static RavKavEntities db = new RavKavEntities();
 
         public static bool AddUser(UserDTO user)
         {
+            db.s
+
+
+
             User u = Convertions.Convertion(user);
             try
             {
@@ -104,7 +85,7 @@ namespace BLL.Logic
                 if (ver == null)
                     return false;
                 string tempPass = ver.verificationCode;
-                string body = "הסיסמה הזמנית שלך היא" + tempPass;
+                string body = " הסיסמה הזמנית שלך היא" + tempPass;
                 SendMail(subject, body, to, from);
                 return true;
             }
@@ -116,8 +97,8 @@ namespace BLL.Logic
             if (u == null)
                 return false;
             int id = u.id;
-            VertificationCode tempPassEmail = db.VertificationCodes.Where(x => x.fUserID == id).FirstOrDefault();
-            if (tempPassEmail == null || tempPassEmail.CreateDate < DateTime.Now.AddMinutes(-30) || tempPass != tempPassEmail.verificationCode)
+            VertificationCode tempPassEmail = db.VertificationCodes.Where(p => p.fUserID == id).OrderByDescending(o=>o.CreateDate).FirstOrDefault();
+             if (tempPassEmail == null || tempPassEmail.CreateDate < DateTime.Now.AddMinutes(-30) || tempPass != tempPassEmail.verificationCode)
                 return false;
 
 
@@ -133,6 +114,27 @@ namespace BLL.Logic
             {
                 return false;
             }
+        }
+        public static bool updateAsManager(int mID, int uID)
+        {
+            if (db.Users.Where(y => y.id == mID).FirstOrDefault().isManager == false)
+                return false;
+            var u = db.Users.Where(t => t.id == uID).FirstOrDefault();
+            if (u == null)
+                return false;
+            u.isManager = true;
+            try
+            {
+                db.Users.Attach(u);
+                db.Entry(u).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
         public static bool UpdateUser(UserDTO user)
         {
