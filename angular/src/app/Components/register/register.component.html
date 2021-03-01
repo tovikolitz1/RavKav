@@ -2,10 +2,10 @@
 
 
 
-<form (submit)="register()" #Formregister class="d-flex justify-content-around greyForm">
+<form (submit)="register()"  [formGroup]="formRegister" #Formregister class="d-flex justify-content-around greyForm">
    <div class="main">
-    <div><input name="firstName" formControlName="firstName" type="text" placeholder="שם פרטי" /></div>
-    <div><input name="lastName" formControlName="lastName" type="text" placeholder="שם משפחה" /></div>
+    <div><input name="fName" formControlName="fName" type="text" placeholder="שם פרטי" /></div>
+    <div><input name="lName" formControlName="lName" type="text" placeholder="שם משפחה" /></div>
     <div><input name="ravkav" formControlName="ravkav" type="text" placeholder="מספר רב קו" /></div>
     <div><input name="email" formControlName="email" type="email" placeholder="דואר אלקטרוני"/></div>
 <div><input name="password" formControlName="password" type="password" placeholder="סיסמא" /></div>

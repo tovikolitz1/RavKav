@@ -15,7 +15,7 @@ namespace Web_Api.Controllers
         public IHttpActionResult CalaulateThePayment(int id)
         {
             DateTime date = DateTime.Today;
-            date=date.AddMonths(-1);
+            date=date.AddMonths(-2);
             return Ok(TravelLogic.CalaulateThePayment(id, date));
         }
         [HttpGet]
@@ -26,7 +26,7 @@ namespace Web_Api.Controllers
         public IHttpActionResult CalaulateThePayment(int idManager,int idUser)
         {
             DateTime date = DateTime.Today;
-            date = date.AddMonths(-1);
+            date = date.AddMonths(-2);
             return Ok(TravelLogic.CalaulateThePayment(idUser, date));
         }
         public IHttpActionResult getTravels(int id)//,int date)
