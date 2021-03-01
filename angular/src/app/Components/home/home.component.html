@@ -2,10 +2,10 @@
 <div >
 
 <a routerLink="/ShowTravels"><button class="btnMain" >צפיה בנסיעות שלי</button></a>
-<a routerLink="/show-calculate"><button class="btnMain">חוזים מומלצים לחודש האחרון</button></a>
+<a routerLink="/show-calculate"><button class="btnMain">חוזים מומלצים <br/>לחודש האחרון</button></a>
 <a routerLink="/update-user"><button class="btnMain" >עידכון פרטים</button></a>
  </div>
-<div *ngIf="isManager" class="d-flex justify-content-center">
+<div *ngIf="isManager" >
     <h3>סביבת מנהלים</h3>
     <a routerLink="/ShowTravels"><button class="btnMain" >צפיה בנסיעות משתמשים </button></a>
 <a routerLink="/update-user"><button class="btnMain">עידכון פרטי משתמשים</button></a>

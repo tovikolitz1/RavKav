@@ -19,9 +19,9 @@ export class ShowCalculateComponent implements OnInit {
        this.webapi.CalculateThePayment().subscribe(x=>{
          console.log(x);
          this.contractList = x;
-        //  this.price=this.contractList.reduce((sum, current) => sum + current.price, 0);
-        //  this.contractList.forEach(a => 
-        //  this.fullPrice+= a.TravelToCon.reduce((sum,current)=> sum =current.price,0));
+         this.price=this.contractList.reduce((sum, current) => sum + current.price, 0);
+         this.contractList.forEach(a => 
+         this.fullPrice+= a.TravelToCon.reduce((sum,current)=> sum =current.price,0));
          
        })
     }

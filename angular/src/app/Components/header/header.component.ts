@@ -14,29 +14,37 @@ export class HeaderComponent implements OnInit {
   usersList: User[];
   userListFilter: User[];
   filter: string = "";
-  userSelected=User;
+  userSelected:User;
 
   filterL() {
+    debugger
     const li = [...this.usersList]
     this.userListFilter = li.filter(x => this.filter == "" || x.fName.includes(this.filter) || x.lName.includes(this.filter) ||
       (x.lName + " " + x.fName).includes(this.filter) || (x.fName + " " + x.lName).includes(this.filter)
     )
-    
   }
+
+  selecdedItem(){
+    debugger
+    this.userSer.userEdit.emit(
+      {...this.userSelected});
+  }
+
+
   ngOnInit() {
     this.userName = "היי אורח,"
     this.userSer.userEdit.subscribe((user: User) => {
-      
-      
-if(this.userSer.isManager){
-  this.userName = "היי " + this.userSer.mamager.fName + " " + this.userSer.mamager.lName + ",";
-}
-else{
-  this.userName = "היי " + user.fName + " " + user.lName + ",";
-      
-}
+
+
+      if (this.userSer.isManager) {
+        this.userName = "היי " + this.userSer.mamager.fName + " " + this.userSer.mamager.lName + ",";
+      }
+      else {
+        this.userName = "היי " + user.fName + " " + user.lName + ",";
+
+      }
       if (user.isManager) {
-        
+
         this.userSer.GetUsersList().subscribe(y => {
           if (y) {
             this.usersList = y;
