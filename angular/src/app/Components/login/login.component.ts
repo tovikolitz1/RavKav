@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
   login() {
 
     this.webapi.IfExsistRavKav({ ...this.formLogin.value }).subscribe(u => {
+      debugger
       if (u != null) {
         console.log(u)
         this.webapi.userEdit.emit(

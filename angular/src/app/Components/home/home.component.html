@@ -1,10 +1,11 @@
 
 <div class="row d-flex justify-content-center">
-
+<div class="d-flex justify-content-center">
 <a routerLink="/ShowTravels"><button class="btnMain" >צפיה בנסיעות שלי</button></a>
 <a routerLink="/ShowTravels"><button class="btnMain">חישוב התשלום</button></a>
 <a routerLink="/update-user"><button class="btnMain" >עידכון פרטים</button></a>
-<div *ngIf="isManager">
+ </div>
+<div *ngIf="isManager" class="d-flex justify-content-center">
     <h3>סביבת מנהלים</h3>
     <a routerLink="/ShowTravels"><button class="btnMain" >צפיה בנסיעות משתמשים </button></a>
 <a routerLink="/update-user"><button class="btnMain">עידכון פרטי משתמשים</button></a>
