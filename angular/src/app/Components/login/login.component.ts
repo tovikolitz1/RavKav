@@ -25,12 +25,12 @@ export class LoginComponent implements OnInit {
       pass: new FormControl('', [Validators.required])
     });
     if (localStorage.getItem("userID") != null) {
+      debugger
       this.ID = parseInt(localStorage.getItem("userID"));
       this.webapi.UserDetails(this.ID).subscribe(u => {
         if (u != null)
           this.webapi.userEdit.emit(
             { ...u });
-
       });
 
     }

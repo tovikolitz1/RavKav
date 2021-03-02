@@ -19,12 +19,17 @@ private user:User;
 public userEdit : EventEmitter<User> = new EventEmitter<User>();
 
   constructor(private httpClient: HttpClient) {
-    this.userEdit.subscribe(x=>this.user={...x});
-    if(this.user!=null&&this.user.isManager)
+    this.userEdit.subscribe(x=>{
+      this.user={...x}
+      if(x!=null&&x.isManager==true)
     {
+      debugger
     this.isManager=true;
     this.mamager={...this.user};
     }
+      
+     } );
+    
    }
    getUSer(){
 

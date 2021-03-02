@@ -45,35 +45,39 @@ export class HeaderComponent implements OnInit {
     //if ther is id show user name
     if (localStorage.getItem("userID") != null) {
       {
-
+        debugger
         this.userSer.UserDetails(parseInt(localStorage.getItem("userID"))).subscribe(u => {
           if (u != null)
             this.userSer.userEdit.emit(
               { ...u });
-
+          this.createList(u);
         });
       }
     }
-// in change of user update  th list
+    // in change of user update  th list
     this.userSer.userEdit.subscribe((user: User) => {
       debugger
-      if (this.userSer.isManager) {
-        //sqy hallo to the manager
-        this.userName = "היי " + this.userSer.mamager.fName + " " + this.userSer.mamager.lName + ",";
-        //list of users
-        this.userSer.GetUsersList().subscribe(y => {
-          if (y) {
-            this.usersList = y;
-            this.filterL();
-          }
-        });
-      }
-      else {
-        //hallo to ither users
-        this.userName = "היי " + user.fName + " " + user.lName + ",";
-      }
-
+      console.log(this.userSer.isManager)
+      this.createList(user);
     })
+  }
+  createList(user) {
+    if (this.userSer.isManager) {
+      //sqy hallo to the manager
+      this.userName = "היי " + this.userSer.mamager.fName + " " + this.userSer.mamager.lName + ",";
+      //list of users
+      this.userSer.GetUsersList().subscribe(y => {
+        if (y) {
+          this.usersList = y;
+          this.filterL();
+        }
+      });
+    }
+    else {
+      //hallo to ither users
+      this.userName = "היי " + user.fName + " " + user.lName + ",";
+    }
+
   }
 
 }
