@@ -48,6 +48,7 @@ export class HeaderComponent implements OnInit {
         debugger
         this.userSer.UserDetails(parseInt(localStorage.getItem("userID"))).subscribe(u => {
           if (u != null)
+          console.log(u)
             this.userSer.userEdit.emit(
               { ...u });
           this.createList(u);

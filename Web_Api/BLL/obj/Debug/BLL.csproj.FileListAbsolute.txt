@@ -1,77 +1,15 @@
-F:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
-F:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
 F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\BLL.dll.config
 F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\BLL.dll
 F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\BLL.pdb
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.dll
 F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.dll
 F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.dll
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.pdb
+F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.dll.config
 F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.xml
 F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.xml
+F:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
+F:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
 F:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CopyComplete
 F:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.dll
 F:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.pdb
-G:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\BLL.dll.config
-G:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\BLL.dll
-G:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\BLL.pdb
-G:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.dll
-G:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.dll
-G:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.dll
-G:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.pdb
-G:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.dll.config
-G:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.xml
-G:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.xml
-G:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
-G:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
-G:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CopyComplete
-G:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.dll
-G:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.pdb
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\BLL.dll.config
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\BLL.dll
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\BLL.pdb
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.dll
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.dll
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.xml
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.xml
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\obj\Debug\BLL.dll
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\obj\Debug\BLL.pdb
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\DALL.dll
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\DALL.pdb
-D:\מסמכים\GitHub\RavKav\Web_Api\BLL\bin\Debug\DALL.dll.config
-F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.dll
-F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.pdb
-F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.dll.config
-E:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\BLL.dll.config
-E:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\BLL.dll
-E:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\BLL.pdb
-E:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.dll
-E:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.dll
-E:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.dll
-E:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.pdb
-E:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DALL.dll.config
-E:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.xml
-E:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.xml
-E:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
-E:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
-E:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CopyComplete
-E:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.dll
-E:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.pdb
-F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.dll
-F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.pdb
-F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.dll.config
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\BLL.dll.config
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\BLL.dll
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\BLL.pdb
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\DAL.dll
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.dll
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\DAL.pdb
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\DAL.dll.config
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.xml
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CopyComplete
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\obj\Debug\BLL.dll
-C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\obj\Debug\BLL.pdb

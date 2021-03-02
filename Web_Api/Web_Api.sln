@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1169
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_Api", "Web_Api\Web_Api.csproj", "{C3FE3086-5C1A-4498-A451-C00B004B64CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{D695544A-5A72-4344-8686-D8A3A3954B28}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALL", "DALL\DALL.csproj", "{D57CE8D2-FF25-494D-BB02-31B04265EA22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{219A0D85-B00F-422F-87DF-ABFAFEC19B30}"
 EndProject
@@ -25,10 +23,6 @@ Global
 		{D695544A-5A72-4344-8686-D8A3A3954B28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D695544A-5A72-4344-8686-D8A3A3954B28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D695544A-5A72-4344-8686-D8A3A3954B28}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D57CE8D2-FF25-494D-BB02-31B04265EA22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D57CE8D2-FF25-494D-BB02-31B04265EA22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D57CE8D2-FF25-494D-BB02-31B04265EA22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D57CE8D2-FF25-494D-BB02-31B04265EA22}.Release|Any CPU.Build.0 = Release|Any CPU
 		{219A0D85-B00F-422F-87DF-ABFAFEC19B30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{219A0D85-B00F-422F-87DF-ABFAFEC19B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{219A0D85-B00F-422F-87DF-ABFAFEC19B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
