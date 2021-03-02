@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { WebApiService } from 'src/app/services/web-api.service';
 
@@ -9,42 +10,57 @@ import { WebApiService } from 'src/app/services/web-api.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public userSer: WebApiService) { }
+  constructor(public userSer: WebApiService, private router: Router) { }
   userName: string;
   usersList: User[];
   userListFilter: User[];
   filter: string = "";
-  userSelected:User;
+  userSelected: User;
+  isShowList: boolean = false;
 
   filterL() {
-    debugger
     const li = [...this.usersList]
     this.userListFilter = li.filter(x => this.filter == "" || x.fName.includes(this.filter) || x.lName.includes(this.filter) ||
       (x.lName + " " + x.fName).includes(this.filter) || (x.fName + " " + x.lName).includes(this.filter)
     )
+    document.getElementById("selectList").focus();
   }
 
-  selecdedItem(){
+  selecdedItem() {
     debugger
     this.userSer.userEdit.emit(
-      {...this.userSelected});
+      { ...this.userSelected });
+    alert('select')
   }
 
 
   ngOnInit() {
+    if (this.router.url === '/home' || this.router.url === '/' || this.router.url === '/login')
+      this.isShowList = false;
+    else
+      this.isShowList = true
+    console.log(this.router.url)
     this.userName = "היי אורח,"
+
+    //if ther is id show user name
+    if (localStorage.getItem("userID") != null) {
+      {
+
+        this.userSer.UserDetails(parseInt(localStorage.getItem("userID"))).subscribe(u => {
+          if (u != null)
+            this.userSer.userEdit.emit(
+              { ...u });
+
+        });
+      }
+    }
+// in change of user update  th list
     this.userSer.userEdit.subscribe((user: User) => {
-
-
+      debugger
       if (this.userSer.isManager) {
+        //sqy hallo to the manager
         this.userName = "היי " + this.userSer.mamager.fName + " " + this.userSer.mamager.lName + ",";
-      }
-      else {
-        this.userName = "היי " + user.fName + " " + user.lName + ",";
-
-      }
-      if (user.isManager) {
-
+        //list of users
         this.userSer.GetUsersList().subscribe(y => {
           if (y) {
             this.usersList = y;
@@ -52,7 +68,13 @@ export class HeaderComponent implements OnInit {
           }
         });
       }
+      else {
+        //hallo to ither users
+        this.userName = "היי " + user.fName + " " + user.lName + ",";
+      }
+
     })
   }
+
 }
 

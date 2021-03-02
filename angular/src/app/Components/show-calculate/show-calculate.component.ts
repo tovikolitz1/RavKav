@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CalculateResulte } from 'src/app/models/calculateResult';
+import { User } from 'src/app/models/user.model';
 import { WebApiService } from 'src/app/services/web-api.service';
 
 @Component({
@@ -16,7 +17,14 @@ export class ShowCalculateComponent implements OnInit {
   public price:number=0;
   public fullPrice:number=0;
     ngOnInit() {
-       this.webapi.CalculateThePayment().subscribe(x=>{
+     this.showCalculate();
+     this.webapi.userEdit.subscribe((user: User) => {
+       this.showCalculate();
+     });
+    }
+
+    showCalculate(){
+        this.webapi.CalculateThePayment().subscribe(x=>{
          console.log(x);
          this.contractList = x;
          this.price=this.contractList.reduce((sum, current) => sum + current.price, 0);

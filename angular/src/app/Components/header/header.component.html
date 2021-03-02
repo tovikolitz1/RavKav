@@ -12,13 +12,15 @@
 </a>
     </div>
 </div>
-<label> חיפוש</label>
-<input placeholder="התחל הקלדה"  [(ngModel)]="filter" (onchange)="filterL()" />
+<!-- <div ngIf="isShowList"> -->
+    <div>
+<label> חיפוש משתמש:</label>
+<input placeholder="התחל הקלדה"  [(ngModel)]="filter" (change)="filterL()" style="border-bottom: 1px solid; margin-bottom: 0px !important; margin-right: 28px;"/>
 <div>
-    <select [(ngModel)]="userSelected" (onchange)="selecdedItem()" > 
+    <select id="selectList" [(ngModel)]="userSelected" (ngModelChange)="selecdedItem()" style="width: 168px; border: none; margin-right: 134px;" > 
         <option *ngFor="let item of userListFilter" value="item">{{item.fName}} {{item.lName}}</option>
     </select>
 </div>
-
+</div>
 
 
