@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { WebApiService } from 'src/app/services/web-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Travel } from 'src/app/models/travel.model';
+import { User } from 'src/app/models/user.model';
 
 
 @Component({
@@ -18,13 +19,17 @@ public date:Date;
 public type:boolean=true;
 public sum:number=0;
   ngOnInit() {
-   
-    console.log(this.travelList)
-
-     this.webapi.getTravels().subscribe(x=>{
+   this.ShowTravels();
+   this.webapi.userEdit.subscribe((user: User) => {
+    this.ShowTravels();
+  });
+    
+  }
+   ShowTravels(){
+       this.webapi.getTravels().subscribe(x=>{
        console.log(x);
        this.travelList = x;
        this.sum=this.travelList.reduce((sum, current) => sum + current.price, 0); console.log(this.sum)
-     })
-  }
+     });
+     }
 }
