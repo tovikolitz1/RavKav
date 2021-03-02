@@ -1,7 +1,6 @@
 ﻿
 using BLL.ModelDTO;
 using DAL;
-using DALL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,9 +30,8 @@ namespace BLL.Logic
         }
         public static bool AddUser(UserDTO user)
         {
-         //   db.s
-
-
+            
+            db.sp_addUder_Insert(user.fName, user.lName, user.email, user.pass, user.ravkav, user.profileId);
 
             User u = Convertions.Convertion(user);
             try

@@ -33,3 +33,15 @@ E:\RAVKAV\RavKav\Web_Api\DALL\obj\Debug\DALL.csproj.CoreCompileInputs.cache
 E:\RAVKAV\RavKav\Web_Api\DALL\obj\Debug\DALL.csproj.CopyComplete
 E:\RAVKAV\RavKav\Web_Api\DALL\obj\Debug\DALL.dll
 E:\RAVKAV\RavKav\Web_Api\DALL\obj\Debug\DALL.pdb
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DALL\bin\Debug\DALL.dll.config
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DALL\bin\Debug\DALL.dll
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DALL\bin\Debug\DALL.pdb
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DALL\bin\Debug\EntityFramework.dll
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DALL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DALL\bin\Debug\EntityFramework.xml
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DALL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DALL\obj\Debug\DALL.csprojAssemblyReference.cache
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DALL\obj\Debug\DALL.csproj.CoreCompileInputs.cache
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DALL\obj\Debug\DALL.csproj.CopyComplete
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DALL\obj\Debug\DALL.dll
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DALL\obj\Debug\DALL.pdb

@@ -40,6 +40,7 @@
     <Property Name="fUserID" Type="Int32" />
     <Property Name="monthDate" Type="DateTime" Precision="0" />
     <NavigationProperty Name="User" Relationship="Self.FK__FinalAmou__fUser__5441852A" FromRole="FinalAmount" ToRole="User" />
+    <NavigationProperty Name="Travels" Relationship="Self.FK__Travel__fFinalAm__398D8EEE" FromRole="FinalAmount" ToRole="Travel" />
   </EntityType>
   <EntityType Name="Profile">
     <Key>
@@ -49,6 +50,16 @@
     <Property Name="discount" Type="Double" />
     <Property Name="describe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Users" Relationship="Self.FK__User__profileId__44FF419A" FromRole="Profile" ToRole="User" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Travel">
     <Key>
@@ -66,6 +77,7 @@
     <Property Name="fContractID" Type="Int32" />
     <Property Name="contractType" Type="Boolean" />
     <NavigationProperty Name="Area" Relationship="Self.FK__Transit__areaID__6FE99F9F" FromRole="Travel" ToRole="Area" />
+    <NavigationProperty Name="FinalAmount" Relationship="Self.FK__Travel__fFinalAm__398D8EEE" FromRole="Travel" ToRole="FinalAmount" />
     <NavigationProperty Name="User" Relationship="Self.FK__Travel__userID__4316F928" FromRole="Travel" ToRole="User" />
     <NavigationProperty Name="User1" Relationship="Self.FK__Travel__userID__440B1D61" FromRole="Travel" ToRole="User" />
   </EntityType>
@@ -73,14 +85,14 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="lName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="isManager" Type="Boolean" Nullable="false" />
     <Property Name="pass" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ravkavNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="profileId" Type="Int32" />
+    <Property Name="profileId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="FinalAmounts" Relationship="Self.FK__FinalAmou__fUser__5441852A" FromRole="User" ToRole="FinalAmount" />
     <NavigationProperty Name="Profile" Relationship="Self.FK__User__profileId__44FF419A" FromRole="User" ToRole="Profile" />
     <NavigationProperty Name="Travels" Relationship="Self.FK__Travel__userID__4316F928" FromRole="User" ToRole="Travel" />
@@ -146,8 +158,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Travel__fFinalAm__398D8EEE">
+    <End Role="FinalAmount" Type="Self.FinalAmount" Multiplicity="0..1" />
+    <End Role="Travel" Type="Self.Travel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FinalAmount">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Travel">
+        <PropertyRef Name="fFinalAmountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__User__profileId__44FF419A">
-    <End Role="Profile" Type="Self.Profile" Multiplicity="0..1" />
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
     <End Role="User" Type="Self.User" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Profile">
@@ -200,6 +224,7 @@
     <EntitySet Name="Contracts" EntityType="Self.Contract" />
     <EntitySet Name="FinalAmounts" EntityType="Self.FinalAmount" />
     <EntitySet Name="Profiles" EntityType="Self.Profile" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Travels" EntityType="Self.Travel" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="VertificationCodes" EntityType="Self.VertificationCode" />
@@ -219,6 +244,10 @@
       <End Role="User" EntitySet="Users" />
       <End Role="FinalAmount" EntitySet="FinalAmounts" />
     </AssociationSet>
+    <AssociationSet Name="FK__Travel__fFinalAm__398D8EEE" Association="Self.FK__Travel__fFinalAm__398D8EEE">
+      <End Role="FinalAmount" EntitySet="FinalAmounts" />
+      <End Role="Travel" EntitySet="Travels" />
+    </AssociationSet>
     <AssociationSet Name="FK__User__profileId__44FF419A" Association="Self.FK__User__profileId__44FF419A">
       <End Role="Profile" EntitySet="Profiles" />
       <End Role="User" EntitySet="Users" />
@@ -235,15 +264,67 @@
       <End Role="User" EntitySet="Users" />
       <End Role="VertificationCode" EntitySet="VertificationCodes" />
     </AssociationSet>
-    <FunctionImport Name="sp_vretificationCode_Insert" ReturnType="Collection(Decimal)">
-      <Parameter Name="fUserID" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="Area_Insert" />
     <FunctionImport Name="AreaToContract_Insert" />
     <FunctionImport Name="AreaToContract_Insert_V2" />
     <FunctionImport Name="Contract_Insert" />
+    <FunctionImport Name="sp_addUder_Insert" ReturnType="Collection(Decimal)">
+      <Parameter Name="fName" Mode="In" Type="String" />
+      <Parameter Name="lName" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="pass" Mode="In" Type="String" />
+      <Parameter Name="ravkavNum" Mode="In" Type="String" />
+      <Parameter Name="profileId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_finalAmountForUser_Insert" ReturnType="Collection(Decimal)">
+      <Parameter Name="fUserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(RavKavModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(RavKavModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="sp_travel_Order" ReturnType="Collection(RavKavModel.sp_travel_Order_Result)" />
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="sp_vretificationCode_Insert" ReturnType="Collection(Decimal)">
+      <Parameter Name="fUserID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
   <ComplexType Name="sp_travel_Order_Result">
     <Property Type="String" Name="bas" Nullable="false" MaxLength="3" />
     <Property Type="Double" Name="price" Nullable="false" />

@@ -27,6 +27,7 @@ namespace DAL
         public Nullable<bool> contractType { get; set; }
     
         public virtual Area Area { get; set; }
+        public virtual FinalAmount FinalAmount { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
     }

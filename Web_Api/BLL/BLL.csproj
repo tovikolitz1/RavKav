@@ -72,12 +72,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DALL\DALL.csproj">
-      <Project>{d57ce8d2-ff25-494d-bb02-31b04265ea22}</Project>
-      <Name>DALL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{7A20629B-59DB-478E-9821-E74DC72A2427}</Project>
+      <Project>{219a0d85-b00f-422f-87df-abfafec19b30}</Project>
       <Name>DAL</Name>
     </ProjectReference>
   </ItemGroup>

@@ -1,23 +1,12 @@
-D:\מסמכים\GitHub\RavKav\Web_Api\DAL\bin\Debug\DAL.dll.config
-D:\מסמכים\GitHub\RavKav\Web_Api\DAL\bin\Debug\DAL.dll
-D:\מסמכים\GitHub\RavKav\Web_Api\DAL\bin\Debug\DAL.pdb
-D:\מסמכים\GitHub\RavKav\Web_Api\DAL\bin\Debug\EntityFramework.dll
-D:\מסמכים\GitHub\RavKav\Web_Api\DAL\bin\Debug\EntityFramework.SqlServer.dll
-D:\מסמכים\GitHub\RavKav\Web_Api\DAL\bin\Debug\EntityFramework.xml
-D:\מסמכים\GitHub\RavKav\Web_Api\DAL\bin\Debug\EntityFramework.SqlServer.xml
-D:\מסמכים\GitHub\RavKav\Web_Api\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
-D:\מסמכים\GitHub\RavKav\Web_Api\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
-D:\מסמכים\GitHub\RavKav\Web_Api\DAL\obj\Debug\DAL.dll
-D:\מסמכים\GitHub\RavKav\Web_Api\DAL\obj\Debug\DAL.pdb
-F:\RAVKAV\RavKav\Web_Api\DAL\bin\Debug\DAL.dll.config
-F:\RAVKAV\RavKav\Web_Api\DAL\bin\Debug\DAL.dll
-F:\RAVKAV\RavKav\Web_Api\DAL\bin\Debug\DAL.pdb
-F:\RAVKAV\RavKav\Web_Api\DAL\bin\Debug\EntityFramework.dll
-F:\RAVKAV\RavKav\Web_Api\DAL\bin\Debug\EntityFramework.SqlServer.dll
-F:\RAVKAV\RavKav\Web_Api\DAL\bin\Debug\EntityFramework.xml
-F:\RAVKAV\RavKav\Web_Api\DAL\bin\Debug\EntityFramework.SqlServer.xml
-F:\RAVKAV\RavKav\Web_Api\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
-F:\RAVKAV\RavKav\Web_Api\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
-F:\RAVKAV\RavKav\Web_Api\DAL\obj\Debug\DAL.csproj.CopyComplete
-F:\RAVKAV\RavKav\Web_Api\DAL\obj\Debug\DAL.dll
-F:\RAVKAV\RavKav\Web_Api\DAL\obj\Debug\DAL.pdb
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DAL\bin\Debug\DAL.dll.config
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DAL\bin\Debug\DAL.dll
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DAL\bin\Debug\DAL.pdb
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DAL\bin\Debug\EntityFramework.dll
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DAL\bin\Debug\EntityFramework.xml
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DAL\obj\Debug\DAL.dll
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\DAL\obj\Debug\DAL.pdb

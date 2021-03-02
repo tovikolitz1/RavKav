@@ -30,7 +30,7 @@ namespace DAL
         public bool isManager { get; set; }
         public string pass { get; set; }
         public string ravkavNum { get; set; }
-        public Nullable<int> profileId { get; set; }
+        public int profileId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FinalAmount> FinalAmounts { get; set; }

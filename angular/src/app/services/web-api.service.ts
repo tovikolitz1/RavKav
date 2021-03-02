@@ -36,6 +36,7 @@ public userEdit : EventEmitter<User> = new EventEmitter<User>();
     return this.httpClient.get<User>("http://localhost:60000/api/User/IfExsistRavKav?ravKav=" + objec.ravkav + "&pass=" + objec.pass);
   }
   AddUser(user:User){
+    debugger;
     return this.httpClient.post<boolean>("http://localhost:60000/api/User/AddUser",user);
   }
   UserDetails(id:number){
