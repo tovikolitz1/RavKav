@@ -1,5 +1,5 @@
 export class User {
-  constructor(public id?:number,public ravkav?: string,public isManager?:boolean, public password?: string,public fName?: string,public lName?: string,public profileId?: number,public email?:string)
+  constructor(public id?:number,public ravkav?: string,public isManager?:boolean, public pass?: string,public fName?: string,public lName?: string,public profileId?: number,public email?:string)
     {
        //this.id=id;
         //this.ravkav=ravkav;

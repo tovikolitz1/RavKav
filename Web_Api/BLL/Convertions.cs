@@ -1,6 +1,5 @@
 ﻿using BLL.ModelDTO;
 using DAL;
-using DALL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -112,7 +111,7 @@ namespace BLL
             newUser.lName = userTbl.lName;
             newUser.pass = userTbl.pass;
             newUser.profileId = userTbl.profileId;
-            newUser.ravkavNum = userTbl.ravkavNum;
+            newUser.ravkav = userTbl.ravkavNum;
             newUser.id = userTbl.id;
             newUser.isManager = userTbl.isManager;
             return newUser;
@@ -128,8 +127,8 @@ namespace BLL
             newUser.fName = user.fName;
             newUser.lName = user.lName;
             newUser.pass = user.pass;
-            newUser.profileId = user.profileId;
-            newUser.ravkavNum = user.ravkavNum;
+            newUser.profileId = (int)user.profileId;
+            newUser.ravkavNum = user.ravkav;
             newUser.id = user.id;
             newUser.isManager = user.isManager;
             return newUser;

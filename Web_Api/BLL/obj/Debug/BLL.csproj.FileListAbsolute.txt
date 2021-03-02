@@ -60,3 +60,18 @@ E:\RAVKAV\RavKav\Web_Api\BLL\obj\Debug\BLL.pdb
 F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.dll
 F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.pdb
 F:\RAVKAV\RavKav\Web_Api\BLL\bin\Debug\DAL.dll.config
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\BLL.dll.config
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\BLL.dll
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\BLL.pdb
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\DAL.dll
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.dll
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\DAL.pdb
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\DAL.dll.config
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.xml
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\obj\Debug\BLL.csproj.CopyComplete
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\obj\Debug\BLL.dll
+C:\Users\שמור על המחשב\Documents\RavKav\Web_Api\BLL\obj\Debug\BLL.pdb

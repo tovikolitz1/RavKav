@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
       lName:new FormControl('',[Validators.required]),
       ravkav:new FormControl('',[Validators.required]),
       email:new FormControl('',[Validators.required]),
-      password:new FormControl('',[Validators.required]),
+      pass:new FormControl('',[Validators.required]),
       profileId:new FormControl('',[Validators.required])  
       
     })

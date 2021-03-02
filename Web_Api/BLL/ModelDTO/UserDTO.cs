@@ -10,7 +10,7 @@ namespace BLL.ModelDTO
         public string email { get; set; }
         public bool isManager { get; set; }
         public string pass { get; set; }
-        public string ravkavNum { get; set; }
+        public string ravkav { get; set; }
         public Nullable<int> profileId { get; set; }
 
     }
